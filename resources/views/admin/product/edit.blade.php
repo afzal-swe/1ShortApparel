@@ -50,7 +50,7 @@
     <section class="content">
       <div class="container-fluid">
 
-       <form action="#" method="post" enctype="multipart/form-data">
+       <form action="{{ route('product_update',$product_edit->id) }}" method="post" enctype="multipart/form-data">
         @csrf
        	<div class="row">
           <!-- left column -->
@@ -64,29 +64,29 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="form-group col-lg-6">
-                      <label for="exampleInputEmail1">Product Name <span class="text-danger">*</span> </label>
+                      <label for="exampleInputEmail1">Product Name </label>
                       <input type="text" class="form-control" name="product_title" value="{{ $product_edit->product_title }}">
                     </div>
                     <div class="form-group col-lg-6">
-                      <label for="exampleInputPassword1">Product Code <span class="text-danger">*</span> </label>
+                      <label for="exampleInputPassword1">Product Code </label>
                       <input type="text" class="form-control" value="{{ $product_edit->product_code }}" name="product_code">
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
-                      <label for="exampleInputEmail1">Category <span class="text-danger">*</span> </label>
+                      <label for="exampleInputEmail1">Category </label>
                       <select class="form-control" name="category_id" id="subcategory_id">
-                        <option disabled="" selected="">==choose category==</option>
+                        {{-- <option disabled="" selected="">==choose category==</option> --}}
                         @foreach($category as $row)
                           
-                           <option style="color:blue;">{{ $row->category_name }}</option>
+                           <option style="color:blue;">@if ($row->id==$row->id) {{ $row->category_name }} @endif </option>
                              
-                        @endforeach 
+                        @endforeach
                       </select>
                     </div>
 
                     <div class="form-group col-lg-6">
-                      <label for="exampleInputEmail1">Subcategory <span class="text-danger">*</span> </label>
+                      <label for="exampleInputEmail1">Subcategory </label>
                       <select class="form-control" name="subcategory_id" id="subcategory_id">
                         <option disabled="" selected="">==choose Subcategory==</option>
                         @foreach($category as $row)
@@ -103,7 +103,7 @@
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
-                      <label for="exampleInputEmail1">Brand <span class="text-danger">*</span> </label>
+                      <label for="exampleInputEmail1">Brand </label>
                       <select class="form-control" name="brand_id" required>
                         <option selected disabled>==choose brand==</option>
                         @foreach($brand as $row)
@@ -123,7 +123,7 @@
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
-                      <label for="exampleInputEmail1">Unit <span class="text-danger">*</span> </label>
+                      <label for="exampleInputEmail1">Unit </label>
                       <input type="text" class=form-control name="product_unit" value="{{ $product_edit->product_unit }}">
                     </div>
                     <div class="form-group col-lg-6">
@@ -133,11 +133,11 @@
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-4">
-                      <label for="exampleInput">Unit price  <span class="text-danger">*</span></label>
+                      <label for="exampleInput">Unit price </label>
                       <input type="text" class="form-control" value="{{ $product_edit->product_price }}" name="product_price">
                     </div>
                     <div class="form-group col-lg-4">
-                      <label for="exampleInput">Selling Price <span class="text-danger">*</span> </label>
+                      <label for="exampleInput">Selling Price </label>
                       <input type="text" name="product_purchase_price" value="{{ $product_edit->product_purchase_price }}" class="form-control">
                     </div>
                     <div class="form-group col-lg-4">
@@ -147,7 +147,7 @@
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
-                      <label for="exampleInputEmail1">Warehouse <span class="text-danger">*</span> </label>
+                      <label for="exampleInputEmail1">Warehouse </label>
                       <select class="form-control" name="warehouse" required>
                         @foreach($warehouse as $row)
                          <option value="{{ $row->warhouse_name }}">{{ $row->warhouse_name }}</option>
@@ -242,7 +242,7 @@
             <div class="card card-primary">
               <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Main Thumbnail <span class="text-danger">*</span> </label><br>
+                    <label for="exampleInputEmail1">Main Thumbnail </label><br>
                     <input type="file" name="thumbnail" required="" accept="image/*" class="dropify">
                   </div><br>
                   <div class="">  
@@ -258,27 +258,27 @@
                   </div>
                      <div class="card p-4">
                         <h6>Featured Product</h6><hr>
-                       <div><span> Status </span> <input type="checkbox" name="featured" value="1" class="btn" style="margin-left: 20px;"></div>
+                       <div><span> Status </span> <input type="checkbox" name="featured" value="1" @if ($product_edit->featured==1) checked @endif class="btn" style="margin-left: 20px;"></div>
                      </div>
 
                      <div class="card p-4">
                         <h6>Today Deal</h6><hr>
-                        <div><span> Status </span> <input type="checkbox" name="today_deal" value="1" class="btn" style="margin-left: 20px;"></div>
+                        <div><span> Status </span> <input type="checkbox" name="today_deal" value="1" @if ($product_edit->today_deal==1) checked @endif class="btn" style="margin-left: 20px;"></div>
                      </div>
 
                      <div class="card p-4">
                         <h6>New Arrivals</h6><hr>
-                       <div><span> Status </span> <input type="checkbox" name="hot_new_arrivals" value="1" class="btn" style="margin-left: 20px;"></div>
+                       <div><span> Status </span> <input type="checkbox" name="hot_new_arrivals" value="1" @if ($product_edit->hot_new_arrivals==1) checked @endif class="btn" style="margin-left: 20px;"></div>
                      </div>
 
                      <div class="card p-4">
                         <h6>Best Sellers</h6><hr>
-                       <div><span> Status </span> <input type="checkbox" name="hot_best_sellers" value="1" class="btn" style="margin-left: 20px;"></div>
+                       <div><span> Status </span> <input type="checkbox" name="hot_best_sellers" value="1" @if ($product_edit->hot_best_sellers==1) checked @endif class="btn" style="margin-left: 20px;"></div>
                      </div>
 
                      <div class="card p-4">
                         <h6>Flash Deal</h6><hr>
-                       <div><span> Status </span> <input type="checkbox" name="flash_deal_id" value="1" class="btn" style="margin-left: 20px;"></div>
+                       <div><span> Status </span> <input type="checkbox" name="flash_deal_id" value="1" @if ($product_edit->flash_deal_id==1) checked @endif class="btn" style="margin-left: 20px;"></div>
                      </div>
 
                      <div class="card p-4">
@@ -288,17 +288,17 @@
 
                      <div class="card p-4">
                         <h6>Product Slider</h6><hr>
-                       <div><span> Status </span> <input type="checkbox" name="product_slider" value="1" class="btn" style="margin-left: 20px;"></div>
+                       <div><span> Status </span> <input type="checkbox" name="product_slider" value="1" @if ($product_edit->product_slider==1) checked @endif class="btn" style="margin-left: 20px;"></div>
                      </div>
 
                      <div class="card p-4">
                         <h6>Cash On Delivery</h6><hr>
-                       <div><span> Status </span> <input type="checkbox" name="cash_on_delivery" value="1" class="btn" style="margin-left: 20px;"></div>
+                       <div><span> Status </span> <input type="checkbox" name="cash_on_delivery" value="1" @if ($product_edit->cash_on_delivery==1) checked  @endif class="btn" style="margin-left: 20px;"></div>
                      </div>
 
                      <div class="card p-4">
                         <h6>Product Publication</h6><hr>
-                       <div><span> Status </span> <input type="checkbox" name="status" value="1"  class="btn" style="margin-left: 20px;"></div>
+                       <div><span> Status </span> <input type="checkbox" name="status" value="1" @if ($product_edit->status==1) checked  @endif  class="btn" style="margin-left: 20px;"></div>
                      </div>
                   
               </div>

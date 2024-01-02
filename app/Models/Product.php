@@ -8,6 +8,7 @@ use App\Models\Categorie;
 use App\Models\Brand;
 use App\Models\SubCategory;
 use App\Models\Warehouse;
+use App\Models\Pickup_point;
 
 
 class Product extends Model
@@ -33,6 +34,6 @@ class Product extends Model
 
     public function pickpoint()
     {
-        return $this->belongsTo(Piceup_point::class, 'pickup_point');
+        return $this->belongsTo(Pickup_point::class, 'pickup_point');
     }
 }

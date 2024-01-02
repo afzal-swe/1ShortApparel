@@ -26,6 +26,7 @@
       <p class="login-box-msg">Supper Admin Login Panel !!</p>
 
       <form method="POST" action="{{ route('login') }}">
+      {{-- <form method="POST" action="{{ route('login') }}"> --}}
         @csrf
         <div class="input-group mb-3">
           <input id="email" class="form-control" type="email" name="email" value="{{old('email')}}" required autofocus autocomplete="username" placeholder="Example@gmail.com">

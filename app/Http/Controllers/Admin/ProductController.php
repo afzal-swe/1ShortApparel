@@ -144,4 +144,11 @@ class ProductController extends Controller
             echo "Page Not Found !";
         }
     }
+
+    // product update 
+    public function product_update(Request $request)
+    {
+        $product_update = $request->id;
+        echo "update";
+    }
 }

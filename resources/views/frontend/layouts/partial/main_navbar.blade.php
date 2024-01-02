@@ -5,7 +5,9 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                
+                @php
+                $category = DB::table('categories')->get();
+                @endphp
                 <div class="main_nav_content d-flex flex-row">
 
                     <!-- Categories Menu -->

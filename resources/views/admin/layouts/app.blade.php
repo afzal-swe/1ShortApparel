@@ -74,6 +74,9 @@
  @include('admin.layouts.partial.navbar')
  <!-- /.navbar -->
  @include('admin.layouts.partial.sidebar')
+
+ 
+ 
  <!-- Main Sidebar Container -->
  @endauth
 

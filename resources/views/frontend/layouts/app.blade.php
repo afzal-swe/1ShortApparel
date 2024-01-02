@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>OneTech</title>
+<title>{{ $settings->website_name }}</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="OneTech shop project">
@@ -17,6 +17,11 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset ('frontend/styles/product_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset ('frontend/styles/product_responsive.css')}}">
+
+<!-- Theme style -->
+<link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.css')}}">
+
+
 
 </head>
 
@@ -35,33 +40,35 @@
 		<div class="top_bar">
 			<div class="container">
 				<div class="row">
-					<div class="col d-flex flex-row">
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset ('frontend/images/phone.png')}}" alt=""></div>1 9296015392</div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset ('frontend/images/mail.png')}}" alt=""></div><a href="mailto:1shotapparelandgoods@gmaill.com">1shotapparelandgoods@gmaill.com</a></div>
+					<div class="col-lg-12 d-flex flex-row">
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset ('frontend/images/phone.png')}}" alt=""></div>{{ $settings->phone_one }}</div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset ('frontend/images/mail.png')}}" alt=""></div><a href="mailto:1shotapparelandgoods@gmaill.com">{{ $settings->main_email }}</a></div>
 						<div class="top_bar_content ml-auto">
-							<div class="top_bar_menu">
-								<ul class="standard_dropdown top_bar_dropdown">
-									<li>
-										<a href="#">English<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li><a href="#">English</a></li>
-											<li><a href="#">Bangla</a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">Dollar $<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li><a href="#">Taka (৳)</a></li>
-											<li><a href="#">Dollar ($)</a></li>
-										</ul>
-									</li>
-								</ul>
-							</div>
+							
+							@guest
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="{{ asset ('frontend/images/user.svg')}}" alt=""></div>
 								<div><a href="{{ route('register') }}">Register</a></div>
 								<div><a href="{{ route('login') }}">Sign in</a></div>
 							</div>
+
+							@else
+							<div class="top_bar_menu">
+								<ul class="standard_dropdown top_bar_dropdown">
+									<li>
+										<a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li><a href="#">Profile</a></li>
+											<li><a href="#">Setting</a></li>
+											<li><a href="#">Order List</a></li>
+											<li><a href="#">Admin Deshboard</a></li>
+											<li><a href="{{ route('customer.logout') }}">Logout</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+
+							@endguest
 						</div>
 					</div>
 				</div>
@@ -75,12 +82,14 @@
 				<div class="row">
 
 					<!-- Logo -->
-					<div class="col-lg-2 col-sm-3 col-3 order-1">
+					<div class="col-lg-2 col-sm-2 col-3 order-1 mt-4 mb-3" >
 						<div class="logo_container">
 							<div class="logo" >
-                                <a href="">
+                                <a href="{{ route('home_page') }}">
                                     <img src="{{ asset ('frontend/images/logo/Logo-01.png')}}" alt="" style="height: 150px; width:300px; margin-left: -70px;">
-                                </a></div>
+                                    {{-- <img src="{{ asset ('frontend/images/logo/Logo-01.png')}}" alt="" style="height: 150px; width:300px; margin-left: -70px;"> --}}
+                                </a>
+							</div>
 						</div>
 					</div>
 
@@ -161,7 +170,7 @@
 					
 					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
 						<div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">Code Artist.IT</a>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 </div>
 						<div class="logos ml-sm-auto">
@@ -191,7 +200,29 @@
 <script src="{{ asset('frontend/plugins/slick-1.8.0/slick.js') }}"></script>
 <script src="{{ asset('frontend/plugins/easing/easing.js') }}"></script>
 <script src="{{ asset('frontend/js/custom.js') }}"></script>
-<script src="{{ asset ('frontend/js/product_custom.js')}}"></script>
+<script src="{{ asset('frontend/js/product_custom.js')}}"></script>
+
+<script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+<script>
+	@if (Session::has('messege'))
+	var type="{{Session::get('alert-type','info')}}"
+	switch(type){
+		case 'info':
+			toastr.info("{{ Session::get('messege') }}");
+			break;
+		case 'success':
+			toastr.success("{{ Session::get('messege') }}");
+			break;
+		case 'warning':
+			toastr.warning("{{ Session::get('messege') }}");
+			break;
+		case 'error':
+			toastr.error("{{ Session::get('messege') }}");
+			break;
+	}   
+	@endif
+  </script>
+
 </body>
 
 </html>

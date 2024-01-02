@@ -70,6 +70,7 @@
               </li>
             </ul>
           </li>
+          
           {{-- Sales Section End --}}
 
           {{-- Product Section Start --}}
@@ -205,11 +206,11 @@
 
           <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="{{ route('main_profile') }}" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 Profile
-                <span class="badge badge-info right">2</span>
+                <span class="badge badge-info right"></span>
               </p>
             </a>
           </li>

@@ -16,14 +16,22 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
-    // Admin after login
+    // // Admin after login
+    // public function user_login()
+    // {
+    //     if (Auth::check()) {
+    //         return view('frontend.layouts.main');
+    //     }
+    // } //end
+
+
+    // admin Deshboard login system
     public function Admin_dashboard()
     {
         if (Auth()->user()->supper_admin == 1) {
             return view('admin.layouts.main');
         }
-        return view('frontend.layouts.main');
-    } //end
+    }
 
     public function Admin_logout()
     {
@@ -65,4 +73,9 @@ class AdminController extends Controller
             return redirect()->back()->with($notification);
         }
     } // End Function //
+
+    public function profile()
+    {
+        return view('admin.profile.main_profile');
+    }
 }

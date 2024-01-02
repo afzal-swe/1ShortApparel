@@ -17,12 +17,21 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\PickupController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
+Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
+
+// Route::group(['prefix' => 'author'], function () {
+//     // Admin Home Route Section Start //
+//     Route::controller(AdminController::class)->group(function () {
+//         Route::get('/', 'Admin_dashboard')->name('dashboard');
+//     });
+// });
 
 Route::middleware(['SupperAdmin'])->group(function () {
     Route::group(['prefix' => 'author'], function () {
         // Admin Home Route Section Start //
         Route::controller(AdminController::class)->group(function () {
-            Route::get('/', 'Admin_dashboard')->name('dashboard');
+            Route::get('/', 'Admin_dashboard')->name('dashboard'); // user login section some problem
+            // Route::get('/admin-dashboard', 'Admin_dashboard')->name('admin_login');
             Route::get('/logout', 'Admin_logout')->name('admin.logout');
             Route::get('/password-change', 'password_change')->name('admin.password_change');
             Route::post('/password-update', 'update_change')->name('pass.update');
@@ -101,6 +110,18 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::get('/add', 'product_add')->name('product_add');
                 Route::post('/store', 'product_store')->name('product_store');
                 Route::get('/edit/{id}', 'product_edit')->name('product_edit');
+                Route::post('/update/{id}', 'product_update')->name('product_update');
+            });
+        }); // End Product Route section //
+
+        // Product Route Section Start
+        Route::group(['prefix' => 'profile'], function () {
+            Route::controller(AdminController::class)->group(function () {
+                Route::get('/', 'profile')->name('main_profile');
+                // Route::get('/add', 'product_add')->name('product_add');
+                // Route::post('/store', 'product_store')->name('product_store');
+                // Route::get('/edit/{id}', 'product_edit')->name('product_edit');
+                // Route::post('/update/{id}', 'product_update')->name('product_update');
             });
         }); // End Product Route section //
 

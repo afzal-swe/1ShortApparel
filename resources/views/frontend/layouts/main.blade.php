@@ -19,7 +19,7 @@
             <div class="banner_product_image"><img src="{{ asset ($product_slider->thumbnail)}}" alt="{{ $product_slider->product_title }}"></div>
             <div class="col-lg-5 offset-lg-4 fill_height">
                 <div class="banner_content">
-                    <h1 class="banner_text">{{ $product_slider->product_title }}</h1>
+                    <h1 class="banner_text">{{ $product_slider->product_title }}-{{ $product_slider->product_code }}</h1>
 
                     @if ($product_slider->discount_price == Null)
                     {{-- $setting comming to AppServiceProviders function -- Alerd !! Commit --}} 
@@ -29,7 +29,7 @@
                     @endif
                     
                     <div class="banner_product_name">{{ $product_slider->brand->name }}</div>
-                    <div class="button banner_button"><a href="#">Shop Now</a></div>
+                    <div class="button banner_button"><a href="{{ route('product.details',$product_slider->slug) }}">Shop Now</a></div>
                 </div>
             </div>
         </div>
