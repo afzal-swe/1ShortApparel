@@ -18,9 +18,9 @@ class indexController extends Controller
     {
         $category = Categorie::all();
         $product_slider = Product::where('product_slider', 1)->latest()->first();
-
-        return view('frontend.layouts.main', compact('category', 'product_slider'));
-        // return view('frontend.layouts.main');
+        $featured = Product::where('status', 1)->orderBy('id', 'DESC')->limit(16)->get();
+        $trendy_product = Product::where('status', 1)->where('trendy', 1)->orderBy('id', 'DESC')->limit(8)->get();
+        return view('frontend.layouts.main', compact('category', 'product_slider', 'featured', 'trendy_product'));
     }
 
     // product details //
@@ -29,11 +29,10 @@ class indexController extends Controller
         $product_details = $request->slug;
 
         $product = Product::where('slug', $product_details)->first();
-        // $view_product = Product::where('slug', $slug)->increment('product_views');
+        $view_product = Product::where('slug', $product_details)->increment('product_views');
         $review = Review::orderBy('id', 'DESC')->limit(6)->get();
         $related_product = Product::where('subcategory_id', $product->subcategory_id)->orderBy('id', 'DESC')->limit(10)->get();
-        // $featured = Product::where('status', 1)->orderBy('id', 'DESC')->limit(8)->get();
-        // $popular_product = Product::where('status', 1)->orderBy('product_views', 'DESC')->limit(8)->get();
-        return view('frontend.product.product_details', compact('product', 'related_product', 'review'));
+        $popular_product = Product::where('status', 1)->orderBy('product_views', 'DESC')->limit(8)->get();
+        return view('frontend.product.product_details', compact('product', 'related_product', 'review', 'view_product', 'popular_product'));
     } // end 
 }

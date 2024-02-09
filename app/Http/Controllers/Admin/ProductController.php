@@ -119,6 +119,8 @@ class ProductController extends Controller
                 'flash_deal_id' => $request->flash_deal_id,
                 'cash_on_delivery' => $request->cash_on_delivery,
                 'status' => $request->status,
+                'product_slider' => $request->product_slider,
+                'trendy' => $request->trendy,
 
             ]);
             $notification = array('messege' => 'New Product Added Successfully', 'alert-type' => 'success');

@@ -187,8 +187,8 @@
                                             <button class="btn btn-outline-info" type="submit" ><span class="loading d-none" style="cursor: pointer">...</span>Add to cart</button>
                                         @endif
                                         
-                                        <a href="#" class="btn btn-outline-primary" type="button" >Add to wishlist</a>
-                                        {{-- <a href="{{ route('add.wishlist',$product->id) }}" class="btn btn-outline-primary" type="button">Add to wishlist</a> --}}
+                                        <a href="{{ route('add.wishlist',$product->id) }}" class="btn btn-outline-primary" type="button" ><i class="fas fa-heart"> Add to wishlist</i></a>
+                                        
                                     </div>
                                 </div>
                             </div>

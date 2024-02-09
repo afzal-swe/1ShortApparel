@@ -44,6 +44,22 @@
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset ('frontend/images/phone.png')}}" alt=""></div>{{ $settings->phone_one }}</div>
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset ('frontend/images/mail.png')}}" alt=""></div><a href="mailto:1shotapparelandgoods@gmaill.com">{{ $settings->main_email }}</a></div>
 						<div class="top_bar_content ml-auto">
+
+							<div class="top_bar_menu">
+								<ul class="standard_dropdown top_bar_dropdown">
+									<li>
+										<a href="#">English<i class="fas fa-chevron-down"></i></a>
+										
+									</li>
+									<li>
+										<a href="#">{{ $settings->currency }}<i class="fas fa-chevron-down"></i></a>
+										{{-- <ul>
+											<li><a href="#">{{ $settings->currency }}</a></li>
+											
+										</ul> --}}
+									</li>
+								</ul>
+							</div>
 							
 							@guest
 							<div class="top_bar_user">
@@ -121,6 +137,10 @@
 						</div>
 					</div>
 
+					@php
+						$wishlist = DB::table('wishlists')->where('user_id', Auth::id())->count();
+					@endphp
+
 					<!-- Wishlist -->
 					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
@@ -128,7 +148,7 @@
 								<div class="wishlist_icon"><img src="{{ asset ('frontend/images/heart.png')}}" alt=""></div>
 								<div class="wishlist_content">
 									<div class="wishlist_text"><a href="#">Wishlist</a></div>
-									<div class="wishlist_count">115</div>
+									<div class="wishlist_count">{{ $wishlist }}</div>
 								</div>
 							</div>
 

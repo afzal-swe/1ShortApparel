@@ -67,6 +67,7 @@
                                                     <option selected disabled>-- Choose Currency --</option>
                                                     <option value="৳">Taka (৳)</option>
                                                     <option value="$">USD ($)</option>
+                                                    <option value="₹">Rupee ⟨₹⟩</option>
                                                 </select>
                                             </div>
 

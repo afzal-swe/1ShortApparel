@@ -251,7 +251,7 @@
                       <h3 class="card-title">More Images (Click Add For More Image)</h3>
                     </div> 
                       <tr>  
-                          <td><input type="file" accept="image/*" name="images" class="form-control name_list" /></td>  
+                          <td><input type="file" accept="image/*" name="images" required class="form-control name_list" /></td>  
                           <td><button type="button" name="add" id="add" class="btn btn-success">Add</button></td>  
                       </tr>  
                     </table>    
@@ -283,7 +283,7 @@
 
                      <div class="card p-4">
                         <h6>Trendy Product</h6><hr>
-                       <div><span> Status </span> <input type="checkbox" name="flash_deal_id" value="1" class="btn" style="margin-left: 20px;"></div>
+                       <div><span> Status </span> <input type="checkbox" name="trendy" value="1" class="btn" style="margin-left: 20px;"></div>
                      </div>
 
                      <div class="card p-4">

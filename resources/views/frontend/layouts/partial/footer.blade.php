@@ -10,8 +10,8 @@
                     <div class="footer_title">Got Question? Call Us 24/7</div>
                     <div class="footer_phone">{{ $settings->phone_two }}</div>
                     <div class="footer_contact_text">
-                        <p>17 Princess Road, London</p>
-                        <p>Grester London NW18JR, UK</p>
+                        <p >Address : {{ $settings->address }}</p>
+                        
                     </div>
                     <div class="footer_social">
                         <ul>
