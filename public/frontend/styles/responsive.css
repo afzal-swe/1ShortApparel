@@ -324,7 +324,7 @@
 	}
 	.banner_product_image
 	{
-		opacity: 0.5;
+		/* opacity: 0.5; */
 		width: 60vw;
 	    top: 50%;
 	    -webkit-transform: translateY(-50%);

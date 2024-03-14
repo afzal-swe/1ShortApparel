@@ -1,8 +1,8 @@
 @extends('frontend.layouts.app')
 
-    @section('navbar')
+    {{-- @section('navbar')
     @include('frontend.layouts.partial.main_navbar')
-    @endsection
+    @endsection --}}
 
 @section('content')
 
@@ -51,9 +51,14 @@
             <!-- Images -->
             <div class="col-lg-1 order-lg-1 order-2">
                 <ul class="image_list">
-                    <li data-image="{{ asset ($product->thumbnail)}}"><img src="{{ asset ($product->thumbnail)}}" alt=""></li>
-                    <li data-image="{{ asset ($product->images)}}"><img src="{{ asset ($product->images)}}" alt=""></li>
-                    <li data-image="{{ asset('frontend/images/single_3.jpg') }}"><img src="{{ asset ('frontend/images/single_3.jpg')}}" alt=""></li> <!-- 40 number tutorial multi image show -->
+                    @isset($img)
+                        @foreach ($img as $key=> $image)
+                            <li data-image="{{ asset ($product->thumbnail)}}"><img src="{{ asset ($product->thumbnail)}}" alt=""></li>
+                        @endforeach
+                    @endisset
+                    
+                    
+                    {{-- <li data-image="{{ asset('frontend/images/single_3.jpg') }}"><img src="{{ asset ('frontend/images/single_3.jpg')}}" alt=""></li> <!-- 40 number tutorial multi image show --> --}}
                 </ul>
             </div>
 
@@ -118,7 +123,16 @@
                 @endif
                     {{-- <div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div> --}}
                     <div class="order_info d-flex flex-row">
-                        <form action="#">
+                        <form action="{{ route('add.to_cart',$product->id) }}" method="POST" enctype="multipart/form-data" >
+                            @csrf
+
+                            {{-- cart add details --}}
+                            <input type="hidden" name="id" value="{{ $product->id }}">
+                            @if ($product->discount_price==Null)
+                            <input type="hidden" name="price" value="{{ $product->product_price }}">
+                            @else
+                            <input type="hidden" name="price" value="{{ $product->discount_price }}">
+                            @endif
                             <div class="form-group">
                                 <div class="row">
                                     @isset($product->product_size)
@@ -152,7 +166,7 @@
                                 <!-- Product Quantity -->
                                 <div class="product_quantity clearfix ml-3">
                                     <span>Quantity: </span>
-                                    <input id="quantity_input" type="text" pattern="[1-9]*" value="1">
+                                    <input id="quantity_input" name="quantity_input" type="text" pattern="[1-9]*" value="1">
                                     <div class="quantity_buttons">
                                         <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
                                         <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>

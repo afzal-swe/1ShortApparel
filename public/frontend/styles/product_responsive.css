@@ -343,7 +343,7 @@
 	}
 	.banner_product_image
 	{
-		opacity: 0.5;
+		/* opacity: 0.5; */
 		width: 60vw;
 	    top: 50%;
 	    -webkit-transform: translateY(-50%);
@@ -366,6 +366,7 @@
 	}
 	.product_item
 	{
+		/* width: 108%; */
 		width: 33.33333333%;
 	}
 	.image_list li
@@ -713,7 +714,7 @@
 {
 	.product_item
 	{
-		width: 50%;
+		width: 108%;
 	}
 }
 

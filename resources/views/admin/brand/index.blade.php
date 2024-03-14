@@ -109,8 +109,22 @@
                             </div>
                           </div>
                         </div>
-   
-                        <input type="checkbox" name="status" value="1"><span> Publication</span><br>
+
+                        <div class="form-group col-lg-12">
+                          <label for="exampleInputFile">Publication<span class="text-danger">*</span></label>
+                          <select name="status" id="" class="form-control  @error('status') is-invalid @enderror " required>
+                            <option value="" selected disabled>== Choose Options ==</option>
+                              
+                              <option value="1">Yes</option>
+                              <option value="0">No</option>
+                              
+                          </select>
+                          @error('status')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                        </div>
                            
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>

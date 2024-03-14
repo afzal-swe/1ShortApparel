@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Categorie;
 use App\Models\Product;
 use App\Models\Review;
+use App\Models\Brand;
 
 class indexController extends Controller
 {

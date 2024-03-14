@@ -69,7 +69,7 @@
                                           @endif
                                       </td>
                                         <td>
-                                            <a href="#" class="btn btn-info sm edit" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="btn btn-info sm edit" data-id="{{ $row->id }}" data-toggle="modal" data-target="#editModal"  title="Edit Data"><i class="fas fa-edit"></i></a>
                                             {{-- <a href="{{ route('category.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a> --}}
                                             <a href="{{ route('category.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
                                         </td>
@@ -128,6 +128,40 @@
                             @enderror
                         </div>
 
+                        <div class="row">
+                          <div class="form-group col-lg-6">
+                            <label for="exampleInputFile">Home Page<span class="text-danger">*</span></label>
+                            <select name="home_page" id="" class="form-control  @error('home_page') is-invalid @enderror " required>
+                              <option value="" selected disabled>== Choose Options ==</option>
+                                
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                                
+                            </select>
+                            @error('home_page')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                          </div>
+                          
+                          <div class="form-group col-lg-6">
+                            <label for="exampleInputFile">Publication<span class="text-danger">*</span></label>
+                            <select name="category_status" id="" class="form-control  @error('category_status') is-invalid @enderror " required>
+                              <option value="" selected disabled>== Choose Options ==</option>
+                                
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                                
+                            </select>
+                            @error('category_status')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                          </div>
+                        </div>
+
                         <div class="form-group">
                           <label for="exampleInputFile">Category Image <span class="text-danger">*</span></label>
                           <div class="input-group">
@@ -140,9 +174,6 @@
                             </div>
                           </div>
                         </div>
-   
-                        <input type="checkbox" name="home_page" value="1"><span> Home Page</span><br>
-                        <input type="checkbox" name="category_status" value="1"><span> Publication</span><br>
                            
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -156,6 +187,28 @@
         <!-- /.modal-dialog -->
       </div>
 
+
+
+{{-- Category Edit Modal --}}
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="exampleModalLabel">Update Category</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="modal_body">
+               
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script>
         $(function () {
           //Initialize Select2 Elements
@@ -167,6 +220,15 @@
       
         })
         
+      </script>
+
+      <script type="text/javascript">
+        $('body').on('click','.edit',function(){
+          let cat_id=$(this).data('id');
+          $.get("categorys/edit"+cat_id,function(data){
+            $("#modal_body").html(data);
+          });
+        });
       </script>
 
 @endsection

@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\PickupController;
+use App\Http\Controllers\Admin\CampaignController;
+use App\Http\Controllers\Admin\MailController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -92,6 +94,17 @@ Route::middleware(['SupperAdmin'])->group(function () {
             });
         }); // End Coupon Route section //
 
+        // campaign Route Section Start
+        Route::group(['prefix' => 'campaign'], function () {
+            Route::controller(CampaignController::class)->group(function () {
+                Route::get('/', 'all_campaign')->name('campaign.all_campaign');
+                Route::post('/store', 'campaign_add')->name('campaign.add');
+                Route::get('/edit/{id}', 'campaign_edit')->name('campaign.edit');
+                Route::post('/update/{id}', 'campaign_update')->name('campaign.update');
+                Route::get('/delete/{id}', 'campaign_delete')->name('campaign.delete');
+            });
+        }); // End campaign Route section //
+
         // pickup-point Route Section Start
         Route::group(['prefix' => 'pickup-point'], function () {
             Route::controller(PickupController::class)->group(function () {
@@ -111,6 +124,16 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::post('/store', 'product_store')->name('product_store');
                 Route::get('/edit/{id}', 'product_edit')->name('product_edit');
                 Route::post('/update/{id}', 'product_update')->name('product_update');
+            });
+        }); // End Product Route section //
+
+        Route::group(['prefix' => 'mail'], function () {
+            Route::controller(MailController::class)->group(function () {
+                Route::get('/', 'mailbox')->name('mail_mailbox');
+                Route::get('/send', 'send_mail')->name('send_mail');
+                // Route::post('/store', 'product_store')->name('product_store');
+                // Route::get('/edit/{id}', 'product_edit')->name('product_edit');
+                // Route::post('/update/{id}', 'product_update')->name('product_update');
             });
         }); // End Product Route section //
 
