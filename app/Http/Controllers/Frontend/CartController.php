@@ -14,7 +14,6 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        // dd($request->all());
 
         $product = Product::where('id', $request->id)->first();
         // dd($product);
@@ -33,5 +32,29 @@ class CartController extends Controller
         return redirect()->back()->with($notification);
 
         // return response()->json($data);
+    }
+
+    public function my_cart()
+    {
+
+        $content = Cart::content();
+        return view('frontend.cart.cart', compact('content'));
+    }
+
+    // single cart delete this function
+    public function cart_product_remove(Request $rowId)
+    {
+        Cart::remove($rowId);
+
+        $notification = array('messege' => 'Cart Remove Successfully', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
+
+    // all cart delete this function
+    public function cart_destory()
+    {
+        Cart::destroy();
+        $notification = array('messege' => 'Cart item Clear!', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
     }
 }

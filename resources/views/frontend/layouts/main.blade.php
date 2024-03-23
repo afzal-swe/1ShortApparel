@@ -850,8 +850,7 @@ $cat_product = DB::table('products')->where('category_id',$row->id)->orderBy('id
                                                 </div>
                                                 <a href="{{ route('add.to_cart',$row->slug) }}">
                                                     <button class="product_cart_button">Add to Cart</button>
-                                                </a>
-                                                
+                                                </a>  
                                             </div>
                                         </div>
                                         <a href="{{ route('add.wishlist',$row->slug) }}">
@@ -859,8 +858,6 @@ $cat_product = DB::table('products')->where('category_id',$row->id)->orderBy('id
                                         </a>
                                     </div>
                                 </div>
-
-
                                 @endforeach
                             </div>
                             <div class="arrivals_slider_dots_cover"></div>

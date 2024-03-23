@@ -18,6 +18,10 @@
 <link rel="stylesheet" type="text/css" href="{{ asset ('frontend/styles/product_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset ('frontend/styles/product_responsive.css')}}">
 
+{{-- Cart design --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/cart_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/cart_responsive.css') }}">
+
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.css')}}">
 
@@ -59,6 +63,8 @@
 <script src="{{ asset('frontend/plugins/easing/easing.js') }}"></script>
 <script src="{{ asset('frontend/js/custom.js') }}"></script>
 <script src="{{ asset('frontend/js/product_custom.js')}}"></script>
+
+<script src="{{ asset('frontend/js/cart_custom.js') }}"></script>
 
 
 <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>

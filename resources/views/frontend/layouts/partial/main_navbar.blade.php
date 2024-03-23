@@ -115,7 +115,7 @@
                         <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                             <div class="wishlist_icon"><img src="{{ asset ('frontend/images/heart.png')}}" alt=""></div>
                             <div class="wishlist_content">
-                                <div class="wishlist_text"><a href="#">Wishlist</a></div>
+                                <div class="wishlist_text"><a href="{{ route('wishlist.view') }}">Wishlist</a></div>
                                 <div class="wishlist_count">{{ $wishlist }}</div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                                     <div class="cart_count"><span>{{ Cart::count() }}</span></div>
                                 </div>
                                 <div class="cart_content">
-                                    <div class="cart_text"><a href="#">Cart</a></div>
+                                    <div class="cart_text"><a href="{{ route('cart') }}">Cart</a></div>
                                     <div class="cart_price">{{ $settings->currency }}{{ Cart::total() }}</div>
                                 </div>
                             </div>

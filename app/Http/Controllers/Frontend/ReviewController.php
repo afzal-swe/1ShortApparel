@@ -8,7 +8,7 @@ use App\Models\Review;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
-use App\Models\Wishlists;
+
 
 class ReviewController extends Controller
 {
@@ -37,26 +37,6 @@ class ReviewController extends Controller
                 'created_at' => Carbon::now(),
             ]);
             $notification = array('messege' => 'Thank for your Review', 'alert-type' => 'success');
-            return redirect()->back()->with($notification);
-        }
-    }
-
-
-    public function add_wishlist($id)
-    {
-
-        $check = DB::table('wishlists')->where('product_id', $id)->where('user_id', Auth::id())->first();
-
-        if ($check) {
-            $notification = array('messege' => 'Already have it on your wishlist !', 'alert-type' => 'error');
-            return redirect()->back()->with($notification);
-        } else {
-            Wishlists::insert([
-                'user_id' => Auth::id(),
-                'product_id' => $id,
-                'created_at' => Carbon::now(),
-            ]);
-            $notification = array('messege' => 'Product add on wishlist !', 'alert-type' => 'success');
             return redirect()->back()->with($notification);
         }
     }
