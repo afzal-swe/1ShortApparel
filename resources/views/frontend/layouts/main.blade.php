@@ -177,10 +177,12 @@ $brand = DB::table('categories')->where('category_status', 1)->orderBy('id', 'DE
 												@endif
 												<div class="product_name"><div><a href="{{ route('product.details',$row->slug) }}">{{ substr($row->product_title,0,20) }}..</a></div></div>
 												<div class="product_extras">
-                                                    <div>
+                                                    {{-- <div>
                                                         <a href="{{ route('product.details',$row->slug) }}">Quick View</a>
-                                                    </div>
-													<button class="product_cart_button">Add to Cart</button>
+                                                    </div> --}}
+													<a href="{{ route('product.details',$row->slug) }}">
+                                                        <button class="product_cart_button">Product Details</button>
+                                                    </a>
 												</div>
 											</div>
 											<a href="{{ route('add.wishlist',$row->id) }}">
@@ -848,8 +850,8 @@ $cat_product = DB::table('products')->where('category_id',$row->id)->orderBy('id
                                                 <div>
                                                     <a href="{{ route('product.details',$row->slug) }}">Quick View</a>
                                                 </div>
-                                                <a href="{{ route('add.to_cart',$row->slug) }}">
-                                                    <button class="product_cart_button">Add to Cart</button>
+                                                <a href="{{ route('product.details',$row->slug) }}">
+                                                    <button class="product_cart_button">Product Details</button>
                                                 </a>  
                                             </div>
                                         </div>

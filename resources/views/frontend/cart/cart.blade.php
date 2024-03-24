@@ -116,7 +116,7 @@
                     <div class="order_total">
                         <div class="order_total_content text-md-right">
                             <div class="order_total_title">Order Total:</div>
-                            <div class="order_total_amount">$2000</div>
+                            <div class="order_total_amount">{{ $settings->currency }} {{ Cart::total() }}</div>
                         </div>
                     </div>
 
