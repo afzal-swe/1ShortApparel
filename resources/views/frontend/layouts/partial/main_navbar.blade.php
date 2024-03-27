@@ -42,10 +42,9 @@
                                 <li>
                                     <a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
                                     <ul>
-                                        <li><a href="#">Profile</a></li>
+                                        <li><a href="{{ route('deshboard') }}">Deshboard</a></li>
                                         <li><a href="#">Setting</a></li>
                                         <li><a href="#">Order List</a></li>
-                                        <li><a href="#">Admin Deshboard</a></li>
                                         <li><a href="{{ route('customer.logout') }}">Logout</a></li>
                                     </ul>
                                 </li>
@@ -164,11 +163,11 @@
                                     $subcategory = DB::table('sub_categories')->where('category_id', $row->id)->get();
                                 @endphp
                                     <li class="hassubs">
-                                        <a href="#"><img src="{{ asset($row->image) }}" alt="" height="18" width="18">  {{ $row->category_name }}<i class="fas fa-chevron-right"></i></a>
+                                        <a href="{{ route('categorywise.product',$row->id) }}"><img src="{{ asset($row->image) }}" alt="" height="18" width="18">  {{ $row->category_name }}<i class="fas fa-chevron-right"></i></a>
                                         <ul>
                                             @foreach ($subcategory as $row)
                                                 <li class="hassubs">
-                                                    <a href="#">{{ $row->subcategory_name }}</a>
+                                                    <a href="{{ route('subcategorywise.product',$row->id) }}">{{ substr( $row->subcategory_name,0,20) }} ..</a>
                                                     {{-- <ul>
                                                         <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
                                                         
@@ -191,6 +190,8 @@
                             <ul class="standard_dropdown main_nav_dropdown">
                                 <li><a href="{{ url('/') }}">Home<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="{{ url('/') }}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ url('/') }}">Campign<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ url('/') }}">Helpline<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="{{ route('contact.page') }}">Contact<i class="fas fa-chevron-down"></i></a></li>
                             
                             </ul>

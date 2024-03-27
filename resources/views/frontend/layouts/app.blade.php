@@ -27,6 +27,8 @@
 
 
 
+
+
 </head>
 
 <body>
@@ -66,6 +68,12 @@
 
 <script src="{{ asset('frontend/js/cart_custom.js') }}"></script>
 
+
+{{-- Category Product --}}
+<script src="{{ asset('frontend/plugins/Isotope/isotope.pkgd.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/jquery-ui-1.12.1.custom/jquery-ui.js') }}"></script>
+<script src="{{ asset('frontend/plugins/parallax-js-master/parallax.min.js') }}"></script>
+<script src="{{ asset('frontend/js/shop_custom.js') }}"></script>
 
 <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 <script>

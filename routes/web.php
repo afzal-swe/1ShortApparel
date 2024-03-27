@@ -7,12 +7,23 @@ use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\ContectController;
+use App\Http\Controllers\Frontend\UserProfileController;
 
 
 Route::group(['prefix' => '/'], function () {
     Route::controller(indexController::class)->group(function () {
         Route::get('/', 'home_page')->name('home_page');
         Route::get('/product-details/{slug}', 'product_details')->name('product.details');
+    });
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::controller(UserProfileController::class)->group(function () {
+            Route::get('/info', 'user_info')->name('user_info');
+            Route::get('/deshboard', 'deshboard')->name('deshboard');
+            Route::get('/review', 'write_userReview')->name('write_user.review');
+            Route::post('/review/store', 'store_websiteReview')->name('store_website.review');
+            Route::get('/setting', 'User_Setting')->name('user.setting');
+        });
     });
 
     Route::group(['prefix' => 'contact'], function () {
@@ -26,9 +37,6 @@ Route::group(['prefix' => '/'], function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'review'], function () {
-        // Route::get('/', function () {
-        //     return view('dashboard'); 
-        // })->name('dashboard');
 
         Route::post('/', [ReviewController::class, 'review_add'])->name('review_add');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,9 +51,14 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'add'], function () {
         Route::post('/cart/{id}', [CartController::class, 'addToCart'])->name('add.to_cart');
         Route::get('/my/cart', [CartController::class, 'my_cart'])->name('cart');
-        Route::get('/cart/remove/{rowId}', [CartController::class, 'cart_product_remove'])->name('cartproduct.remove');
+        Route::get('/cart/remove/{rowId}', [CartController::class, 'cart_product_remove'])->name('delete.cart');
         Route::get('/destory', [CartController::class, 'cart_destory'])->name('cart.destory');
     });
+});
+
+Route::group(['prefix' => 'category'], function () {
+    Route::get('/product/{id}', [indexController::class, 'categorywise_product'])->name('categorywise.product');
+    Route::get('/sub-category/{id}', [indexController::class, 'subcategorywise_product'])->name('subcategorywise.product');
 });
 
 

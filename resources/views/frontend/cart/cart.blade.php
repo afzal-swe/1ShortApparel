@@ -104,7 +104,7 @@
                                     </div>
                                     <div class="cart_item_total cart_info_col">
                                         
-                                        <a href="#" class="cart_item_text btn btn-danger" data-id="{{ $row->rowId }}" id="removeProduct">x</a>
+                                        <a href="{{ route('delete.cart',$row->rowId) }}" class="cart_item_text btn btn-danger" >x</a>
                                     </div>
                                 </div>
                             </li>

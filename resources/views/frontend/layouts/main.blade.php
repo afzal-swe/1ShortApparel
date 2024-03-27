@@ -9,6 +9,11 @@
 <!-- Banner -->
 
 {{-- indexController --}}
+<style type="text/css">
+    .checked{
+        color:orange;
+    }
+</style>
 
 
 <div class="banner">
@@ -693,7 +698,7 @@ $brand = DB::table('categories')->where('category_status', 1)->orderBy('id', 'DE
                         <!-- Popular Categories Item -->
                         @foreach ($category as $row)
                             <div class="owl-item">
-                                <a href="">
+                                <a href="{{ route('categorywise.product',$row->id) }}">
                                     <div class="popular_category d-flex flex-column align-items-center justify-content-center">
                                         <div class="popular_category_image"><img src="{{ asset ($row->image)}}" alt="" style="width: 60px;"></div>
                                         <div class="popular_category_text">{{ substr($row->category_name,0,20) }}..</div>
@@ -1712,97 +1717,67 @@ $cat_product = DB::table('products')->where('category_id',$row->id)->orderBy('id
                     
                     <!-- Reviews Slider -->
                     <div class="owl-carousel owl-theme reviews_slider">
-                        
+                        @foreach ($wbreview as $row)
+                            
                         <!-- Reviews Slider Item -->
                         <div class="owl-item">
                             <div class="review d-flex flex-row align-items-start justify-content-start">
-                                <div><div class="review_image"><img src="{{ asset ('frontend/images/review_1.jpg')}}" alt=""></div></div>
+                                <div><div class="review_image"><img class="card-img-top" src="https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg"></div></div>
                                 <div class="review_content">
-                                    <div class="review_name">Roberto Sanchez</div>
+                                    <div class="review_name">{{ $row->name }}</div>
                                     <div class="review_rating_container">
-                                        <div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="review_time">2 day ago</div>
+                                        <div class="rating_r rating_r_4 review_rating">
+                                            @if($row->rating==5)
+                                                <div>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                </div>
+                                            @elseif($row->rating==4)
+                                                <div>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </div>
+                                            @elseif($row->rating==3)
+                                                <div>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </div>
+                                            @elseif($row->rating==2)
+                                                <div>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </div>
+                                            @elseif($row->rating==1)
+                                                <div>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="review_time">{{ $row->review_date }}</div>
                                     </div>
-                                    <div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
+                                    <div class="review_text"><p style="text-align: justify;">{{ substr($row->review,0,110) }}..</p></div>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
 
-                        <!-- Reviews Slider Item -->
-                        <div class="owl-item">
-                            <div class="review d-flex flex-row align-items-start justify-content-start">
-                                <div><div class="review_image"><img src="{{ asset ('frontend/images/review_2.jpg')}}" alt=""></div></div>
-                                <div class="review_content">
-                                    <div class="review_name">Brandon Flowers</div>
-                                    <div class="review_rating_container">
-                                        <div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="review_time">2 day ago</div>
-                                    </div>
-                                    <div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Reviews Slider Item -->
-                        <div class="owl-item">
-                            <div class="review d-flex flex-row align-items-start justify-content-start">
-                                <div><div class="review_image"><img src="{{ asset ('frontend/images/review_3.jpg')}}" alt=""></div></div>
-                                <div class="review_content">
-                                    <div class="review_name">Emilia Clarke</div>
-                                    <div class="review_rating_container">
-                                        <div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="review_time">2 day ago</div>
-                                    </div>
-                                    <div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Reviews Slider Item -->
-                        <div class="owl-item">
-                            <div class="review d-flex flex-row align-items-start justify-content-start">
-                                <div><div class="review_image"><img src="{{ asset ('frontend/images/review_1.jpg')}}" alt=""></div></div>
-                                <div class="review_content">
-                                    <div class="review_name">Roberto Sanchez</div>
-                                    <div class="review_rating_container">
-                                        <div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="review_time">2 day ago</div>
-                                    </div>
-                                    <div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Reviews Slider Item -->
-                        <div class="owl-item">
-                            <div class="review d-flex flex-row align-items-start justify-content-start">
-                                <div><div class="review_image"><img src="{{ asset ('frontend/images/review_2.jpg')}}" alt=""></div></div>
-                                <div class="review_content">
-                                    <div class="review_name">Brandon Flowers</div>
-                                    <div class="review_rating_container">
-                                        <div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="review_time">2 day ago</div>
-                                    </div>
-                                    <div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Reviews Slider Item -->
-                        <div class="owl-item">
-                            <div class="review d-flex flex-row align-items-start justify-content-start">
-                                <div><div class="review_image"><img src="{{ asset ('frontend/images/review_3.jpg')}}" alt=""></div></div>
-                                <div class="review_content">
-                                    <div class="review_name">Emilia Clarke</div>
-                                    <div class="review_rating_container">
-                                        <div class="rating_r rating_r_4 review_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="review_time">2 day ago</div>
-                                    </div>
-                                    <div class="review_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum laoreet.</p></div>
-                                </div>
-                            </div>
-                        </div>
-
+                  
                     </div>
                     <div class="reviews_dots"></div>
                 </div>

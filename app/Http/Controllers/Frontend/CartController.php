@@ -42,9 +42,9 @@ class CartController extends Controller
     }
 
     // single cart delete this function
-    public function cart_product_remove(Request $rowId)
+    public function cart_product_remove(Request $request)
     {
-        Cart::remove($rowId);
+        Cart::remove($request->rowId);
 
         $notification = array('messege' => 'Cart Remove Successfully', 'alert-type' => 'success');
         return redirect()->back()->with($notification);
