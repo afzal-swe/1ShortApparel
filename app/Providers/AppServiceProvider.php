@@ -33,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
 
         $settings = DB::table('website_settings')->first();
         view()->share('settings', $settings); // this share file using any view file sections;
+
     }
 }

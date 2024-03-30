@@ -172,7 +172,8 @@ $brand = DB::table('categories')->where('category_status', 1)->orderBy('id', 'DE
 									<div class="featured_slider_item">
 										<div class="border_active"></div>
 										<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-											<a href=""><div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset ($row->thumbnail)}}" alt="{{ $row->product_title }}" height="100%" width="80%"></div></a>
+                                            
+											<a href="#"><div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset ($row->thumbnail)}}" alt="{{ $row->product_title }}" height="100%" width="80%"></div></a>
 											<div class="product_content" style="margin-top: -60px;">
 												
 												@if ($row->discount_price==Null)
@@ -1883,9 +1884,10 @@ $cat_product = DB::table('products')->where('category_id',$row->id)->orderBy('id
                         <div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
                     </div>
                     <div class="newsletter_content clearfix">
-                        <form action="#" class="newsletter_form">
-                            <input type="email" class="newsletter_input" required="required" placeholder="Enter your email address">
-                            <button class="newsletter_button">Subscribe</button>
+                        <form action="{{ route('store.newsletter') }}" method="POST" class="newsletter_form">
+                            @csrf
+                            <input type="email" class="newsletter_input" name="email" required="required" placeholder="Enter your email address">
+                            <button class="newsletter_button" type="submit">Subscribe</button>
                         </form>
                         <div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
                     </div>

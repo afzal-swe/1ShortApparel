@@ -13,21 +13,21 @@
 
                 <div class="card-body">
                    <div>
-                   	  <form action="#" method="post">
+                   	  <form action="{{ route('userInfo.update',Auth::user()->id) }}" method="post">
                    	  	@csrf
                    	    <div class="form-group">
                    	      <label for="exampleInputEmail1">Customer Name</label>
                    	      <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}">
                    	    </div>
 
-                   	    <div class="form-group">
+                   	    {{-- <div class="form-group">
                    	      <label for="exampleInputEmail1">Customer User Name</label>
-                   	      <input type="text" class="form-control" name="name" value="{{ Auth::user()->user_name }}">
-                   	    </div>
+                   	      <input type="text" class="form-control" name="user_name" value="{{ Auth::user()->user_name }}">
+                   	    </div> --}}
 
                    	    <div class="form-group">
                    	      <label for="exampleInputEmail1">Customer Email</label>
-                   	      <input type="email" class="form-control" name="email" readonly="" value="{{ Auth::user()->email }}">
+                   	      <input type="email" class="form-control" name="" readonly="" value="{{ Auth::user()->email }}">
                    	    </div>
 
                    	    <div class="form-group">
@@ -36,7 +36,7 @@
                    	    </div>
                    	    
                    	    <br>
-                   	    <button type="submit" class="btn btn-primary" disabled>Save</button>
+                   	    <button type="submit" class="btn btn-primary">Save</button>
                    	  </form>
                    </div>
                 </div>

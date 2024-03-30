@@ -18,6 +18,7 @@ class indexController extends Controller
     private $db_subcategory;
     private $db_products;
     private $db_wbreview;
+    private $db_NewsLetter;
 
     public function __construct()
     {
@@ -25,6 +26,7 @@ class indexController extends Controller
         $this->db_subcategory = "sub_categories";
         $this->db_products = "products";
         $this->db_wbreview = "wereviews";
+        $this->db_NewsLetter = "news_letters";
     }
 
     // root page
@@ -84,5 +86,27 @@ class indexController extends Controller
             ->paginate(20);
 
         return view('frontend.product.subcategory_product', compact('subcategory', 'products', 'subcategorywise'));
+    }
+
+    // store news letter function //
+
+    public function storeNewsletter(Request $request)
+    {
+
+        $email = $request->email;
+
+        $check = DB::table($this->db_NewsLetter)->where('email', $email)->first();
+
+        if ($check) {
+            $notification = array('messege' => 'Email Already Exist', 'alert-type' => 'error');
+            return redirect()->back()->with($notification);
+        } else {
+            $data = array();
+            $data['email'] = $request->email;
+            DB::table($this->db_NewsLetter)->insert($data);
+
+            $notification = array('messege' => 'Thanks for subscribe us!', 'alert-type' => 'success');
+            return redirect()->back()->with($notification);
+        }
     }
 }

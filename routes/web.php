@@ -8,27 +8,34 @@ use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\ContectController;
 use App\Http\Controllers\Frontend\UserProfileController;
+use App\Http\Controllers\Frontend\F_PageController;
 
 
 Route::group(['prefix' => '/'], function () {
     Route::controller(indexController::class)->group(function () {
         Route::get('/', 'home_page')->name('home_page');
         Route::get('/product-details/{slug}', 'product_details')->name('product.details');
+        Route::post('/store/newsletter', 'storeNewsletter')->name('store.newsletter');
     });
 
     Route::group(['prefix' => 'user'], function () {
         Route::controller(UserProfileController::class)->group(function () {
-            Route::get('/info', 'user_info')->name('user_info');
             Route::get('/deshboard', 'deshboard')->name('deshboard');
+            Route::get('/info', 'user_info')->name('user_info');
+            Route::post('/update/{id}', 'userInfo_Update')->name('userInfo.update');
             Route::get('/review', 'write_userReview')->name('write_user.review');
             Route::post('/review/store', 'store_websiteReview')->name('store_website.review');
             Route::get('/setting', 'User_Setting')->name('user.setting');
+            Route::post('/setting', 'customer_PasswordChange')->name('customer.password.change');
         });
     });
 
     Route::group(['prefix' => 'contact'], function () {
         Route::get('/page', [ContectController::class, 'contact_page'])->name('contact.page');
         Route::post('/send/message', [ContectController::class, 'contact_send'])->name('contact.send_message');
+    });
+    Route::group(['prefix' => 'page'], function () {
+        Route::get('/{page_slug}', [F_PageController::class, 'view_Page'])->name('view.page');
     });
 });
 
