@@ -18,7 +18,9 @@ class SupperAdmin
     {
         if (Auth()->user()->supper_admin == 1) {
             return $next($request);
+        } else {
+            $notification = array('messege' => 'Successfully !', 'alert-type' => 'success');
+            return redirect()->route('home_page')->with($notification);
         }
-        return redirect()->route('/')->with("error", "You are not a admin");
     }
 }

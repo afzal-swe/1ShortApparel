@@ -122,7 +122,7 @@
 
                     <div class="cart_buttons">
                         <a href="{{ route('cart.destory') }}" type="button" class="button cart_button_clear btn-danger">Clear Cart</a>
-                        <button type="button" class="button cart_button_checkout">Checkout</button>
+                        <a href="{{ route('checkout') }}" type="button" class="button cart_button_checkout">Checkout</a>
                     </div>
                 </div>
             </div>

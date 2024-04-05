@@ -38,7 +38,7 @@ class UserProfileController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'user_name' => 'required|unique:users|max:50',
+            'name' => 'required|unique:users|max:50',
         ]);
 
         User::findOrFail($request->id)->update([

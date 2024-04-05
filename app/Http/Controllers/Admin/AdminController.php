@@ -30,6 +30,8 @@ class AdminController extends Controller
     {
         if (Auth()->user()->supper_admin == 1) {
             return view('admin.layouts.main');
+        } else {
+            return view('frontend.layouts.main');
         }
     }
 

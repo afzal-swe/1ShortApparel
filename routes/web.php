@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\ContectController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\Frontend\F_PageController;
+use App\Http\Controllers\Frontend\OrderContdroller;
 
 
 Route::group(['prefix' => '/'], function () {
@@ -60,6 +61,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/my/cart', [CartController::class, 'my_cart'])->name('cart');
         Route::get('/cart/remove/{rowId}', [CartController::class, 'cart_product_remove'])->name('delete.cart');
         Route::get('/destory', [CartController::class, 'cart_destory'])->name('cart.destory');
+        Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+        Route::post('/coupon', [CartController::class, 'applyCoupon'])->name('apply.coupon');
+        Route::get('/remove', [CartController::class, 'couponRemove'])->name('coupon.remove');
+    });
+    Route::group(['prefix' => 'order'], function () {
+        Route::post('/place', [OrderContdroller::class, 'OrderPlace'])->name('order.place');
     });
 });
 
