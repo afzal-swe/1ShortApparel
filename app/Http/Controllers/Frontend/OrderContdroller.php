@@ -3,22 +3,33 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderContdroller extends Controller
 {
     //
 
     private $db_order;
+    private $db_order_details;
 
     public function __construct()
     {
         $this->middleware('auth');
         $this->db_order = "orders";
+        $this->db_order_details = "order__details";
+    }
+
+    public function Order_List()
+    {
+        $orders = DB::table($this->db_order)->where('user_id', Auth::id())->orderBy('id', 'DESC')->take(10)->get();
+
+        return view('user.my_order', compact('orders'));
     }
 
     public function OrderPlace(Request $request)
@@ -60,6 +71,9 @@ class OrderContdroller extends Controller
         }
 
         $order_id = DB::table('orders')->insertGetId($order);
+
+        // $mail = Mail::to($request->c_email)->send(new InvoiceMail($order));
+        // dd($mail);
 
         // Order Details
         $content = Cart::content();

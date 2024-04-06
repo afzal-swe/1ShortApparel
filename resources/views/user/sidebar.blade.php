@@ -6,7 +6,7 @@
             <a href="{{ route('deshboard') }}" class="text-muted"> <li class="list-group-item"><i class="fas fa-home"></i> Dashboard</li></a>
             <a href="{{ route('user_info') }}" class="text-muted"> <li class="list-group-item"><i class="fas fa-home"></i> Profile</li></a>
             <a href="{{ route('wishlist.view') }}" class="text-muted"> <li class="list-group-item"> <i class="far fa-heart"></i> Wishlist</li></a>
-            <a href="#" class="text-muted"> <li class="list-group-item"> <i class="fas fa-file-alt"></i>  My Order</li></a>
+            <a href="{{ route('order.list') }}" class="text-muted"> <li class="list-group-item"> <i class="fas fa-file-alt"></i>  My Order</li></a>
             
             <a href="{{ route('user.setting') }}" class="text-muted"> <li class="list-group-item"><i class="fas fa-edit"></i> Setting</li> </a>
             <a href="#" class="text-muted"> <li class="list-group-item"> <i class="fab fa-telegram-plane"></i> Open Ticket</li> </a>
