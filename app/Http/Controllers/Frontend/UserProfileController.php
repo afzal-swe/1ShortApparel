@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class UserProfileController extends Controller
 {
@@ -122,5 +123,55 @@ class UserProfileController extends Controller
             $notification = array('messege' => 'Old Password Not Matched!', 'alert-type' => 'error');
             return redirect()->back()->with($notification);
         }
+    }
+
+    // Open Ticket function
+    public function Ticket()
+    {
+        $ticket = DB::table('tickets')->where('user_id', Auth::id())->orderBy('id', 'DESC')->take(10)->get();
+        return view('user.ticket', compact('ticket'));
+    }
+
+    // create ticket from
+    public function new_ticket()
+    {
+        return view('user.new_ticket');
+    }
+
+    // store ticket 
+    public function store_ticket(Request $request)
+    {
+        $validated = $request->validate([
+            'subject' => 'required',
+        ]);
+
+        $data = array();
+        $data['subject'] = $request->subject;
+        $data['service'] = $request->service;
+        $data['priority'] = $request->priority;
+        $data['message'] = $request->message;
+        $data['user_id'] = Auth::id();
+        $data['status'] = 0;
+        $data['date'] = date('Y-m-d');
+
+        if ($request->image) {
+            //working with image
+            $photo = $request->image;
+            $photoname = uniqid() . '.' . $photo->getClientOriginalExtension();
+            Image::make($photo)->resize(600, 350)->save('image/ticket/' . $photoname);  //image intervention
+            $data['image'] = 'image/ticket/' . $photoname;   // public/files/brand/plus-point.jpg
+        }
+
+        DB::table('tickets')->insert($data);
+        $notification = array('messege' => 'Ticket Inserted!', 'alert-type' => 'success');
+        return redirect()->route('open.ticket')->with($notification);
+    }
+
+    // Ticket Show
+    public function show_Ticket(Request $request)
+    {
+
+        $ticket = DB::table('tickets')->where('id', $request->id)->first();
+        return view('user.show_ticket', compact('ticket'));
     }
 }

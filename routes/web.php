@@ -28,6 +28,11 @@ Route::group(['prefix' => '/'], function () {
             Route::post('/review/store', 'store_websiteReview')->name('store_website.review');
             Route::get('/setting', 'User_Setting')->name('user.setting');
             Route::post('/setting', 'customer_PasswordChange')->name('customer.password.change');
+            Route::get('/open/ticket', 'Ticket')->name('open.ticket');
+            Route::get('/create/ticket', 'new_ticket')->name('new.ticket');
+            Route::post('/store/ticket', 'store_ticket')->name('store.ticket');
+            Route::get('/show/ticket/{id}', 'show_Ticket')->name('show.ticket');
+            Route::get('/reply/ticket', 'reply_Ticket')->name('reply.ticket');
         });
     });
 

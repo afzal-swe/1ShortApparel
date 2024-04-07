@@ -9,7 +9,7 @@
             <a href="{{ route('order.list') }}" class="text-muted"> <li class="list-group-item"> <i class="fas fa-file-alt"></i>  My Order</li></a>
             
             <a href="{{ route('user.setting') }}" class="text-muted"> <li class="list-group-item"><i class="fas fa-edit"></i> Setting</li> </a>
-            <a href="#" class="text-muted"> <li class="list-group-item"> <i class="fab fa-telegram-plane"></i> Open Ticket</li> </a>
+            <a href="{{ route('open.ticket') }}" class="text-muted"> <li class="list-group-item"> <i class="fab fa-telegram-plane"></i> Open Ticket</li> </a>
             <a href="{{ route('customer.logout') }}" class="text-muted"> <li class="list-group-item"> <i class="fas fa-sign-out-alt"></i> Logout</li> </a>
            </ul>
      
