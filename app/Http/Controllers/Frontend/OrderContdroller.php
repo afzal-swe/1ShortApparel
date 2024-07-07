@@ -101,4 +101,15 @@ class OrderContdroller extends Controller
         $notification = array('messege' => 'Successfully Order Placed!', 'alert-type' => 'success');
         return redirect()->to('/')->with($notification);
     }
+
+    // Customer single ordr view 
+    public function Order_View(Request $request)
+    {
+
+        $order = DB::table($this->db_order)->where('id', $request->id)->first();
+        // dd($order);
+        $order_details = DB::table($this->db_order_details)->where('order_id', $request->id)->get();
+
+        return view('user.order_details', compact('order', 'order_details'));
+    }
 }

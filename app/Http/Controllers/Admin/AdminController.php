@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    //
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,7 +25,14 @@ class AdminController extends Controller
     // } //end
 
 
-    // admin Deshboard login system
+    /**
+     * Display the admin dashboard.
+     *
+     * This method determines whether the authenticated user is a super admin. If the user is a super admin,
+     * it returns the view for the admin dashboard. Otherwise, it returns the view for the frontend main layout.
+     *
+     * @return \Illuminate\View\View
+     */
     public function Admin_dashboard()
     {
         if (Auth()->user()->supper_admin == 1) {
@@ -35,12 +42,20 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Log the admin out.
+     *
+     * This method handles the logout process for the admin. It logs out the authenticated user using the Auth facade.
+     * After logging out, it prepares a success notification and redirects the user to the admin login page with the notification.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Admin_logout()
     {
         Auth::logout();
         $notification = array('messege' => 'Logout Successfully', 'alert-type' => 'success');
         return redirect()->route('admin_login')->with($notification);
-    } // End
+    }
 
     public function password_change()
     {

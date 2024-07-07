@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'order'], function () {
         Route::post('/place', [OrderContdroller::class, 'OrderPlace'])->name('order.place');
         Route::get('/list', [OrderContdroller::class, 'Order_List'])->name('order.list');
+        Route::get('/view/{id}', [OrderContdroller::class, 'Order_View'])->name('view.order');
     });
 });
 

@@ -15,28 +15,45 @@ class BrandController extends Controller
     {
         $this->middleware('auth');
     }
-    // View All Brand Name and image //
+
+    /**
+     * Display all brands.
+     *
+     * This method retrieves all brand records from the database, ordered by their ID in descending order.
+     * It then passes the retrieved brand data to the 'admin.brand.index' view for display.
+     *
+     * @return \Illuminate\View\View
+     */
     public function All_Brands()
     {
-
         $brand = Brand::orderBy('id', 'DESC')->get();
 
         return view('admin.brand.index', compact('brand'));
-    } // End
+    }
 
-    // Add new brand //
+
+
+    /**
+     * Add a new brand.
+     *
+     * This method handles the addition of a new brand. It first validates the incoming request to ensure
+     * that the 'name' and 'image' fields are present and meet specified criteria. If an image file is provided,
+     * it generates a unique name for the image based on the brand name, resizes it, and saves it to the designated
+     * directory. The brand information, including the name and image path, is then inserted into the 'brands' table.
+     * A success notification is prepared, and the user is redirected back to the previous page with the notification.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Add_Brand(Request $request)
     {
-
         $request->validate([
             'name' => 'required|unique:brands|max:50',
             'image' => 'required',
         ]);
 
         if ($request->file('image')) {
-
             $name = Str::of($request->name)->slug('-');
-
             $img = $request->file('image');
             $name_gen = $name . '.' . $img->getClientOriginalExtension();
             Image::make($img)->resize(240, 120)->save("image/brand/" . $name_gen);
@@ -46,12 +63,13 @@ class BrandController extends Controller
                 'name' => $request->name,
                 'image' => $save_img,
                 'status' => $request->status,
-
             ]);
+
             $notification = array('messege' => 'Brand Insert Successfully', 'alert-type' => 'success');
             return redirect()->back()->with($notification);
         }
-    } // End 
+    }
+
 
     // Edit from view function //
     public function edit_brand(Request $request)
