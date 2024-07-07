@@ -52,8 +52,22 @@
                                         <td>{{ $row->coupon_code }}</td>
                                         <td>{{ $row->valid_date }}</td>
                                         <td>{{ $row->coupon_amount }}</td>
-                                        <td>{{ $row->type }}</td>
-                                        <td>{{ $row->status }}</td>
+                                        
+                                        <td> 
+                                          @if ($row->type==1)
+                                          <p class="text-info">Fixed</p>
+                                          @else
+                                          <p class="text-info">Percentage</p>
+                                          @endif
+                                        </td>
+                                       
+                                        <td> 
+                                          @if ($row->status==1)
+                                          <p class="text-success">Active</p>
+                                          @else
+                                          <p class="text-danger">Deactive</p>
+                                          @endif
+                                        </td>
                                         
                                         <td >
                                             <a href="{{ route('coupon.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a>

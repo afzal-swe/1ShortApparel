@@ -71,7 +71,7 @@
   
  @auth
  <!-- Navbar -->
- @include('admin.layouts.partial.navbar')
+ {{-- @include('admin.layouts.partial.navbar') --}}
  <!-- /.navbar -->
  @include('admin.layouts.partial.sidebar')
 

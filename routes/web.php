@@ -32,7 +32,7 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/create/ticket', 'new_ticket')->name('new.ticket');
             Route::post('/store/ticket', 'store_ticket')->name('store.ticket');
             Route::get('/show/ticket/{id}', 'show_Ticket')->name('show.ticket');
-            Route::get('/reply/ticket', 'reply_Ticket')->name('reply.ticket');
+            Route::post('/reply/ticket', 'reply_Ticket')->name('reply.ticket');
         });
     });
 

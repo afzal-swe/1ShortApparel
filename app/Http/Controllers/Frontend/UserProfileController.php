@@ -19,6 +19,7 @@ class UserProfileController extends Controller
     private $db_web_site_review;
     private $db_order;
     private $db_order_details;
+    private $db_replies;
 
     public function __construct()
     {
@@ -27,6 +28,7 @@ class UserProfileController extends Controller
         $this->db_tableuser = "users";
         $this->db_order = "orders";
         $this->db_order_details = "order__details";
+        $this->db_replies = "replies";
     }
 
     public function deshboard()
@@ -173,5 +175,35 @@ class UserProfileController extends Controller
 
         $ticket = DB::table('tickets')->where('id', $request->id)->first();
         return view('user.show_ticket', compact('ticket'));
+    }
+
+    // fontend user reply ticket function
+    public function reply_Ticket(Request $request)
+    {
+        // dd($request->all());
+
+        $validate = $request->validate([
+            'message' => ['required'],
+        ]);
+
+        $data = array();
+        $data['message'] = $request->message;
+        $data['ticket_id'] = $request->ticket_id;
+        $data['user_id'] = Auth::id();
+        $data['reply_date'] = date('Y-m-d');
+
+        if ($request->image) {
+            $photo = $request->image;
+            $photoname = uniqid() . '-' . $photo->getClientOriginalExtension();
+            Image::make($photo)->resize(600, 350)->save('image/ticket/' . $photoname);
+
+            $data['image'] = "image/ticket/" . $photoname;
+        }
+
+        DB::table($this->db_replies)->insert($data);
+        DB::table('tickets')->where('id', $request->ticket_id)->update(['status' => 0]);
+
+        $notification = array('messege' => 'Replied Done', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
     }
 }

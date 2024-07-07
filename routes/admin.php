@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\PickupController;
 use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\MailController;
+use App\Http\Controllers\Admin\TicketController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -126,6 +127,17 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::post('/update/{id}', 'product_update')->name('product_update');
             });
         }); // End Product Route section //
+
+        // Tickets Route Section Start
+        Route::group(['prefix' => 'ticket'], function () {
+            Route::controller(TicketController::class)->group(function () {
+                Route::get('/', 'all_ticket')->name('ticket.index');
+                Route::get('/show/{id}', 'admin_ticket_show')->name('admin.ticket.show');
+                Route::get('/delete/{id}', 'admin_ticket_delete')->name('admin.ticket.delete');
+                Route::post('/store', 'admin_store_reply')->name('admin.store.reply');
+                Route::get('/close/{id}', 'close_ticket')->name('admin.close.ticket');
+            });
+        }); // End Tickets Route section //
 
         Route::group(['prefix' => 'mail'], function () {
             Route::controller(MailController::class)->group(function () {
