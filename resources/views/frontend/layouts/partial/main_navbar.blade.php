@@ -44,7 +44,7 @@
                                     <ul>
                                         <li><a href="{{ route('deshboard') }}">Deshboard</a></li>
                                         <li><a href="{{ route('user.setting') }}">Setting</a></li>
-                                        <li><a href="#">Order List</a></li>
+                                        <li><a href="{{ route('order.list') }}">Order List</a></li>
                                         <li><a href="{{ route('customer.logout') }}">Logout</a></li>
                                     </ul>
                                 </li>

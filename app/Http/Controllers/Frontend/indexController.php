@@ -19,6 +19,8 @@ class indexController extends Controller
     private $db_products;
     private $db_wbreview;
     private $db_NewsLetter;
+    private $db_order;
+    private $db_order_details;
 
     public function __construct()
     {
@@ -27,6 +29,8 @@ class indexController extends Controller
         $this->db_products = "products";
         $this->db_wbreview = "wereviews";
         $this->db_NewsLetter = "news_letters";
+        $this->db_order = "orders";
+        $this->db_order_details = "order__details";
     }
 
     // root page
@@ -106,6 +110,28 @@ class indexController extends Controller
             DB::table($this->db_NewsLetter)->insert($data);
 
             $notification = array('messege' => 'Thanks for subscribe us!', 'alert-type' => 'success');
+            return redirect()->back()->with($notification);
+        }
+    }
+
+    // Order Tracking Page
+    public function Order_Tracking()
+    {
+        return view('frontend.tracking.order_tracking');
+    }
+
+    // prder tracking check
+    public function Check_Order(Request $request)
+    {
+
+        $check = DB::table($this->db_order)->where('order_id', $request->order_id)->first();
+        // dd($check);
+        if ($check) {
+            $order = DB::table($this->db_order)->where('order_id', $request->order_id)->first();
+            $order_details = DB::table($this->db_order_details)->where('order_id', $order->id)->get();
+            return view('frontend.tracking.order_details', compact('order', 'order_details'));
+        } else {
+            $notification = array('messege' => 'Invalid OrderID! Try again.', 'alert-type' => 'error');
             return redirect()->back()->with($notification);
         }
     }

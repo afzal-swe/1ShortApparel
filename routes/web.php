@@ -82,6 +82,11 @@ Route::group(['prefix' => 'category'], function () {
     Route::get('/sub-category/{id}', [indexController::class, 'subcategorywise_product'])->name('subcategorywise.product');
 });
 
+Route::group(['prefix' => 'tracking'], function () {
+    Route::get('/order', [indexController::class, 'Order_Tracking'])->name('order.tracking');
+    Route::post('/order/check', [indexController::class, 'Check_Order'])->name('check.order');
+});
+
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
