@@ -71,7 +71,7 @@
   
  @auth
  <!-- Navbar -->
- {{-- @include('admin.layouts.partial.navbar') --}}
+ @include('admin.layouts.partial.navbar')
  <!-- /.navbar -->
  @include('admin.layouts.partial.sidebar')
 
@@ -157,7 +157,7 @@
 <!-- dropzonejs -->
 <script src="{{ asset ('backend/plugins/dropzone/min/dropzone.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset ('backend/dist/js/adminlte.min.js')}}"></script>
+{{-- <script src="{{ asset ('backend/dist/js/adminlte.min.js')}}"></script> --}}
 
 
 

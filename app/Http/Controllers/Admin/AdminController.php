@@ -60,7 +60,7 @@ class AdminController extends Controller
     public function password_change()
     {
         return view('admin.profile.change_password');
-    } // End
+    }
 
     public function update_change(Request $request)
     {
