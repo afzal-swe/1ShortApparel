@@ -10,11 +10,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Brands Table</h1>
+            <h1>Payment Gateway Table</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><- Go To Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">DataTables</li>
             </ol>
           </div>
@@ -29,8 +29,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                          <h3 class="card-title">All Brands</h3>
-                          <button class="btn btn-info btn-sm" style="float: right" data-toggle="modal" data-target="#modal-default"> + Add Brand</button>
+                          <h3 class="card-title">All Payment Gateway</h3>
+                          <a href="{{ route('payment.gateway_edit') }}" class="btn btn-info btn-sm" style="float: right"> Update Payment Option</a><br>
+                          <button class="btn btn-info btn-sm" style="float: right,margin:right='2px'" data-toggle="modal" data-target="#modal-default"> + Add Payment Option</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -38,22 +39,25 @@
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Brand Image</th>
-                                    <th>Brand Name</th>
+                                    <th>Gateway Name</th>
+                                    <th>Store Id</th>
+                                    <th>Signature Key</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @if ($brand !== null)
-                                  @foreach ($brand as $key=>$row)
+                                @if ($view_payment_gateway !== null)
+                                  @foreach ($view_payment_gateway as $key=>$row)
                                     <tr>
                                         <td>{{++$key}}</td>
-                                        <td><img src="{{ asset($row->image) }}" style="height: 40px; width:60px"></td>
-                                        <td>{{ $row->name }}</td>
+                                        <td>{{ $row->gateway_name ?? "Null" }}</td>
+                                        <td>{{ $row->store_id ?? "Null" }}</td>
+                                        <td>{{ $row->signature_key ?? "Null" }}</td>
+                                        <td>{{ $row->status ?? "Null" }}</td>
                                         <td >
-                                            <a href="{{ route('brand.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('brand.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{ route('payment.gateway.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                   @endforeach
@@ -77,54 +81,43 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Insert New Brand</h4>
+              <h4 class="modal-title">Add New Payment Gateway</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('brand.add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('payment_gateway.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label for="">Brand Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror " placeholder="Brand Name" value="{{old('name')}}" required>
-                            @error('name')
+                            <label for="">Gateway Name <span class="text-danger">*</span></label>
+                            <input type="text" name="gateway_name" class="form-control @error('gateway_name') is-invalid @enderror " placeholder="Gateway Name" value="{{old('gateway_name')}}" required>
+                            @error('gateway_name')
                               <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        
                         <div class="form-group">
-                          <label for="exampleInputFile">Brand Logo <span class="text-danger">*</span></label>
-                          <div class="input-group">
-                            <div class="custom-file">
-                              <input type="file" name="image"  class="custom-file-input" id="exampleInputFile" required>
-                              <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                            </div>
-                            <div class="input-group-append">
-                              <span class="input-group-text">Upload</span>
-                            </div>
-                          </div>
+                            <label for="">Store Id</label>
+                            <input type="text" name="store_id" class="form-control" placeholder="Store Id">
                         </div>
 
-                        <div class="form-group col-lg-12">
-                          <label for="exampleInputFile">Publication<span class="text-danger">*</span></label>
-                          <select name="status" id="" class="form-control  @error('status') is-invalid @enderror " required>
+                        <div class="form-group">
+                            <label for="">Signature Key</label>
+                            <input type="text" name="signature_key" class="form-control" placeholder="Signature Key"> 
+                        </div>
+
+                        {{-- <div class="form-group col-lg-12">
+                          <label for="exampleInputFile">Status</label>
+                          <select name="status" id="" class="form-control">
                             <option value="" selected disabled>== Choose Options ==</option>
-                              
                               <option value="1">Yes</option>
                               <option value="0">No</option>
-                              
                           </select>
-                          @error('status')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                          @enderror
-                        </div>
+                        </div> --}}
                            
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>

@@ -14,7 +14,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><- Go To Home</a></li>
               <li class="breadcrumb-item active">DataTables</li>
             </ol>
           </div>
@@ -36,9 +36,9 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                   <h4 class="modal-title">Page Edit Form</h4>
-                                  <a href="{{ route('page.all') }}" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  {{-- <a href="{{ route('page.all') }}" type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
-                                  </a>
+                                  </a> --}}
                                 </div>
                                 <div class="modal-body">
                                     <form action="{{ route('page.update',$edit->id) }}" method="post" enctype="multipart/form-data">

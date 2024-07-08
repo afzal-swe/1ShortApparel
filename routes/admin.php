@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\PickupController;
 use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\TicketController;
+use App\Http\Controllers\Admin\BDPaymentController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -33,7 +34,7 @@ Route::middleware(['SupperAdmin'])->group(function () {
     Route::group(['prefix' => 'author'], function () {
         // Admin Home Route Section Start //
         Route::controller(AdminController::class)->group(function () {
-            Route::get('/', 'Admin_dashboard')->name('dashboard'); // user login section some problem
+            Route::get('/admin-dashboard', 'Admin_dashboard')->name('dashboard');
             // Route::get('/admin-dashboard', 'Admin_dashboard')->name('admin_login');
             Route::get('/logout', 'Admin_logout')->name('admin.logout');
             Route::get('/password-change', 'password_change')->name('admin.password_change');
@@ -198,6 +199,14 @@ Route::middleware(['SupperAdmin'])->group(function () {
                     Route::get('/', 'social_create')->name('social.create');
                     Route::post('/store', 'social_store')->name('social.store');
                     Route::post('/update/{id}', 'social_update')->name('social.update');
+                });
+            });
+            Route::group(['prefix' => 'payment-gateway'], function () {
+                Route::controller(BDPaymentController::class)->group(function () {
+                    Route::get('/', 'Payment_All')->name('payment.all');
+                    Route::post('/add', 'Payment_Gateway_Add')->name('payment_gateway.store');
+                    Route::get('/delete/{id}', 'Payment_Gateway_Delete')->name('payment.gateway.delete');
+                    Route::get('/edit', 'Payment_Gateway_Edit')->name('payment.gateway_edit');
                 });
             });
         });
