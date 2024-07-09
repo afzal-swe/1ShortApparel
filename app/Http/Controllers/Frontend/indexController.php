@@ -21,6 +21,7 @@ class indexController extends Controller
     private $db_NewsLetter;
     private $db_order;
     private $db_order_details;
+    private $campaingns;
 
     public function __construct()
     {
@@ -31,6 +32,7 @@ class indexController extends Controller
         $this->db_NewsLetter = "news_letters";
         $this->db_order = "orders";
         $this->db_order_details = "order__details";
+        $this->campaingns = "campaingns";
     }
 
     // root page
@@ -41,7 +43,8 @@ class indexController extends Controller
         $featured = Product::where('status', 1)->orderBy('id', 'DESC')->limit(16)->get();
         $trendy_product = Product::where('status', 1)->where('trendy', 1)->orderBy('id', 'DESC')->limit(8)->get();
         $wbreview = DB::table($this->db_wbreview)->where('status', 1)->orderBy('id', 'DESC')->limit(12)->get();
-        return view('frontend.layouts.main', compact('category', 'product_slider', 'featured', 'trendy_product', 'wbreview'));
+        $campaingn = DB::table($this->campaingns)->where('status', 1)->orderBy('id', 'DESC')->first();
+        return view('frontend.layouts.main', compact('category', 'product_slider', 'featured', 'trendy_product', 'wbreview', 'campaingn'));
     }
 
     // product details //

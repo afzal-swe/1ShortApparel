@@ -59,11 +59,11 @@
                                          <label>Paypal</label>
 							  	   </div>
 							  	   <div class="form-group col-lg-4">
-                                         <input type="radio"  name="payment_type" checked="" value="2" >
+                                         <input type="radio"  name="payment_type" value="2" >
                                          <label>Bkash/Rocket/Nagad </label>
 							  	   </div>
 							  	   <div class="form-group col-lg-4">
-                                         <input type="radio"  name="payment_type" value="3" >
+                                         <input type="radio"  name="payment_type" checked="" value="3" >
                                          <label>Hand Cash</label>
 							  	   </div>
 							  	   

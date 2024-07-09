@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\ContectController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\Frontend\F_PageController;
 use App\Http\Controllers\Frontend\OrderContdroller;
+use App\Http\Controllers\Frontend\PaymentController;
 
 
 Route::group(['prefix' => '/'], function () {
@@ -74,6 +75,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/place', [OrderContdroller::class, 'OrderPlace'])->name('order.place');
         Route::get('/list', [OrderContdroller::class, 'Order_List'])->name('order.list');
         Route::get('/view/{id}', [OrderContdroller::class, 'Order_View'])->name('view.order');
+    });
+    // __ Payment Route Option
+    Route::group(['prefix' => 'payment'], function () {
+        Route::post('success', [OrderContdroller::class, 'success'])->name('success');
+        Route::post('fail', [OrderContdroller::class, 'fail'])->name('fail');
+        Route::get('cancel', [OrderContdroller::class, 'cancel'])->name('cancel');
     });
 });
 

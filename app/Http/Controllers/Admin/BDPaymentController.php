@@ -64,4 +64,50 @@ class BDPaymentController extends Controller
             echo "Page Not Found !";
         }
     }
+
+    // Update Aamarpay function
+    public function Aamarpay_update(Request $request)
+    {
+
+        $data = array();
+        $data['store_id'] = $request->store_id ?? "Null";
+        $data['signature_key'] = $request->signature_key ?? "Null";
+        $data['status'] = $request->status ?? "0";
+        $data['updated_at'] = Carbon::now();
+
+        DB::table($this->payment_gateway)->where('id', $request->id)->update($data);
+
+        $notification = array('messege' => 'Aamarpay Data Update !!', 'alert-type' => "success");
+        return redirect()->back()->with($notification);
+    }
+    // Update Surjopay function
+    public function Surjopay_update(Request $request)
+    {
+
+        $data = array();
+        $data['store_id'] = $request->store_id ?? "Null";
+        $data['signature_key'] = $request->signature_key ?? "Null";
+        $data['status'] = $request->status ?? "0";
+        $data['updated_at'] = Carbon::now();
+
+        DB::table($this->payment_gateway)->where('id', $request->id)->update($data);
+
+        $notification = array('messege' => 'Surjopay Data Update !!', 'alert-type' => "success");
+        return redirect()->back()->with($notification);
+    }
+    // Update SSL function
+    public function Ssl_update(Request $request)
+    {
+
+        $data = array();
+        $data['store_id'] = $request->store_id ?? "Null";
+        $data['signature_key'] = $request->signature_key ?? "Null";
+        $data['status'] = $request->status ?? "0";
+        $data['updated_at'] = Carbon::now();
+
+        DB::table($this->payment_gateway)->where('id', $request->id)->update($data);
+
+        $notification = array('messege' => 'SSL Data Update !!', 'alert-type' => "success");
+        return redirect()->back()->with($notification);
+    }
 }

@@ -31,8 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="#" method="Post">
-              {{-- <form role="form" action="{{ route('update.aamarpay') }}" method="Post"> --}}
+              <form role="form" action="{{ route('update.aamarpay') }}" method="Post">
                 @csrf
                 <input type="hidden" name="id" value="{{ $aamarpay->id }}">
                 <div class="card-body">
@@ -65,8 +64,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="#" method="Post">
-              {{-- <form role="form" action="{{ route('update.surjopay') }}" method="Post"> --}}
+              <form role="form" action="{{ route('update.surjopay') }}" method="Post">
                 @csrf
 
                 <input type="hidden" name="id" value="{{ $surjopay->id }}">
@@ -100,8 +98,10 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="#" method="Post">
+              <form role="form" action="{{ route('update.ssl') }}" method="Post">
                 @csrf
+
+                <input type="hidden" name="id" value="{{ $ssl->id }}">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">StoreID</label>

@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\BDPaymentController;
+use App\Http\Controllers\Admin\OrderController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -34,7 +35,7 @@ Route::middleware(['SupperAdmin'])->group(function () {
     Route::group(['prefix' => 'author'], function () {
         // Admin Home Route Section Start //
         Route::controller(AdminController::class)->group(function () {
-            Route::get('/admin-dashboard', 'Admin_dashboard')->name('dashboard');
+            Route::get('/', 'Admin_dashboard')->name('dashboard');
             // Route::get('/admin-dashboard', 'Admin_dashboard')->name('admin_login');
             Route::get('/logout', 'Admin_logout')->name('admin.logout');
             Route::get('/password-change', 'password_change')->name('admin.password_change');
@@ -161,6 +162,13 @@ Route::middleware(['SupperAdmin'])->group(function () {
             });
         }); // End Product Route section //
 
+        // Prder Route Section Start
+        Route::group(['prefix' => 'order'], function () {
+            Route::controller(OrderController::class)->group(function () {
+                Route::get('/all', 'All_Order')->name('admin_order.view');
+            });
+        }); // End Prder Route section //
+
         // Setting Route Section //
         Route::group(['prefix' => 'setting'], function () {
             Route::group(['prefix' => 'seo'], function () {
@@ -206,7 +214,11 @@ Route::middleware(['SupperAdmin'])->group(function () {
                     Route::get('/', 'Payment_All')->name('payment.all');
                     Route::post('/add', 'Payment_Gateway_Add')->name('payment_gateway.store');
                     Route::get('/delete/{id}', 'Payment_Gateway_Delete')->name('payment.gateway.delete');
+
                     Route::get('/edit', 'Payment_Gateway_Edit')->name('payment.gateway_edit');
+                    Route::post('/aamarpay-update', 'Aamarpay_update')->name('update.aamarpay');
+                    Route::post('/surjopay-update', 'Surjopay_update')->name('update.surjopay');
+                    Route::post('/ssl-update', 'Ssl_update')->name('update.ssl');
                 });
             });
         });

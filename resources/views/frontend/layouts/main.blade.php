@@ -39,7 +39,23 @@
             </div>
         </div>
     </div>
+</div><hr>
+
+{{-- campaingn Section --}}
+@isset($campaingn)
+    
+<div class="characteristics">
+    <div class="container">
+        <div class="row">
+           <div class="col-lg-2"></div>
+           <div class="col-lg-8">
+            <strong class="text-info">{{ $campaingn->title }}</strong>
+            <a href=""><img src="{{ $campaingn->image }}" style="width: 100%;"></a>
+           </div><br>
+        </div>
+    </div>
 </div>
+@endisset
 
 <!-- Characteristics -->
 
