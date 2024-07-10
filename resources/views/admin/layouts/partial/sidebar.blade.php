@@ -107,18 +107,8 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
-                  {{-- <i class="far fa-circle nav-icon"></i> --}}
-                  <p>Product Catalog</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/buttons.html" class="nav-link">
-                  {{-- <i class="far fa-circle nav-icon"></i> --}}
-                  <p>Vendor Product</p>
-                </a>
-              </li>
+              
+              
               <li class="nav-item">
                 <a href="{{ route('brand.index') }}" class="nav-link">
                   {{-- <i class="far fa-circle nav-icon"></i> --}}
@@ -229,32 +219,8 @@
           {{-- Tickets Section End --}}
 
 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Vendor Section
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Create Vendor</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Vendor</p>
-                </a>
-              </li>
-            </ul>
-          </li>
 
-
-          <li class="nav-header">EXAMPLES</li>
+          
           <li class="nav-item">
             <a href="{{ route('main_profile') }}" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
@@ -296,21 +262,21 @@
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
-                Blog Section
+                Blogs
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="{{ route('admin_blog.category') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Create Blog</p>
+                  <p>Category</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Blog</p>
+                  <p>Blog</p>
                 </a>
               </li>
             </ul>
@@ -391,12 +357,6 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/invoice.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Notice</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ route('seo.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>SEO Setting</p>
@@ -434,7 +394,7 @@
               </li>
             </ul>
           </li>
-
+          <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="far fa-circle nav-icon"></i>

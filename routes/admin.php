@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\BDPaymentController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\BlogController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -85,6 +86,17 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::get('/delete/{id}', 'warehouse_delete')->name('warehouse.delete');
             });
         }); // End Product Route section //
+
+        // Blog Category Route Section Start
+        Route::group(['prefix' => 'blog-category'], function () {
+            Route::controller(BlogController::class)->group(function () {
+                Route::get('/', 'Blog_Category')->name('admin_blog.category');
+                Route::post('/store', 'Blog_Store')->name('blog.category.store');
+                Route::get('/delete/{id}', 'Blog_Destroy')->name('blog.category.delete');
+                Route::get('/edit/{id}', 'Blog_Edit');
+                Route::post('/update', 'Blog_Update')->name('blog.category.update');
+            });
+        }); // End Blog Category Route section //
 
         // Coupon Route Section Start
         Route::group(['prefix' => 'coupon'], function () {

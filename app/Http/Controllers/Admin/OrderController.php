@@ -124,4 +124,13 @@ class OrderController extends Controller
         $order_details = DB::table('order__details')->where('order_id', $request->id)->get();
         return view('admin.order.order_details', compact('order', 'order_details'));
     }
+
+    //__delete
+    public function delete($id)
+    {
+        $order = DB::table('orders')->where('id', $id)->delete();
+        $order_details = DB::table('order__details')->where('order_id', $id)->delete();
+        $notification = array('messege' => 'Order deleted!', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
 }
