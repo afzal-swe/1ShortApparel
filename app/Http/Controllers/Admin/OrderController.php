@@ -90,4 +90,38 @@ class OrderController extends Controller
 
         return view('admin.order.view_order');
     }
+
+    //__order edit
+    public function Editorder(Request $request)
+    {
+        $order_edit = DB::table($this->DB_Order)->where('id', $request->id)->first();
+        return view('admin.order.update_order', compact('order_edit'));
+    }
+
+    //__update status
+    public function updateStatus(Request $request)
+    {
+        $data = array();
+        $data['c_name'] = $request->c_name;
+        $data['c_email'] = $request->c_email;
+        $data['c_address'] = $request->c_address;
+        $data['c_address'] = $request->c_address;
+        $data['status'] = $request->status;
+
+        // if($request->status=='1'){
+        //     Mail::to($request->c_email)->send(new RecievedMail($data));
+        // }
+
+        DB::table($this->DB_Order)->where('id', $request->id)->update($data);
+        return response()->json('successfully changed status!');
+    }
+
+
+    //__view Order
+    public function ViewOrder(Request $request)
+    {
+        $order = DB::table($this->DB_Order)->where('id', $request->id)->first();
+        $order_details = DB::table('order__details')->where('order_id', $request->id)->get();
+        return view('admin.order.order_details', compact('order', 'order_details'));
+    }
 }

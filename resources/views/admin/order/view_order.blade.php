@@ -91,7 +91,7 @@
 </div>
 
 
-
+{{-- Edit Model Section --}}
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -162,7 +162,7 @@
     //order edit
 	$('body').on('click','.edit', function(){
 	    var id=$(this).data('id');
-		var url = "{{ url('order/admin/edit') }}/"+id;
+		var url = "{{ url('author/order/admin/edit') }}/"+id;
 		$.ajax({
 			url:url,
 			type:'get',
@@ -175,7 +175,7 @@
     //order view
 	$('body').on('click','.view', function(){
 	    var id=$(this).data('id');
-		var url = "{{ url('/order/view/admin') }}/"+id;
+		var url = "{{ url('author/order/view/admin') }}/"+id;
 		$.ajax({
 			url:url,
 			type:'get',
