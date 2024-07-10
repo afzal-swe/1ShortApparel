@@ -166,6 +166,10 @@ Route::middleware(['SupperAdmin'])->group(function () {
         Route::group(['prefix' => 'order'], function () {
             Route::controller(OrderController::class)->group(function () {
                 Route::get('/all', 'All_Order')->name('admin_order.view');
+                Route::get('/admin/edit/{id}', 'Editorder');
+                Route::post('/update/order/status', 'updateStatus')->name('update.order.status');
+                Route::get('/view/admin/{id}', 'ViewOrder');
+                Route::get('/delete/{id}', 'delete')->name('order.delete');
             });
         }); // End Prder Route section //
 

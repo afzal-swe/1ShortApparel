@@ -201,12 +201,6 @@
                   <p>All Orders</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pending Orders</p>
-                </a>
-              </li>
             </ul>
           </li>
           {{-- Orders Section End --}}
