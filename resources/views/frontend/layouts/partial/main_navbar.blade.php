@@ -189,7 +189,7 @@
                         <div class="main_nav_menu ml-auto">
                             <ul class="standard_dropdown main_nav_dropdown">
                                 <li><a href="{{ url('/') }}">Home<i class="fas fa-chevron-down"></i></a></li>
-                                <li><a href="{{ url('/') }}">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ route('blog') }}">Blog<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="{{ url('/') }}">Campign<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="{{ url('/') }}">Helpline<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="{{ route('contact.page') }}">Contact<i class="fas fa-chevron-down"></i></a></li>

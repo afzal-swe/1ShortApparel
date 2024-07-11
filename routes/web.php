@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\Frontend\F_PageController;
 use App\Http\Controllers\Frontend\OrderContdroller;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\BlogController;
 
 
 Route::group(['prefix' => '/'], function () {
@@ -40,6 +41,9 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'contact'], function () {
         Route::get('/page', [ContectController::class, 'contact_page'])->name('contact.page');
         Route::post('/send/message', [ContectController::class, 'contact_send'])->name('contact.send_message');
+    });
+    Route::group(['prefix' => 'blog'], function () {
+        Route::get('/', [BlogController::class, 'Blog'])->name('blog');
     });
     Route::group(['prefix' => 'page'], function () {
         Route::get('/{page_slug}', [F_PageController::class, 'view_Page'])->name('view.page');

@@ -61,7 +61,7 @@
                         <li><a href="{{ route('deshboard') }}">My Account</a></li>
                         <li><a href="{{ route('order.tracking') }}">Order Tracking</a></li>
                         <li><a href="{{ route('wishlist.view') }}">Wish List</a></li>
-                        <li><a href="#">Our Bolg</a></li>
+                        <li><a href="{{ route('blog') }}">Our Bolg</a></li>
                         <li><a href="{{ route('contact.page') }}">Contact Us</a></li>
                         <li><a href="#">Become a vendor</a></li>
                     </ul>

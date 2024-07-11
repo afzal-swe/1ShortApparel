@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\BDPaymentController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ContactMessageController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -152,6 +153,14 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::get('/close/{id}', 'close_ticket')->name('admin.close.ticket');
             });
         }); // End Tickets Route section //
+
+        // Contact Message Route Section Start
+        Route::group(['prefix' => 'contact-message'], function () {
+            Route::controller(ContactMessageController::class)->group(function () {
+                Route::get('/', 'Contact_Message')->name('contact.message');
+                Route::get('/delete/{id}', 'Delete_Message')->name('delete.message');
+            });
+        }); // End Contact Message Route section //
 
         Route::group(['prefix' => 'mail'], function () {
             Route::controller(MailController::class)->group(function () {
