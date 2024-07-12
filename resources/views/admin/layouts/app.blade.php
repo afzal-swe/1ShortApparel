@@ -158,6 +158,8 @@
 <script src="{{ asset ('backend/plugins/dropzone/min/dropzone.min.js')}}"></script>
 <!-- AdminLTE App -->
 {{-- <script src="{{ asset ('backend/dist/js/adminlte.min.js')}}"></script> --}}
+{{-- print this function --}}
+<script src="{{ asset('backend/plugins/print_this/printThis.js') }}" ></script>
 
 
 

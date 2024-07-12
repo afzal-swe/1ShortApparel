@@ -36,7 +36,7 @@
           {{-- Sales Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Sales Section
                 <i class="right fas fa-angle-left"></i>
@@ -57,7 +57,7 @@
           {{-- Product Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Product Section
                 <i class="fas fa-angle-left right"></i>
@@ -126,7 +126,7 @@
           {{-- Customers Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Customers
                 <i class="fas fa-angle-left right"></i>
@@ -158,7 +158,7 @@
           {{-- Orders Section End --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Orders
                 <i class="fas fa-angle-left right"></i>
@@ -179,7 +179,7 @@
           {{-- Tickets Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Ticket
                 <i class="fas fa-angle-left right"></i>
@@ -199,7 +199,7 @@
           {{-- Contact Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Contact Message
                 <i class="fas fa-angle-left right"></i>
@@ -221,7 +221,7 @@
           
           <li class="nav-item">
             <a href="{{ route('main_profile') }}" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Profile
                 <span class="badge badge-info right"></span>
@@ -232,7 +232,7 @@
           {{-- Gallery Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 File Manager
                 <i class="fas fa-angle-left right"></i>
@@ -258,7 +258,7 @@
           {{-- Blog Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Blogs
                 <i class="fas fa-angle-left right"></i>
@@ -284,7 +284,7 @@
           {{-- Mail Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Mailbox
                 <i class="fas fa-angle-left right"></i>
@@ -349,7 +349,7 @@
           {{-- Report Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Reports Section
                 <i class="fas fa-angle-left right"></i>
@@ -358,7 +358,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="{{ route('order_report.view') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Order Report</p>
                 </a>
@@ -366,7 +366,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Customer Report</p>
                 </a>
@@ -374,7 +374,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Stock Report</p>
                 </a>
@@ -382,7 +382,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Report</p>
                 </a>
@@ -390,7 +390,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ticket Report</p>
                 </a>

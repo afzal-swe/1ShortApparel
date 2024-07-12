@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\BDPaymentController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\ReportController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -248,6 +249,42 @@ Route::middleware(['SupperAdmin'])->group(function () {
             });
         });
         // Setting Route Group End. //
+
+        // Setting Route Section //
+        Route::group(['prefix' => 'report'], function () {
+            Route::group(['prefix' => 'order'], function () {
+                Route::controller(ReportController::class)->group(function () {
+                    Route::get('/view', 'Order_report')->name('order_report.view');
+                    Route::get('/print', 'Print_report')->name('order_report.print');
+                });
+            }); // End SEO Route section //
+            // Route::group(['prefix' => 'smtp'], function () {
+            //     Route::controller(SmtpController::class)->group(function () {
+            //         Route::get('/', 'smtp_create')->name('smtp.create');
+            //     });
+            // });
+            // Route::group(['prefix' => 'page'], function () {
+            //     Route::controller(PageController::class)->group(function () {
+            //         Route::get('/', 'all_page')->name('page.all');
+            //     });
+            // });
+            // Route::group(['prefix' => 'website-setting'], function () {
+            //     Route::controller(WebsiteSettingController::class)->group(function () {
+            //         Route::get('/', 'website_create')->name('website.create');
+            //     });
+            // });
+            // Route::group(['prefix' => 'social'], function () {
+            //     Route::controller(SocialController::class)->group(function () {
+            //         Route::get('/', 'social_create')->name('social.create');
+            //     });
+            // });
+            // Route::group(['prefix' => 'payment-gateway'], function () {
+            //     Route::controller(BDPaymentController::class)->group(function () {
+            //         Route::get('/', 'Payment_All')->name('payment.all');
+            // });
+        });
+        // Report Route Group End. //
+
     });
 });
 
