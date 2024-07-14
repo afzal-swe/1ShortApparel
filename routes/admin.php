@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\RoleController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -55,6 +56,18 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::get('/delete/{id}', 'Brand_Delete')->name('brand.delete');
             });
         }); // Brand Route Section End //
+
+        // Role Route Section Start //
+        Route::group(['prefix' => 'role'], function () {
+            Route::controller(RoleController::class)->group(function () {
+                Route::get('/user', 'index')->name('manage.role');
+                Route::get('/create', 'Role_Create')->name('role.create');
+                Route::post('/store', 'store')->name('store.role');
+                Route::get('/delete/{id}', 'destroy')->name('role.delete');
+                Route::get('/edit/{id}', 'edit')->name('role.edit');
+                Route::post('/update', 'update')->name('update.role');
+            });
+        }); // Role Route Section End //
 
         // Category Route Section Start //
         Route::group(['prefix' => 'categorys'], function () {

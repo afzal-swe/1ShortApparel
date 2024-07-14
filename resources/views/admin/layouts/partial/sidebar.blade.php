@@ -155,6 +155,8 @@
           </li>
           {{-- Customers Section End --}}
 
+          
+            
           {{-- Orders Section End --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -448,7 +450,7 @@
           </li>
 
 
-          {{-- <li class="nav-item">
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
@@ -458,20 +460,20 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('role.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create New Role</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('manage.role') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage Role</p>
                 </a>
               </li>
             </ul>
-          </li> --}}
+          </li>
 
           <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
