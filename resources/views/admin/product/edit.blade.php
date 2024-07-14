@@ -50,8 +50,9 @@
     <section class="content">
       <div class="container-fluid">
 
-       <form action="{{ route('product_update',$product_edit->id) }}" method="post" enctype="multipart/form-data">
+       <form action="{{ route('product_update') }}" method="post" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="id" value="{{ $product_edit->id }}">
        	<div class="row">
           <!-- left column -->
           <div class="col-md-8">
@@ -79,7 +80,7 @@
                         {{-- <option disabled="" selected="">==choose category==</option> --}}
                         @foreach($category as $row)
                           
-                           <option style="color:blue;">@if ($row->id==$row->id) {{ $row->category_name }} @endif </option>
+                           <option style="color:blue;" value="{{ $row->id }}"@if ($row->id==$product_edit->category_id ) selected @endif>{{ $row->category_name }}</option>
                              
                         @endforeach
                       </select>
@@ -95,7 +96,7 @@
                            @endphp
                            <option style="color:blue;" disabled="">{{ $row->category_name }}</option>
                               @foreach($subcategory as $row)
-                                <option value="{{ $row->id }}"> -- {{ $row->subcategory_name }}</option>
+                                <option value="{{ $row->id }}"@if ($row->id==$product_edit->subcategory_id ) selected @endif>> -- {{ $row->subcategory_name }}</option>
                               @endforeach
                         @endforeach 
                       </select>
@@ -105,9 +106,8 @@
                     <div class="form-group col-lg-6">
                       <label for="exampleInputEmail1">Brand </label>
                       <select class="form-control" name="brand_id" required>
-                        <option selected disabled>==choose brand==</option>
                         @foreach($brand as $row)
-                          <option value="{{ $row->id }}">{{ $row->name }}</option>
+                          <option value="{{ $row->id }}"  @if ($row->id==$product_edit->brand_id) selected @endif>{{ $row->name }}</option>
                         @endforeach 
                       </select>
                     </div>
@@ -116,7 +116,7 @@
                       <select class="form-control" name="pickup_point">
                         <option selected disabled>==choose pickup point==</option>
                         @foreach($pickup_point as $row)
-                          <option value="{{ $row->id }}">{{ $row->pickup_point_name  }}</option>
+                          <option value="{{ $row->id }}"@if ($row->id==$product_edit->pickup_point) selected @endif>{{ $row->pickup_point_name  }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -150,7 +150,7 @@
                       <label for="exampleInputEmail1">Warehouse </label>
                       <select class="form-control" name="warehouse" required>
                         @foreach($warehouse as $row)
-                         <option value="{{ $row->warhouse_name }}">{{ $row->warhouse_name }}</option>
+                         <option value="{{ $row->id }}"@if ($row->id==$product_edit->warehouse) selected @endif>{{ $row->warhouse_name }}</option>
                         @endforeach 
                       </select>
                     </div>
@@ -243,7 +243,9 @@
               <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Main Thumbnail </label><br>
-                    <input type="file" name="thumbnail" required="" accept="image/*" class="dropify">
+                    <img src="{{ asset($product_edit->thumbnail) }}" alt="" style="height: 50px; width:50px;">
+                    <input type="file" name="thumbnail" accept="image/*" class="dropify">
+                    <input type="hidden" name="old_thumbnail" value="{{ $product_edit->thumbnail }}">
                   </div><br>
                   <div class="">  
                     <table class="table table-bordered" id="dynamic_field">
@@ -251,9 +253,28 @@
                       <h3 class="card-title">More Images (Click Add For More Image)</h3>
                     </div> 
                       <tr>  
-                          <td><input type="file" accept="image/*" name="images" class="form-control name_list" /></td>  
+                          <td><input type="file" accept="image/*" name="images[]" class="form-control name_list" /></td>  
+                          <td><input type="hidden" accept="image/*" name="images[]" class="form-control name_list" /></td>  
                           <td><button type="button" name="add" id="add" class="btn btn-success">Add</button></td>  
-                      </tr>  
+                      </tr> 
+                      
+
+                      {{-- @php
+                      $images = json_decode($product_edit->images,true);
+                   @endphp
+                   @if(!$images)
+                   @else
+                   <div class="row" >
+                    @foreach($images as $key => $image)
+                      <div class="col-md-4" >
+                         <img alt="" src="{{asset($image->images)}}" style="width: 100px; height: 80px; padding: 10px;"/>
+                         <input type="hidden" name="old_images[]" value="{{ $image }}">
+                         <button type="button" class="remove-files" style="border: none;">X</button>
+                      </div>
+                    @endforeach
+                    </div>
+                   @endif --}}
+
                     </table>    
                   </div>
                      <div class="card p-4">
@@ -311,8 +332,8 @@
 
           
 
-           <button class="btn btn-info ml-2" type="submit" disabled>Save & Unpublish</button>
-           <button class="btn btn-success ml-2" type="submit">Save & Publish</button>
+           
+           <button class="btn btn-success ml-2" type="submit">Update</button>
         </div>
       </form>
     </div><br>

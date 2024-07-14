@@ -140,7 +140,7 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::get('/add', 'product_add')->name('product_add');
                 Route::post('/store', 'product_store')->name('product_store');
                 Route::get('/edit/{id}', 'product_edit')->name('product_edit');
-                Route::post('/update/{id}', 'product_update')->name('product_update');
+                Route::post('/update', 'product_update')->name('product_update');
             });
         }); // End Product Route section //
 
@@ -258,11 +258,12 @@ Route::middleware(['SupperAdmin'])->group(function () {
                     Route::get('/print', 'Print_report')->name('order_report.print');
                 });
             }); // End SEO Route section //
-            // Route::group(['prefix' => 'smtp'], function () {
-            //     Route::controller(SmtpController::class)->group(function () {
-            //         Route::get('/', 'smtp_create')->name('smtp.create');
-            //     });
-            // });
+            Route::group(['prefix' => 'ticket'], function () {
+                Route::controller(ReportController::class)->group(function () {
+                    Route::get('/view', 'Ticket_View')->name('ticket_view.print');
+                    Route::get('/print', 'Ticket_Print')->name('Ticket_Print.print');
+                });
+            });
             // Route::group(['prefix' => 'page'], function () {
             //     Route::controller(PageController::class)->group(function () {
             //         Route::get('/', 'all_page')->name('page.all');

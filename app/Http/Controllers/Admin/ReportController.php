@@ -12,10 +12,12 @@ class ReportController extends Controller
 {
     //
     private $DB_Order;
+    private $db_replies;
 
     public function __construct()
     {
         $this->DB_Order = "orders";
+        $this->db_replies = "replies";
     }
 
 
@@ -119,5 +121,124 @@ class ReportController extends Controller
         }
 
         return view('admin.report.order.print', compact('order'));
+    }
+
+    // Ticket Print View function Section
+    public function Ticket_View(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $ticket = "";
+            $query = DB::table('tickets')->leftJoin('users', 'tickets.user_id', 'users.id');
+
+            if ($request->date) {
+                $query->where('tickets.date', $request->date);
+            }
+
+            if ($request->type == 'Technical') {
+                $query->where('tickets.service', $request->type);
+            }
+            if ($request->type == 'Payment') {
+                $query->where('tickets.service', $request->type);
+            }
+            if ($request->type == 'Affiliate') {
+                $query->where('tickets.service', $request->type);
+            }
+            if ($request->type == 'Return') {
+                $query->where('tickets.service', $request->type);
+            }
+            if ($request->type == 'Refund') {
+                $query->where('tickets.service', $request->type);
+            }
+
+            if ($request->status == 1) {
+                $query->where('tickets.status', 1);
+            }
+
+            if ($request->status == 0) {
+                $query->where('tickets.status', 0);
+            }
+
+            if ($request->status == 2) {
+                $query->where('tickets.status', 2);
+            }
+
+            $ticket = $query->select('tickets.*', 'users.name')->get();
+            return DataTables::of($ticket)
+
+                ->addIndexColumn()
+                ->editColumn('status', function ($row) {
+                    if ($row->status == 1) {
+                        return '<span class="badge badge-warning"> Running </span>';
+                    } elseif ($row->status == 2) {
+                        return '<span class="badge badge-muted"> Close </span>';
+                    } else {
+                        return '<span class="badge badge-danger"> Pending </span>';
+                    }
+                })
+
+
+                ->rawColumns(['status', 'date'])
+                ->make(true);
+        }
+        return view('admin.report.ticket.ticket_view');
+    }
+
+    // Ticket print Sections 
+    public function Ticket_Print(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $ticket = "";
+            $query = DB::table('tickets')->leftJoin('users', 'tickets.user_id', 'users.id');
+
+            if ($request->date) {
+                $query->where('tickets.date', $request->date);
+            }
+
+            if ($request->type == 'Technical') {
+                $query->where('tickets.service', $request->type);
+            }
+            if ($request->type == 'Payment') {
+                $query->where('tickets.service', $request->type);
+            }
+            if ($request->type == 'Affiliate') {
+                $query->where('tickets.service', $request->type);
+            }
+            if ($request->type == 'Return') {
+                $query->where('tickets.service', $request->type);
+            }
+            if ($request->type == 'Refund') {
+                $query->where('tickets.service', $request->type);
+            }
+
+            if ($request->status == 1) {
+                $query->where('tickets.status', 1);
+            }
+
+            if ($request->status == 0) {
+                $query->where('tickets.status', 0);
+            }
+
+            if ($request->status == 2) {
+                $query->where('tickets.status', 2);
+            }
+
+            $ticket = $query->select('tickets.*', 'users.name')->get();
+            return DataTables::of($ticket)
+
+                ->addIndexColumn()
+                ->editColumn('status', function ($row) {
+                    if ($row->status == 1) {
+                        return '<span class="badge badge-warning"> Running </span>';
+                    } elseif ($row->status == 2) {
+                        return '<span class="badge badge-muted"> Close </span>';
+                    } else {
+                        return '<span class="badge badge-danger"> Pending </span>';
+                    }
+                });
+        }
+
+        return view('admin.report.ticket.ticket_print', compact('ticket'));
     }
 }
