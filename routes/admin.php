@@ -141,6 +141,7 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::post('/store', 'product_store')->name('product_store');
                 Route::get('/edit/{id}', 'product_edit')->name('product_edit');
                 Route::post('/update', 'product_update')->name('product_update');
+                Route::get('/delete/{id}', 'Product_delete')->name('product.delete');
             });
         }); // End Product Route section //
 

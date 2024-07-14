@@ -9,7 +9,7 @@ use Illuminate\Support\Carbon;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\File;
 use App\Models\Brand;
 use App\Models\Categorie;
 use App\Models\Pickup_point;
@@ -317,6 +317,27 @@ class ProductController extends Controller
 
         DB::table('products')->where('id', $request->id)->update($data);
         $notification = array('messege' => 'Product Updated!', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
+
+    public function Product_delete($id)
+    {
+        $product = DB::table('products')->where('id', $id)->first();  //product data get
+        if (File::exists('image/product/thumbnail/' . $product->thumbnail)) {
+            FIle::delete('image/product/thumbnail/' . $product->thumbnail);
+        }
+
+        $images = json_decode($product->images, true);
+        if (isset($images)) {
+            foreach ($images as $key => $image) {
+                if (File::exists('image/product/images/' . $image)) {
+                    FIle::delete('image/product/images/' . $image);
+                }
+            }
+        }
+
+        DB::table('products')->where('id', $id)->delete();
+        $notification = array('messege' => 'Product Deleted!', 'alert-type' => 'success');
         return redirect()->back()->with($notification);
     }
 }
