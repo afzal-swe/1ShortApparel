@@ -135,6 +135,16 @@ Route::middleware(['SupperAdmin'])->group(function () {
             });
         }); // End campaign Route section //
 
+        // campaign Route Section Start
+        Route::group(['prefix' => 'campaign-product'], function () {
+            Route::controller(CampaignController::class)->group(function () {
+                Route::get('/{campaign_id}', 'Campaign_Product')->name('campaign.product');
+                Route::get('/add/{id}/{campaign_id}', 'ProductAddToCampaign')->name('add.product.to.campaign');
+                Route::get('/list/{campaign_id}', 'ProductListCampaign')->name('campaign.product.list');
+                Route::get('/remove/{id}', 'RemoveProduct')->name('product.remove.campaign');
+            });
+        }); // End campaign Route section //
+
         // pickup-point Route Section Start
         Route::group(['prefix' => 'pickup-point'], function () {
             Route::controller(PickupController::class)->group(function () {

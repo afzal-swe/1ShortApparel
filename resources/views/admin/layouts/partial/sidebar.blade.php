@@ -54,6 +54,8 @@
           
           {{-- Sales Section End --}}
 
+          @if (Auth::user()->product==1)
+            
           {{-- Product Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -122,6 +124,9 @@
             </ul>
           </li>
           {{-- Product Section End --}}
+          @else
+            
+          @endif
 
           {{-- Customers Section Start --}}
           <li class="nav-item">
@@ -157,6 +162,8 @@
 
           
             
+          @if (Auth::user()->order==1)
+            
           {{-- Orders Section End --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -176,8 +183,13 @@
             </ul>
           </li>
           {{-- Orders Section End --}}
+          @else
+            
+          @endif
           
 
+          @if (Auth::user()->ticket==1)
+            
           {{-- Tickets Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -197,7 +209,11 @@
             </ul>
           </li>
           {{-- Tickets Section End --}}
+          @else
+          @endif
 
+          @if (Auth::user()->contact==1)
+            
           {{-- Contact Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -217,6 +233,8 @@
             </ul>
           </li>
           {{-- Contact Section End --}}
+          @else
+          @endif
 
 
 
@@ -257,6 +275,7 @@
           </li>
           {{-- Gallery Section End --}}
 
+          @if (Auth::user()->blog==1)
           {{-- Blog Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -282,6 +301,8 @@
             </ul>
           </li>
           {{-- Blog Section End --}}
+          @else
+          @endif
 
           {{-- Mail Section Start --}}
           <li class="nav-item">
@@ -304,6 +325,8 @@
           {{-- Mail Section End --}}
 
 
+          @if (Auth::user()->offer==1)
+            
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -328,7 +351,11 @@
               </li>
             </ul>
           </li>
+          @else
+            
+          @endif
 
+          @if (Auth::user()->pickup==1)
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -346,8 +373,11 @@
               </li>
             </ul>
           </li>
+          @else
+          @endif
 
 
+          @if (Auth::user()->report==1)
           {{-- Report Section Start --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -400,7 +430,10 @@
             </ul>  --}}
           </li>
           {{-- Report Section End --}}
+          @else 
+          @endif
 
+          @if (Auth::user()->setting==1)
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -448,8 +481,13 @@
               </li>
             </ul>
           </li>
+            
+          @else
+            
+          @endif
 
 
+          @if (Auth::user()->userrole==1)
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -473,7 +511,10 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> 
+          @else
+            
+          @endif
 
           <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">

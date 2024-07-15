@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Review;
 use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
+// use Jorenvh\Share\Share;
 
 class indexController extends Controller
 {
@@ -57,7 +58,21 @@ class indexController extends Controller
         $review = Review::orderBy('id', 'DESC')->limit(6)->get();
         $related_product = Product::where('subcategory_id', $product->subcategory_id)->orderBy('id', 'DESC')->limit(10)->get();
         $popular_product = Product::where('status', 1)->orderBy('product_views', 'DESC')->limit(8)->get();
-        return view('frontend.product.product_details', compact('product', 'related_product', 'review', 'view_product', 'popular_product'));
+
+
+
+
+        // $share = /Share::page(url()->current())
+        //     ->facebook()
+        //     ->twitter()
+        //     ->linkedin('Extra linkedin summary can be passed here')
+        //     ->whatsapp()
+        //     ->getRawLinks();
+
+
+
+
+        return view('frontend.product.product_details', compact('product', 'related_product', 'review', 'view_product', 'popular_product', 'share'));
     } // end 
 
     public function categorywise_product(Request $request)

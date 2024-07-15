@@ -208,6 +208,7 @@
                             </div>
                             
                         </form>
+                         {!! $share !!}
                     </div>
                 </div>
             </div>
