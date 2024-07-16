@@ -42,12 +42,14 @@
 							<div class="product_grid_border"></div>
 
 							@foreach($products as $row)
+							{{-- @dd($products); --}}
 								<div class="product_item is_new col-lg-2">
 									<div class="product_border"></div>
 									<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($row->thumbnail) }}" alt=""></div>
 									<div class="product_content pt-2">
 										<div class="product_price">{{ $settings->currency }}{{ $row->price }}</div>
-										<div class="product_name"><div><a href="{{ route('campaign.product.details',$row->id) }}" tabindex="0">{{ $row->product_title }}</a></div></div>
+										<div class="product_name"><div><a href="#" tabindex="0">{{ $row->product_title }}</a></div></div>
+										{{-- <div class="product_name"><div><a href="{{ route('campaign.product.details',$row->id) }}" tabindex="0">{{ $row->product_title }}</a></div></div> --}}
 									</div>
 									<a href="{{ route('add.wishlist',$row->product_id) }}">
 									  <div class="product_fav"><i class="fas fa-heart"></i></div>

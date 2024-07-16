@@ -47,15 +47,18 @@ class indexController extends Controller
         $trendy_product = Product::where('status', 1)->where('trendy', 1)->orderBy('id', 'DESC')->limit(8)->get();
         $wbreview = DB::table($this->db_wbreview)->where('status', 1)->orderBy('id', 'DESC')->limit(12)->get();
         $campaingn = DB::table($this->campaingns)->where('status', 1)->orderBy('id', 'DESC')->first();
+        // dd($featured);
         return view('frontend.layouts.main', compact('category', 'product_slider', 'featured', 'trendy_product', 'wbreview', 'campaingn'));
     }
 
     // product details //
     public function product_details(Request $request)
     {
+
         $product_details = $request->slug;
 
         $product = Product::where('slug', $product_details)->first();
+
         $view_product = Product::where('slug', $product_details)->increment('product_views');
         $review = Review::orderBy('id', 'DESC')->limit(6)->get();
         $related_product = Product::where('subcategory_id', $product->subcategory_id)->orderBy('id', 'DESC')->limit(10)->get();
@@ -64,7 +67,7 @@ class indexController extends Controller
 
 
 
-        // $share = /Share::page(url()->current())
+        // $share = Share::page(url()->current())
         //     ->facebook()
         //     ->twitter()
         //     ->linkedin('Extra linkedin summary can be passed here')
@@ -74,7 +77,7 @@ class indexController extends Controller
 
 
 
-        return view('frontend.product.product_details', compact('product', 'related_product', 'review', 'view_product', 'popular_product', 'share'));
+        return view('frontend.product.product_details', compact('product', 'related_product', 'review', 'view_product', 'popular_product'));
     } // end 
 
     public function categorywise_product(Request $request)
@@ -160,6 +163,8 @@ class indexController extends Controller
     public function Campaign_Products($id)
     {
 
+        // dd/($id);
+
         $products = DB::table($this->db_campaign_product)->leftJoin('products', 'campaign_product.product_id', 'products.id')
             ->select('products.product_title', 'products.product_code', 'products.thumbnail', 'campaign_product.*')
             ->where('campaign_product.campaign_id', $id)
@@ -167,5 +172,23 @@ class indexController extends Controller
 
         // dd($products);
         return view('frontend.campaign.product_list', compact('products'));
+    }
+
+    // Campaign Product Details
+    public function Campaign_Product_Details($id)
+    {
+        // $product = Product::where('id', $id)->first();
+
+
+        // Product::where('id', $id)->increment('product_views');
+        // $product_price = DB::table($this->db_campaign_product)->where('product_id', $product->id)->first();
+
+        // $related_product = DB::table($this->db_campaign_product)->leftJoin('products', 'campaign_product.product_id', 'products.id')
+        //     ->select('products.product_title', 'products.product_code', 'products.thumbnail', 'products.id', 'campaign_product.*')
+        //     ->inRandomOrder(12)->get();
+
+
+        // $review = Review::where('product_id', $product->id)->orderBy('id', 'DESC')->take(6)->get();
+        // return view('frontend.campaign.product_details', compact('product', 'related_product', 'review', 'product_price'));
     }
 }

@@ -208,7 +208,7 @@
                             </div>
                             
                         </form>
-                         {!! $share !!}
+                         {{-- {!! $share !!} --}}
                     </div>
                 </div>
             </div>
@@ -440,7 +440,7 @@
                                     <div class="viewed_content text-center">
 
                                         @if ($row->discount_price==Null)
-                                        <div class="viewed_price" style="margin-top: 25px;">{{ $setting->currency }}{{ $row->product_price }}</div>
+                                        <div class="viewed_price" style="margin-top: 25px;">{{ $settings->currency }}{{ $row->product_price }}</div>
                                         @else
                                         <div class="viewed_price" style="margin-top: 25px;">
                                             {{ $settings->currency }}{{ $row->discount_price }} <span>{{ $settings->currency }}{{ $row->product_price }}</span></div>
