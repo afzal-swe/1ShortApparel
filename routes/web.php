@@ -97,6 +97,10 @@ Route::group(['prefix' => 'tracking'], function () {
     Route::get('/order', [indexController::class, 'Order_Tracking'])->name('order.tracking');
     Route::post('/order/check', [indexController::class, 'Check_Order'])->name('check.order');
 });
+Route::group(['prefix' => 'campaing'], function () {
+    Route::get('/product/{id}', [indexController::class, 'Campaign_Products'])->name('frontend_campaign.product');
+    Route::post('/product/details/{id}', [indexController::class, 'Campaign_Product_Details'])->name('campaign.product.details');
+});
 
 
 // Route::middleware('auth')->group(function () {

@@ -53,7 +53,7 @@
                       <td>{{ $row->product_code }}</td>
                       <td>{{ $row->category_name }}</td>
                       <td>{{ $row->name }}</td>
-                      <td>{{ $row->product_purchase_price }}</td>
+                      <td>{{ $row->product_price }}</td>
                       <td>
                       	@if($exist)
                       	@else

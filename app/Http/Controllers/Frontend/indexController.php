@@ -23,6 +23,7 @@ class indexController extends Controller
     private $db_order;
     private $db_order_details;
     private $campaingns;
+    private $db_campaign_product;
 
     public function __construct()
     {
@@ -34,6 +35,7 @@ class indexController extends Controller
         $this->db_order = "orders";
         $this->db_order_details = "order__details";
         $this->campaingns = "campaingns";
+        $this->db_campaign_product = "campaign_product";
     }
 
     // root page
@@ -152,5 +154,18 @@ class indexController extends Controller
             $notification = array('messege' => 'Invalid OrderID! Try again.', 'alert-type' => 'error');
             return redirect()->back()->with($notification);
         }
+    }
+
+    // __ Campaign Product function
+    public function Campaign_Products($id)
+    {
+
+        $products = DB::table($this->db_campaign_product)->leftJoin('products', 'campaign_product.product_id', 'products.id')
+            ->select('products.product_title', 'products.product_code', 'products.thumbnail', 'campaign_product.*')
+            ->where('campaign_product.campaign_id', $id)
+            ->get();
+
+        // dd($products);
+        return view('frontend.campaign.product_list', compact('products'));
     }
 }
