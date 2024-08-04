@@ -38,19 +38,44 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
+                User Section
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  {{-- <i class="far fa-circle nav-icon"></i> --}}
+                  <p>Manage User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('user.review') }}" class="nav-link">
+                  {{-- <i class="far fa-circle nav-icon"></i> --}}
+                  <p>User Review</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          {{-- Sales Section Start --}}
+          {{-- <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
                 Sales Section
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage Sales</p>
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
           
           {{-- Sales Section End --}}
 
@@ -129,7 +154,7 @@
           @endif
 
           {{-- Customers Section Start --}}
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
@@ -157,7 +182,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
           {{-- Customers Section End --}}
 
           
@@ -521,7 +546,7 @@
             <a href="#" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                Login & Register Setting
+                Login & Register
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -556,11 +581,11 @@
                 
                
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="pages/examples/register.html" class="nav-link">
                   
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
           

@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\ReviewController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -58,16 +59,28 @@ Route::middleware(['SupperAdmin'])->group(function () {
         }); // Brand Route Section End //
 
         // Role Route Section Start //
-        Route::group(['prefix' => 'role'], function () {
-            Route::controller(RoleController::class)->group(function () {
-                Route::get('/user', 'index')->name('manage.role');
-                Route::get('/create', 'Role_Create')->name('role.create');
-                Route::post('/store', 'store')->name('store.role');
-                Route::get('/delete/{id}', 'destroy')->name('role.delete');
-                Route::get('/edit/{id}', 'edit')->name('role.edit');
-                Route::post('/update', 'update')->name('update.role');
-            });
-        }); // Role Route Section End //
+        Route::group(['prefix' => 'user'], function () {
+
+            // User Role Route Section
+            Route::group(['prefix' => 'role'], function () {
+                Route::controller(RoleController::class)->group(function () {
+                    Route::get('/', 'index')->name('manage.role');
+                    Route::get('/create', 'Role_Create')->name('role.create');
+                    Route::post('/store', 'store')->name('store.role');
+                    Route::get('/delete/{id}', 'destroy')->name('role.delete');
+                    Route::get('/edit/{id}', 'edit')->name('role.edit');
+                    Route::post('/update', 'update')->name('update.role');
+                });
+            }); // Role Route Section End //
+
+            // User Review Route Section
+            Route::group(['prefix' => 'review'], function () {
+                Route::controller(ReviewController::class)->group(function () {
+                    Route::get('/', 'User_Review')->name('user.review');
+                    Route::get('/delete/{id}', 'Review_Delete')->name('review.delete');
+                });
+            }); // User Review Route Section End //
+        }); // User Review Route Section End //
 
         // Category Route Section Start //
         Route::group(['prefix' => 'categorys'], function () {
