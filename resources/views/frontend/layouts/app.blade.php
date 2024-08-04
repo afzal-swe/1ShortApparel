@@ -1,7 +1,32 @@
+@php
+    $seo = DB::table('seos')->first();
+@endphp
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>{{ $settings->website_name }}</title>
+
+
+@isset($seo)
+            
+        
+<meta property="og:type" content="Website">
+<meta property="og:title" content="{{ $seo->meta_title }}">
+<meta property="og:description" content="{{ $seo->meta_description }}">
+
+
+<meta name="author" content="{{ $seo->meta_author }}">
+<meta name="keyword" content="{{ $seo->meta_keyword }}">
+<meta name="description" content="{{ $seo->meta_description }}">
+<meta name="google-verification" content="{{ $seo->google_verification }}">
+<meta name="google-analytics" content="{{ $seo->google_analytics }}">
+<meta name="alexa-analytics" content="{{ $seo->alexa_analytics }}">
+<title>{{ $seo->meta_title }}</title>
+@endisset
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="OneTech shop project">

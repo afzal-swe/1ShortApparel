@@ -44,7 +44,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('user.view') }}" class="nav-link">
                   {{-- <i class="far fa-circle nav-icon"></i> --}}
                   <p>Manage User</p>
                 </a>

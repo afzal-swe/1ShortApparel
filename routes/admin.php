@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::get('/admin-login', [HomeController::class, 'login_from'])->name('admin_login');
 Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name('customer.logout');
@@ -80,7 +81,17 @@ Route::middleware(['SupperAdmin'])->group(function () {
                     Route::get('/delete/{id}', 'Review_Delete')->name('review.delete');
                 });
             }); // User Review Route Section End //
-        }); // User Review Route Section End //
+
+            // User View Route Section
+            Route::group(['prefix' => 'view'], function () {
+                Route::controller(UserController::class)->group(function () {
+                    Route::get('/', 'User_View')->name('user.view');
+                    Route::get('/edit/{id}', 'User_Edit')->name('user.edit');
+                    Route::post('/update/{id}', 'User_Update')->name('user.update');
+                    Route::get('/delete/{id}', 'User_Delete')->name('user.delete');
+                });
+            }); // User View Route Section End //
+        }); // User View Route Section End //
 
         // Category Route Section Start //
         Route::group(['prefix' => 'categorys'], function () {

@@ -39,6 +39,7 @@ class RoleController extends Controller
         $data = array();
         $data['name'] = $request->name;
         $data['email'] = $request->email;
+        $data['supper_admin'] = 0;
         $data['password'] = Hash::make($request->password);
         $data['category'] = $request->category;
         $data['product'] = $request->product;
@@ -73,6 +74,7 @@ class RoleController extends Controller
         $data = array();
         $data['name'] = $request->name;
         $data['email'] = $request->email;
+        $data['supper_admin'] = 0;
         $data['category'] = $request->category;
         $data['product'] = $request->product;
         $data['offer'] = $request->offer;

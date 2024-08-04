@@ -1,16 +1,40 @@
+
+@php
+    $seo = DB::table('seos')->first();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {{-- @php
+    @php
       $website_info = DB::table('website_settings')->first();
-    @endphp --}}
+    @endphp
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {{-- @if ($website_info !== Null)
+  @if ($website_info !== Null)
   <title>{{ $website_info->website_name }}</title>
   @else
   <title>Testing Site</title>
-  @endif --}}
+  @endif
+
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+        
+        @isset($seo)
+            
+        
+        <meta property="og:type" content="Website">
+        <meta property="og:title" content="{{ $seo->meta_title }}">
+        <meta property="og:description" content="{{ $seo->meta_description }}">
+
+
+        <meta name="author" content="{{ $seo->meta_author }}">
+        <meta name="keyword" content="{{ $seo->meta_keyword }}">
+        <meta name="description" content="{{ $seo->meta_description }}">
+        <meta name="google-verification" content="{{ $seo->google_verification }}">
+        <meta name="google-analytics" content="{{ $seo->google_analytics }}">
+        <meta name="alexa-analytics" content="{{ $seo->alexa_analytics }}">
+        <title>{{ $seo->meta_title }}</title>
+        @endisset
 
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
