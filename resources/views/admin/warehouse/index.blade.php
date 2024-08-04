@@ -1,8 +1,16 @@
 
+
+                          
+                       
+                                
+                           
+
+
+
+  
 @extends('admin.layouts.app')
 @section('content')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -34,30 +42,32 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                          <table class="table table-bordered table-striped table-sm ytable">
+                          <table id="example1" class="table table-bordered table-striped table-sm">
                             <thead>
-                                <tr>
-                                    <th>SL</th>
-                                    <th>Warehouse  Name</th>
-                                    <th>Warehouse  Address</th>
-                                    <th>Warehouse Phone</th>
-                                    <th>Action</th>
-                                </tr>
+                              <tr>
+                                <th>SL</th>
+                                <th>Warehouse  Name</th>
+                                <th>Warehouse  Address</th>
+                                <th>Warehouse Phone</th>
+                                <th>Action</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach ($warehouse as $key=>$row)
-                                    <tr>
-                                        <td>{{++$key}}</td>
-                                        <td>{{ $row->warhouse_name }}</td>
-                                        <td>{{ $row->warhouse_address }}</td>
-                                        <td>{{ $row->warhouse_phone }}</td>
-                                        
-                                        <td >
-                                            <a href="{{ route('warehouse.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('warehouse.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+
+                              @foreach ($warehouse as $key=>$row)
+                              <tr>
+                                  <td>{{++$key}}</td>
+                                  <td>{{ $row->warhouse_name }}</td>
+                                  <td>{{ $row->warhouse_address }}</td>
+                                  <td>{{ $row->warhouse_phone }}</td>
+                                  
+                                  <td >
+                                      <a href="{{ route('warehouse.edit',$row->id) }}" class="btn btn-info btn-sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                      <a href="{{ route('warehouse.delete',$row->id) }}" id="delete" class="btn btn-danger btn-sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
+                                  </td>
+                              </tr>
+                          @endforeach
+
                             </tbody>
                           </table>
                         </div>
@@ -67,6 +77,9 @@
             </div>
         </div>
     </section>
+  </div>
+
+     
 
 {{-- Category Added Modal --}}
     <div class="modal fade" id="modal-default">
@@ -79,20 +92,21 @@
               </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('warehouse.store') }}" method="post">
-                    @csrf
+              <form action="{{ route('warehouse.store') }}" method="post">
+                @csrf
 
 
-                        <div class="form-group">
-                            <label for="">Warehouse Name </label>
-                            <input type="text" name="warhouse_name" class="form-control @error('warhouse_name') is-invalid @enderror " placeholder="Warehouse Name" value="{{old('warhouse_name')}}">
-                            @error('warhouse_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
+                    <div class="form-group">
+                        <label for="">Warehouse Name </label>
+                        <input type="text" name="warhouse_name" class="form-control @error('warhouse_name') is-invalid @enderror " placeholder="Warehouse Name" value="{{old('warhouse_name')}}">
+                        @error('warhouse_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                       
+                        
                         <div class="form-group">
                             <label for="">Warehouse Address </label>
                             <input type="text" name="warhouse_address" class="form-control @error('warhouse_address') is-invalid @enderror " placeholder="Warehouse Address" value="{{old('warhouse_address')}}">
@@ -114,16 +128,19 @@
                         </div>
                            
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary"><span class="d-none loader" ><i class="fas fa-spinner"></i>Loading..</span><span class="submit_btn">Submit</span></button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
-                    
+                    </div>
                 </form>
             </div>
           </div>
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-    </div>
+      </div>
+
+
+    
 
 
 @endsection
