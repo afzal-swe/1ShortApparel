@@ -56,22 +56,22 @@
                                         <td>{{ $row->category_name }}</td>
                                         <td>
                                           @if ($row->home_page == '1')
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                            <h6 class="btn text-success" >Active</h6>
                                           @else
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                            <h6 class="btn text-danger" >Deactive</h6>
                                           @endif
                                       </td>
                                         <td>
-                                          @if ($row->status == '1')
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                          @if ($row->category_status == '1')
+                                            <h6 class="btn text-success" >Active</h6>
                                           @else
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                            <h6 class="btn text-danger" >Deactive</h6>
                                           @endif
                                       </td>
                                         <td>
-                                            <a href="#" class="btn btn-info sm edit" data-id="{{ $row->id }}" data-toggle="modal" data-target="#editModal"  title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            {{-- <a href="{{ route('category.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a> --}}
-                                            <a href="{{ route('category.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
+                                            
+                                            <a href="#" class="btn btn-info btn-sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('category.delete',$row->id) }}" id="delete" class="btn btn-danger btn-sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

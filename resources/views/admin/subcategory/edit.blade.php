@@ -75,6 +75,16 @@
                                                 <label for="">Sub Category Image</label>
                                                 <input type="file" name="image" class="form-control" >
                                             </div>
+
+                                            <div class="form-group">
+                                                
+                                               <img src="{{ asset($edit->image) }}" alt="" >
+                                            </div><hr>
+
+                                            <div class="form-group">
+                                              <h6>Status</h6>
+                                             <input type="checkbox" name="subcategory_status" value="1" @if($edit->subcategory_status==1) checked @endif>
+                                          </div>
         
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-primary">Update</button>

@@ -56,6 +56,10 @@
                                                 <label for="">Brand Image</label>
                                                 <input type="file" name="image" class="form-control" >
                                             </div>
+
+                                            <div class="form-group">
+                                                <img src="{{ asset($edit->image) }}" alt="">
+                                            </div>
         
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-primary">Update</button>

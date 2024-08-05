@@ -56,15 +56,15 @@
                                         <td>{{ $row->category->category_name }}</td>
                                         <td>{{ $row->subcategory_name }}</td>
                                         <td>
-                                          @if ($row->status == '1')
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                          @if ($row->subcategory_status == '1')
+                                          <h6 class="text-info">Active</h6>
                                           @else
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                          <h6 class="text-danger">Deactive</h6>
                                           @endif
                                       </td>
                                         <td >
-                                            <a href="{{ route('subcategory.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('subcategory.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{ route('subcategory.edit',$row->id) }}" class="btn btn-info btn-sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('subcategory.delete',$row->id) }}" id="delete" class="btn btn-danger btn-sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

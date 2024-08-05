@@ -98,6 +98,7 @@ class SubCategoryController extends Controller
             SubCategory::findOrFail($update)->update([
                 'brand_id' => $request->brand_id,
                 'category_id' => $request->category_id,
+                'subcategory_status' => $request->subcategory_status,
                 'subcategory_name' => $request->subcategory_name,
                 'subcategory_slug' => $name,
                 'image' => $img_url,
@@ -109,6 +110,7 @@ class SubCategoryController extends Controller
             SubCategory::findOrFail($update)->update([
                 'brand_id' => $request->brand_id,
                 'category_id' => $request->category_id,
+                'subcategory_status' => $request->subcategory_status,
                 'subcategory_name' => $request->subcategory_name,
                 'subcategory_slug' => $name,
                 'updated_at' => Carbon::now(),

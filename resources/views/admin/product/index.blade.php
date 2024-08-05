@@ -54,36 +54,36 @@
                                 @foreach ($product as $key=>$row)
                                     <tr>
                                         <td>{{++$key}}</td>
-                                        <td><img src="{{ asset($row->images) }}" style="height: 40px; width:60px"></td>
+                                        <td><img src="{{ asset($row->thumbnail) }}" style="height: 40px; width:60px"></td>
                                         <td>{{ $row->brand->name }}</td>
                                         <td>{{ $row->category->category_name }}</td>
                                         {{-- <td>{{ $row->subcategory->subcategory_name }}</td> --}}
                                         <td>{{ $row->product_title }}</td>
                                         <td>
-                                          @if ($row->status == '1')
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                          @if ($row->featured == '1')
+                                          <button class="btn btn-success btn-sm">On</button>
                                           @else
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                          <button class="btn btn-danger btn-sm">Off</button>
+                                          @endif
+                                      </td>
+                                        <td>
+                                          @if ($row->today_deal == '1')
+                                          <button class="btn btn-success btn-sm">On</button>
+                                          @else
+                                          <button class="btn btn-danger btn-sm">Off</button>
                                           @endif
                                       </td>
                                         <td>
                                           @if ($row->status == '1')
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                          <button class="btn btn-success btn-sm">On</button>
                                           @else
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                                          @endif
-                                      </td>
-                                        <td>
-                                          @if ($row->status == '1')
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                                          @else
-                                          <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                          <button class="btn btn-danger btn-sm">Off</button>
                                           @endif
                                       </td>
                                         <td >
-                                            <a href="#" class="btn btn-success sm" title="View Data"><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('product_edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('product.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="#" class="btn btn-primary btn-sm" title="View Data"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('product_edit',$row->id) }}" class="btn btn-info btn-sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('product.delete',$row->id) }}" id="delete" class="btn btn-danger btn-sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

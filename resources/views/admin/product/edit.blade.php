@@ -243,7 +243,7 @@
               <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Main Thumbnail </label><br>
-                    <img src="{{ asset($product_edit->thumbnail) }}" alt="" style="height: 50px; width:50px;">
+                    <img src="{{ asset($product_edit->thumbnail) }}" alt="" style="height: 150px; width:150px;"><br><hr>
                     <input type="file" name="thumbnail" accept="image/*" class="dropify">
                     <input type="hidden" name="old_thumbnail" value="{{ $product_edit->thumbnail }}">
                   </div><br>

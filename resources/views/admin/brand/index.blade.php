@@ -38,8 +38,8 @@
                             <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Brand Image</th>
-                                    <th>Brand Name</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -52,8 +52,8 @@
                                         <td><img src="{{ asset($row->image) }}" style="height: 40px; width:60px"></td>
                                         <td>{{ $row->name }}</td>
                                         <td >
-                                            <a href="{{ route('brand.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('brand.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{ route('brand.edit',$row->id) }}" class="btn btn-info btn-sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('brand.delete',$row->id) }}" id="delete" class="btn btn-danger btn-sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                   @endforeach
