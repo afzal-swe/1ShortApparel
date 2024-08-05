@@ -3,7 +3,8 @@
 @section('content')
 
 
-<div class="content-wrapper">
+
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -33,48 +34,49 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                          <table  class="table table-bordered table-striped table-sm ytable">
+                          <table id="example1" class="table table-bordered table-striped table-sm">
                             <thead>
-                                <tr>
-                                    <th>SL</th>
-                                    <th>Coupon Code</th>
-                                    <th>Coupon Date</th>
-                                    <th>Coupon Amount</th>
-                                    <th>Coupon Type</th>
-                                    <th>Coupon Status</th>
-                                    <th>Action</th>
-                                </tr>
+                              <tr>
+                                <th>SL</th>
+                                <th>Coupon Code</th>
+                                <th>Coupon Date</th>
+                                <th>Coupon Amount</th>
+                                <th>Coupon Type</th>
+                                <th>Coupon Status</th>
+                                <th>Action</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $key=>$row)
-                                    <tr>
-                                        <td>{{++$key}}</td>
-                                        <td>{{ $row->coupon_code }}</td>
-                                        <td>{{ $row->valid_date }}</td>
-                                        <td>{{ $row->coupon_amount }}</td>
-                                        
-                                        <td> 
-                                          @if ($row->type==1)
-                                          <p class="text-info">Fixed</p>
-                                          @else
-                                          <p class="text-info">Percentage</p>
-                                          @endif
-                                        </td>
-                                       
-                                        <td> 
-                                          @if ($row->status==1)
-                                          <p class="text-success">Active</p>
-                                          @else
-                                          <p class="text-danger">Deactive</p>
-                                          @endif
-                                        </td>
-                                        
-                                        <td >
-                                            <a href="{{ route('coupon.edit',$row->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ route('coupon.delete',$row->id) }}" id="delete" class="btn btn-danger sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                              @foreach ($data as $key=>$row)
+                              <tr>
+                                  <td>{{++$key}}</td>
+                                  <td>{{ $row->coupon_code }}</td>
+                                  <td>{{ $row->valid_date }}</td>
+                                  <td>{{ $row->coupon_amount }}</td>
+                                  
+                                  <td> 
+                                    @if ($row->type==1)
+                                    <p class="text-info">Fixed</p>
+                                    @else
+                                    <p class="text-info">Percentage</p>
+                                    @endif
+                                  </td>
+                                 
+                                  <td> 
+                                    @if ($row->status==1)
+                                    <p class="text-success">Active</p>
+                                    @else
+                                    <p class="text-danger">Deactive</p>
+                                    @endif
+                                  </td>
+                                  
+                                  <td >
+                                      <a href="{{ route('coupon.edit',$row->id) }}" class="btn btn-info btn-sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                      <a href="{{ route('coupon.delete',$row->id) }}" id="delete" class="btn btn-danger btn-sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
+                                  </td>
+                              </tr>
+                          @endforeach
+
                             </tbody>
                           </table>
                         </div>

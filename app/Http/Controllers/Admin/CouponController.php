@@ -39,7 +39,7 @@ class CouponController extends Controller
             'created_at' => Carbon::now(),
         ]);
         $notification = array('messege' => 'Coupon Create Successfully', 'alert-type' => 'success');
-        return redirect()->back()->with($notification);
+        return redirect()->route('coupon.all_coupon')->with($notification);
     } // End //
 
     // Edit coupon 
@@ -70,7 +70,7 @@ class CouponController extends Controller
                 'created_at' => Carbon::now(),
             ]);
             $notification = array('messege' => 'Coupon Create Successfully', 'alert-type' => 'success');
-            return redirect()->back()->with($notification);
+            return redirect()->route('coupon.all_coupon')->with($notification);
         } else {
             echo "Page Not Found !";
         }
@@ -86,7 +86,7 @@ class CouponController extends Controller
             Coupon::findOrFail($req)->delete();
 
             $notification = array('messege' => 'Coupon Delete Successfully', 'alert-type' => 'success');
-            return redirect()->back()->with($notification);
+            return redirect()->route('coupon.all_coupon')->with($notification);
         } else {
             echo "page Not Found !";
         }
