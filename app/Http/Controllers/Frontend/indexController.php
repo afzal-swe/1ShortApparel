@@ -175,20 +175,23 @@ class indexController extends Controller
     }
 
     // Campaign Product Details
-    public function Campaign_Product_Details($id)
+    public function Campaign_Product_Details(Request $request, $id)
     {
-        // $product = Product::where('id', $id)->first();
+
+        $product = Product::where('id', $id)->first();
 
 
-        // Product::where('id', $id)->increment('product_views');
-        // $product_price = DB::table($this->db_campaign_product)->where('product_id', $product->id)->first();
 
-        // $related_product = DB::table($this->db_campaign_product)->leftJoin('products', 'campaign_product.product_id', 'products.id')
-        //     ->select('products.product_title', 'products.product_code', 'products.thumbnail', 'products.id', 'campaign_product.*')
-        //     ->inRandomOrder(12)->get();
+        Product::where('id', $id)->increment('product_views');
+        $product_price = DB::table($this->db_campaign_product)->where('product_id', $product)->first();
+        dd($product_price);
+
+        $related_product = DB::table($this->db_campaign_product)->leftJoin('products', 'campaign_product.product_id', 'products.id')
+            ->select('products.product_title', 'products.product_code', 'products.thumbnail', 'products.id', 'campaign_product.*')
+            ->inRandomOrder(12)->get();
 
 
-        // $review = Review::where('product_id', $product->id)->orderBy('id', 'DESC')->take(6)->get();
-        // return view('frontend.campaign.product_details', compact('product', 'related_product', 'review', 'product_price'));
+        $review = Review::where('product_id', $product)->orderBy('id', 'DESC')->take(6)->get();
+        return view('frontend.campaign.product_details', compact('product', 'related_product', 'review', 'product_price'));
     }
 }
