@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 30, 2024 at 10:06 PM
+-- Generation Time: Aug 07, 2024 at 05:12 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,49 @@ SET time_zone = "+00:00";
 --
 -- Database: `1short_apparel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` bigint UNSIGNED NOT NULL,
+  `blog_category_id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `publish_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tag` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_category`
+--
+
+CREATE TABLE `blog_category` (
+  `id` bigint UNSIGNED NOT NULL,
+  `category_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blog_category`
+--
+
+INSERT INTO `blog_category` (`id`, `category_name`, `category_slug`, `created_at`, `updated_at`) VALUES
+(4, 'Offereee', 'offereee', '2024-07-10 17:17:34', '2024-08-04 17:36:11'),
+(5, 'Promotion', 'promotion', '2024-07-10 17:17:55', NULL),
+(6, 'Campaign', 'campaign', '2024-07-10 17:18:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -42,6 +85,32 @@ CREATE TABLE `brands` (
 
 INSERT INTO `brands` (`id`, `name`, `image`, `status`, `created_at`, `updated_at`) VALUES
 (4, '1Short Apparel', 'image/brand/1short-apparel.png', 1, NULL, '2023-12-10 17:16:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `campaign_product`
+--
+
+CREATE TABLE `campaign_product` (
+  `id` bigint UNSIGNED NOT NULL,
+  `campaign_id` bigint UNSIGNED NOT NULL,
+  `product_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `campaign_product`
+--
+
+INSERT INTO `campaign_product` (`id`, `campaign_id`, `product_id`, `price`, `created_at`, `updated_at`) VALUES
+(31, 10, '3', '408', NULL, NULL),
+(32, 10, '4', '400', NULL, NULL),
+(33, 10, '5', '384', NULL, NULL),
+(34, 10, '6', '376', NULL, NULL),
+(35, 10, '7', '616', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -69,7 +138,7 @@ CREATE TABLE `campaingns` (
 --
 
 INSERT INTO `campaingns` (`id`, `title`, `start_date`, `end_date`, `image`, `discount`, `month`, `year`, `slug`, `status`, `created_at`, `updated_at`) VALUES
-(8, 'test', '2024-02-27', '2024-02-28', 'image/campaign/test.jpg', '5', 'February', '2024', 'test', '1', '2024-02-26 18:30:24', NULL);
+(10, 'Cota dabi ta E-campaign', '2024-08-03', '2024-08-19', 'image/campaign/cota-dabi-ta-e-campaign.jpeg', '20', 'July', '2024', 'cota-dabi-ta-e-campaign', '1', '2024-07-16 04:21:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -124,8 +193,6 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`id`, `name`, `email`, `phone`, `desctiption`, `created_at`, `updated_at`) VALUES
-(1, 'Md.Afzal Hossen', 'afzalbhola07@gmail.com', '01811178307', 'Null', '2024-02-29 12:40:14', NULL),
-(2, 'Md.Afzal Hossen', 'afzalbhola07@gmail.com', '01811178307', 'asdfsa', '2024-02-29 12:41:14', NULL),
 (3, 'Md.Afzal Hossen', 'afzalbhola07@gmail.com', '01811178307', 'asdfa', '2024-02-29 12:41:50', NULL),
 (4, 'Md.Afzal Hossen', 'afzalbhola07@gmail.com', '01811178307', 'dsafsadf', '2024-03-01 12:46:55', NULL);
 
@@ -151,8 +218,7 @@ CREATE TABLE `coupons` (
 --
 
 INSERT INTO `coupons` (`id`, `coupon_code`, `valid_date`, `type`, `coupon_amount`, `status`, `created_at`, `updated_at`) VALUES
-(2, '12112', '2023-12-01', NULL, 501245, 1, '2023-12-04 13:27:21', '2023-12-04 13:27:21'),
-(3, 'cd25', '2024-02-28', '1', 1202, 1, '2024-02-26 16:39:58', NULL);
+(3, 'cd2512', '2024-04-05', NULL, 10021, 1, '2024-08-04 19:26:03', '2024-08-04 19:26:03');
 
 -- --------------------------------------------------------
 
@@ -210,7 +276,19 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (25, '2024_03_27_003852_create_wereviews_table', 18),
 (26, '2024_03_27_102857_create_shippings_table', 19),
 (27, '2024_03_27_113336_create_pages_table', 20),
-(28, '2024_03_30_211737_create_news_letters_table', 21);
+(28, '2024_03_30_211737_create_news_letters_table', 21),
+(29, '2024_04_03_204731_create_orders_table', 22),
+(30, '2024_04_03_205754_create_order__details_table', 22),
+(31, '2024_04_06_100448_create_tickets_table', 23),
+(32, '2024_04_07_184105_create_replies_table', 24),
+(33, '2024_06_04_082751_create_tests_table', 25),
+(34, '2024_06_04_083121_create_replies_table', 26),
+(35, '2024_07_08_091703_create_payment_geteway_bd_table', 27),
+(36, '2024_07_10_220228_create_blog_category_table', 28),
+(37, '2024_07_10_220436_create_blogs_table', 28),
+(38, '2024_07_14_013227_add_column_to_table', 29),
+(39, '2024_07_15_121202_create_campaign_product_table', 30),
+(40, '2024_07_16_141347_add_column_to_table_users', 31);
 
 -- --------------------------------------------------------
 
@@ -233,6 +311,82 @@ INSERT INTO `news_letters` (`id`, `email`, `created_at`, `updated_at`) VALUES
 (1, 'afzalbhola07@gmail.com', NULL, NULL),
 (2, 'afzal@gmail.com', NULL, NULL),
 (3, 'admin@gmail.com', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int NOT NULL,
+  `c_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_zipcode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_extra_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subtotal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coupon_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coupon_discount` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `after_discount` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_charge` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int DEFAULT '0',
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `month` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `year` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `c_name`, `c_phone`, `c_email`, `c_country`, `c_zipcode`, `c_address`, `c_extra_phone`, `c_city`, `subtotal`, `total`, `coupon_code`, `coupon_discount`, `after_discount`, `payment_type`, `tax`, `shipping_charge`, `order_id`, `status`, `date`, `month`, `year`, `created_at`, `updated_at`) VALUES
+(5, 12, 'Md.Afzal', '01811178307', 'afzalbhola07@gmail.com', 'Bangladesh', '1219', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', 'Dhaka', '450.00', '450.00', NULL, NULL, NULL, '2', '0', '0', '52830', 0, '05-04-2024', 'April', '2024', NULL, NULL),
+(6, 12, 'Md.Afzal', '01811178307', 'afzalbhola07@gmail.com', 'Bangladesh', '1219', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', 'Dhaka', '450.00', '450.00', NULL, NULL, NULL, '2', '0', '0', '39830', 1, '05-04-2024', 'April', '2024', NULL, NULL),
+(7, 12, 'Md.Afzal', '01811178307', 'afzalbhola07@gmail.com', 'Bangladesh', '1219', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', 'Dhaka', '450.00', '450.00', NULL, NULL, NULL, '2', '0', '0', '856217', 0, '05-04-2024', 'April', '2024', NULL, NULL),
+(8, 12, 'Md.Afzal', '01811178307', 'afzalbhola07@gmail.com', 'Bangladesh', '1219', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', 'Dhaka', '450.00', '450.00', NULL, NULL, NULL, '2', '0', '0', '156742', 1, '05-04-2024', 'April', '2024', NULL, NULL),
+(9, 12, 'Md.Afzal', '01811178307', 'afzalbhola07@gmail.com', 'Bangladesh', '1219', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', 'Dhaka', '450.00', '450.00', NULL, NULL, NULL, '2', '0', '0', '341365', 4, '05-04-2024', 'April', '2024', NULL, NULL),
+(10, 12, 'Md.Afzal', '01811178307', 'afzalbhola07@gmail.com', 'Bangladesh', '1219', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', 'Dhaka', '450.00', '450.00', NULL, NULL, NULL, '2', '0', '0', '325182', 3, '05-04-2024', 'April', '2024', NULL, NULL),
+(11, 12, 'Md.Afzal', '01811178307', 'afzalbhola07@gmail.com', 'Bangladesh', '1219', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', 'Dhaka', '450.00', '450.00', NULL, NULL, NULL, '2', '0', '0', '36664', 1, '05-04-2024', 'April', '2024', NULL, NULL),
+(12, 3, 'dsafasfassad', '01811178307', 'afzalbhola07@gmail.com', 'Bangladesh', '1219', 'Banasree Block-B, Road-5, House-21 Dhaka', '01811178307', 'Dhaka', '450.00', '450.00', NULL, NULL, NULL, '2', '0', '0', '815722', 1, '07-07-2024', 'July', '2024', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order__details`
+--
+
+CREATE TABLE `order__details` (
+  `id` bigint UNSIGNED NOT NULL,
+  `order_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quantity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `single_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subtotal_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order__details`
+--
+
+INSERT INTO `order__details` (`id`, `order_id`, `product_id`, `product_name`, `color`, `size`, `quantity`, `single_price`, `subtotal_price`, `created_at`, `updated_at`) VALUES
+(4, 10, 4, 'T-shart', 'black', 'Xl', '1', '450', '450', NULL, NULL),
+(5, 12, 4, 'T-shart', NULL, 'S', '1', '450', '450', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -278,6 +432,31 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payment_geteway_bd`
+--
+
+CREATE TABLE `payment_geteway_bd` (
+  `id` bigint UNSIGNED NOT NULL,
+  `gateway_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `signature_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payment_geteway_bd`
+--
+
+INSERT INTO `payment_geteway_bd` (`id`, `gateway_name`, `store_id`, `signature_key`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Aamarpay', 'aamarpaytest', 'dbb74894e82415a2f7ff0ec3a97e4183', 0, NULL, '2024-07-09 15:32:45'),
+(3, 'SSL Commerz', 'test surjopay', 'pay', 0, NULL, '2024-07-08 16:44:22'),
+(5, 'Surjopay', 'SSL1', 'SSL2', 0, '2024-07-08 07:41:19', '2024-07-08 16:44:25');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `personal_access_tokens`
 --
 
@@ -315,8 +494,8 @@ CREATE TABLE `pickup_points` (
 --
 
 INSERT INTO `pickup_points` (`id`, `pickup_point_name`, `pickup_point_address`, `pickup_point_phone`, `pickup_point_phone_two`, `created_at`, `updated_at`) VALUES
-(4, 'aaaaa', 'aaaaa', '11111', '22222', '2023-12-07 16:10:38', '2023-12-07 16:10:38'),
-(5, 'asdfas', 'aaa', '12124512', '1245784512', '2023-12-07 16:19:11', '2023-12-07 16:19:11');
+(5, 'asdfas', 'aaa', '12124512', '1245784512', '2023-12-07 16:19:11', '2023-12-07 16:19:11'),
+(6, 'Bholaaaaaaaaaaaaa', 'Roton Pu', '114-580-330701', '838-875-430212', '2024-08-04 05:11:21', '2024-08-04 05:11:21');
 
 -- --------------------------------------------------------
 
@@ -369,30 +548,61 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `brand_id`, `category_id`, `subcategory_id`, `product_title`, `product_code`, `product_price`, `product_unit`, `product_quantity`, `discount_price`, `post_date`, `post_month`, `slug`, `images`, `thumbnail`, `product_purchase_price`, `stock_quantity`, `product_video`, `product_description`, `product_tags`, `product_color`, `product_size`, `featured`, `today_deal`, `hot_new_arrivals`, `hot_best_sellers`, `flash_deal_id`, `cash_on_delivery`, `admin_id`, `warehouse`, `pickup_point`, `product_slider`, `product_views`, `trendy`, `status`, `created_at`, `updated_at`) VALUES
-(3, 4, 6, 4, 'T-shart', '22470', '500', 'Pc', 20, '400', '11-12-2023', 'December', 't-shart', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\n\nA574318\nA574317\nA574316\nA574319\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '1', 28, 0, 1, '2023-12-10 18:53:49', '2024-03-24 17:19:38'),
-(4, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18'),
-(5, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(6, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(7, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(8, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(9, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(10, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(11, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(12, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(13, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(14, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(15, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(16, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(17, 4, 7, 6, 'Internal Implementation Manager', '2012', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-implementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 28, 1, 1, '2024-01-28 22:19:59', '2024-03-27 03:15:51'),
-(18, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18'),
-(19, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18'),
-(20, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18'),
-(21, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18'),
-(22, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18'),
-(23, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18'),
-(24, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18'),
-(25, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18'),
-(26, 4, 6, 5, 'T-shart', '22470', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dasfsaf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 97, 0, 1, '2023-12-10 18:53:49', '2024-03-30 14:25:18');
+(3, 4, 6, 4, 'T-shart1', '22471', '510', 'Pc', 20, NULL, '11-12-2023', 'December', 't-shart', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\n\nA574318\nA574317\nA574316\nA574319\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '1', 30, 0, 1, '2023-12-10 18:53:49', '2024-07-07 01:36:34'),
+(4, 4, 6, 5, 'T-shart2', '22470', '500', 'Pc', 20, NULL, '11-12-2023', 'December', 't-shart a', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 228, 0, 1, '2023-12-10 18:53:49', '2024-07-16 04:09:54'),
+(5, 4, 7, 6, 'Internal Implementation3 Manager', '2011', '480', 'Pc', NULL, NULL, '29-01-2024', 'January', 'internalntation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(6, 4, 7, 6, 'Internal Implementation4Manager', '2012', '470', 'Pc', NULL, NULL, '29-01-2024', 'January', 'intimplementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(7, 4, 7, 6, 'Internal Implementation Manager5', '2013', '770', 'Pc', NULL, NULL, '29-01-2024', 'January', 'internal-imager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(8, 4, 7, 6, 'Internal Implementation Manager6', '2014', '660', 'Pc', NULL, '650', '29-01-2024', 'January', 'intmentation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(9, 4, 7, 6, 'Internal Implementation Manager7', '2015', '550', 'Pc', NULL, '540', '29-01-2024', 'January', 'internal-imp-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(10, 4, 7, 6, 'Internal Implementation Manager', '2016', '540', 'Pc', NULL, '530', '29-01-2024', 'January', 'imentation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(11, 4, 7, 6, 'Internal Implementation Manager8', '2017', '999', 'Pc', NULL, '850', '29-01-2024', 'January', 'intmentation-m', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(12, 4, 7, 6, 'Internal Implementation Manager9', '2018', '1020', 'Pc', NULL, '1000', '29-01-2024', 'January', 'inmentation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(13, 4, 7, 6, 'Internal Implementation Manager10', '2019', '360', 'Pc', NULL, '350', '29-01-2024', 'January', 'internal-impementation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 47, 1, 1, '2024-01-28 22:19:59', '2024-07-16 05:04:48'),
+(14, 4, 7, 6, 'Internal Implementation Manager11', '20112', '880', 'Pc', NULL, '850', '29-01-2024', 'January', 'internal-impentation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(15, 4, 7, 6, 'Internal Implementation Manager12', '20121', '980', 'Pc', NULL, '970', '29-01-2024', 'January', 'internal-imptation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(16, 4, 7, 6, 'Internal Implementation Manager13', '2010', '470', 'Pc', NULL, '460', '29-01-2024', 'January', 'internal-immentation-manager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 46, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(17, 4, 7, 6, 'Internal Implementation Manager14', '20121', '500', 'Pc', NULL, '400', '29-01-2024', 'January', 'internal-impnager', 'image/product/images/internal-implementation-manager.jpg', 'image/product/thumbnail/internal-implementation-manager.jpg', '400', '500', NULL, '<p>asdfasf asdfa&nbsp;</p>', 'Omnis quasi aliquam facere esse ab alias recusandae.', 'red, black,', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B1', 5, '0', 60, 1, 1, '2024-01-28 22:19:59', '2024-07-16 04:05:32'),
+(18, 4, 6, 5, 'T-shart15', '22482', '450', 'Pc', 20, '400', '11-12-2023', 'December', 't-shart f', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B-3', 4, '0', 233, 0, 1, '2023-12-10 18:53:49', '2024-07-16 04:17:39'),
+(19, 4, 6, 5, 'T-shart16', '22481', '599', 'Pc', 20, '550', '11-12-2023', 'December', 't-shart d', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B-3', 4, '0', 284, 0, 1, '2023-12-10 18:53:49', '2024-07-16 04:14:57'),
+(20, 4, 6, 5, 'T-shart17', '22483', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart ds', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, 1, 1, 1, 1, 1, 1, 'B-3', 4, '0', 231, 0, 1, '2023-12-10 18:53:49', '2024-07-16 04:17:48'),
+(21, 4, 6, 5, 'T-shart18', '22484', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart daff', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 235, 0, 1, '2023-12-10 18:53:49', '2024-07-16 05:04:40'),
+(22, 4, 6, 5, 'T-shart19', '22485', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart da', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 229, 0, 1, '2023-12-10 18:53:49', '2024-07-16 04:09:54'),
+(23, 4, 6, 5, 'T-shart20', '22486', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-shart dadf', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 252, 0, 1, '2023-12-10 18:53:49', '2024-07-16 05:12:06'),
+(24, 4, 6, 5, 'T-shart21', '22488', '500', 'Pc', 20, '450', '11-12-2023', 'December', 't-s', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 228, 0, 1, '2023-12-10 18:53:49', '2024-07-16 04:09:54'),
+(25, 4, 6, 5, 'T-shart22', '224870', '999', 'Pc', 20, '1020', '11-12-2023', 'December', 't-sh', 'image/product/images/t-shart.jpg', 'image/product/thumbnail/t-shart.jpg', '500', '20', 'yYV2VEXMlYI', '<p>This classic cotton t-shirt is the perfect addition to your wardrobe. Made from 100% soft and durable cotton, it is designed for all-day comfort. The t-shirt features a classic fit with a ribbed crew neck and short sleeves, making it ideal for casual wear. The black color is versatile and easy to style, making it a must-have for any fashion-conscious individual. Available in sizes S to XXL, you’re sure to find the perfect fit. Whether you’re running errands, hanging out with friends, or just lounging at home, this t-shirt is sure to keep you comfortable and stylish.\r\n\r\nA574318\r\nA574317\r\nA574316\r\nA574319\r\nA574320</p>', 'Possimus explicabo iste quam.', 'red, black,blue,yello', 'S, M, Xl, XXl', 1, NULL, 1, 1, 1, 1, 1, 'B-3', 4, '0', 237, 0, 1, '2023-12-10 18:53:49', '2024-07-16 05:11:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `replies`
+--
+
+CREATE TABLE `replies` (
+  `id` bigint UNSIGNED NOT NULL,
+  `ticket_id` bigint UNSIGNED NOT NULL,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reply_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `replies`
+--
+
+INSERT INTO `replies` (`id`, `ticket_id`, `user_id`, `message`, `image`, `reply_date`, `created_at`, `updated_at`) VALUES
+(1, 6, '0', 'dsafas', 'image/ticket/665ff51858942-png', '2024-06-05', NULL, NULL),
+(2, 6, '0', 'test', NULL, '2024-06-05', NULL, NULL),
+(3, 6, '1', 'you r most welcome', 'image/ticket/665ff8ae86144-png', '2024-06-05', NULL, NULL),
+(4, 1, '0', 'thanks for testing', NULL, '2024-06-05', NULL, NULL),
+(5, 6, '1', 'first test', NULL, '2024-06-05', NULL, NULL),
+(6, 6, '0', 'sadfsa', NULL, '2024-06-05', NULL, NULL),
+(7, 1, '0', 'asdfas', NULL, '2024-06-05', NULL, NULL),
+(8, 8, '0', 'asdfasf', NULL, '2024-07-07', NULL, NULL),
+(9, 8, '3', 'asdfsa', NULL, '2024-07-07', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -418,7 +628,6 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `review`, `rating`, `review_date`, `review_month`, `review_year`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, 'This is a nice product', 5, '02-01-2024', NULL, 2024, '2024-01-01 20:15:20', NULL),
 (2, 1, 3, 'fdsafasfsa', 5, '02-01-2024', NULL, 2024, '2024-01-01 20:15:20', NULL),
 (3, 1, 3, 'fdsafasfsa', 3, '02-01-2024', NULL, 2024, '2024-01-01 20:15:20', NULL),
 (4, 1, 3, 'fdsafasfsa', 4, '02-01-2024', NULL, 2024, '2024-01-01 20:15:20', NULL),
@@ -448,7 +657,7 @@ CREATE TABLE `seos` (
 --
 
 INSERT INTO `seos` (`id`, `meta_author`, `meta_title`, `meta_keyword`, `meta_description`, `google_analytics`, `google_verification`, `alexa_analytics`, `created_at`, `updated_at`) VALUES
-(1, '1Shot Apprel', 'Bundle Offer', 'newsportal, online, online news, online newspaper, online news, today, today news,', 'this is an online news portal website where you can easily read daily.', 'asds', 'dsafsa', 'dsafsaf', NULL, '2023-12-03 13:50:56');
+(1, '1Shot Apprel', 'Online Shop', 'newsportal, online, online news, online newspaper, online news, today, today news,', 'this is an online news portal website where you can easily read daily.', 'asds', 'dsafsa', 'dsafsaf', NULL, '2024-08-04 02:23:02');
 
 -- --------------------------------------------------------
 
@@ -542,9 +751,43 @@ CREATE TABLE `sub_categories` (
 
 INSERT INTO `sub_categories` (`id`, `brand_id`, `category_id`, `subcategory_name`, `subcategory_slug`, `subcategory_status`, `image`, `created_at`, `updated_at`) VALUES
 (3, 4, 5, 'Men\'s Three-Season Classic Jacket', 'mens-three-season-classic-jacket', 1, 'image/subcategory/mens-three-season-classic-jacket.jpg', '2023-12-10 18:10:13', NULL),
-(4, 4, 5, 'Hooded Raglan Jacket', 'hooded-raglan-jacket', 1, 'image/subcategory/hooded-raglan-jacket.jpg', '2023-12-10 18:11:36', NULL),
+(4, 4, 5, 'Hooded Raglan Jacket', 'hooded-raglan-jacket', 1, 'image/subcategory/hooded-raglan-jacket.jpg', '2023-12-10 18:11:36', '2024-08-04 17:22:37'),
 (5, 4, 6, 'Men\'s Muscle Tank', 'mens-muscle-tank', 1, 'image/subcategory/mens-muscle-tank.jpg', '2023-12-10 18:12:34', NULL),
-(6, 4, 7, 'Men\'s Heather Colorblock Contender Polo', 'mens-heather-colorblock-contender-polo', 1, 'image/subcategory/mens-heather-colorblock-contender-polo.jpg', '2023-12-10 18:13:28', NULL);
+(6, 4, 7, 'Men\'s Heather Colorblock Contender Polo', 'mens-heather-colorblock-contender-polo', 1, 'image/subcategory/mens-heather-colorblock-contender-polo.jpg', '2023-12-10 18:13:28', '2024-08-04 17:22:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `service` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `priority` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int DEFAULT '0',
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `user_id`, `subject`, `service`, `priority`, `message`, `image`, `status`, `date`, `created_at`, `updated_at`) VALUES
+(1, 12, 'Bangla 1', 'Affiliate', 'Medium', 'dsfafas', 'image/ticket/66112769ae5e8.png', 2, '2024-04-06', NULL, NULL),
+(2, 12, 'Bangla 1', 'Payment', 'High', 'asdfgasd', 'image/ticket/661127afa8d32.png', 0, '2024-04-06', NULL, NULL),
+(3, 12, 'I Need Your Help', 'Return', 'Medium', 'fdsg', 'image/ticket/661127f5c40e5.png', 2, '2024-04-06', NULL, NULL),
+(4, 12, 'I Need Your Help', 'Affiliate', 'High', 'sdAFsadf', 'image/ticket/6612db3819878.png', 2, '2024-04-07', NULL, NULL),
+(5, 12, 'I Need Your Help', 'Affiliate', 'Medium', 'dsaFas', 'image/ticket/6612db5c57b34.png', 1, '2024-04-07', NULL, NULL),
+(6, 1, 'Bangla 1', 'Payment', 'Medium', 'fasdfa', 'image/ticket/665fea58986f6.png', 1, '2024-06-05', NULL, NULL),
+(7, 1, 'Bangla 1', 'Payment', 'Medium', 'first ticket check', 'image/ticket/666010637aaaa.png', 2, '2024-06-05', NULL, NULL),
+(8, 3, 'Bangla 1', 'Technical', 'Medium', 'fdasfasf', NULL, 0, '2024-07-07', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -562,6 +805,20 @@ CREATE TABLE `users` (
   `status` int DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` int UNSIGNED DEFAULT NULL,
+  `product` int UNSIGNED DEFAULT NULL,
+  `offer` int UNSIGNED DEFAULT NULL,
+  `order` int UNSIGNED DEFAULT NULL,
+  `blog` int UNSIGNED DEFAULT NULL,
+  `pickup` int UNSIGNED DEFAULT NULL,
+  `ticket` int UNSIGNED DEFAULT NULL,
+  `contact` int UNSIGNED DEFAULT NULL,
+  `report` int UNSIGNED DEFAULT NULL,
+  `setting` int UNSIGNED DEFAULT NULL,
+  `userrole` int UNSIGNED DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -571,11 +828,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `user_name`, `email`, `phone`, `supper_admin`, `status`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Md.Afzal Hossen', 'Admin', 'admin@gmail.com', '01611178307', 1, 1, NULL, '$2y$10$.8b8MJoIs.DOeT0aMoz.w.LN3IvTUITCdn6.OsiwaEXNLN137J4r.', NULL, '2023-12-01 15:37:39', '2024-03-30 13:59:45'),
-(2, 'asdfas', NULL, 'afzalbhola07@gmail.com', NULL, 1, NULL, NULL, '$2y$10$mpYBbGkJWOghwmLZzahVJe/X8rSwPKteHygUgmwsTcO4kJTBFl7.S', NULL, '2023-12-01 17:11:25', '2023-12-01 17:11:25'),
-(3, 'dsafasfas', NULL, 'info@codeartist.com', NULL, 1, NULL, NULL, '$2y$10$7WTb6fUv21dJwjt.YSCbj.GSYx84s0CyKIjGqELgn./8271MPnLuC', NULL, '2023-12-31 12:57:25', '2023-12-31 12:57:25'),
-(4, 'sadfasfa', NULL, 'afzalbasdfhola07@gmail.com', NULL, 1, NULL, NULL, '$2y$10$27MO9tmWXGuUymRiFcKDierbuvd/RdozYWnHc5ue191pGe7NkwZxa', NULL, '2023-12-31 15:06:57', '2023-12-31 15:06:57');
+INSERT INTO `users` (`id`, `name`, `user_name`, `email`, `phone`, `supper_admin`, `status`, `email_verified_at`, `password`, `category`, `product`, `offer`, `order`, `blog`, `pickup`, `ticket`, `contact`, `report`, `setting`, `userrole`, `avatar`, `provider`, `provider_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Md.Afzal Hossen', 'Admin', 'admin@gmail.com', '01611178307', 1, NULL, NULL, '$2y$10$.8b8MJoIs.DOeT0aMoz.w.LN3IvTUITCdn6.OsiwaEXNLN137J4r.', 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, '2023-12-01 15:37:39', '2024-03-30 13:59:45'),
+(16, 'afzal-swe', 'afzal', 'afzal.swe@gmail.com', '0187898745', 0, 1, NULL, '$2y$10$VYO0FDJRdnUixwPK8Pi/3uWVEyPcRXpKs6RaeEAltD.acBS5xO3N6', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 'Md.Afzal', 'sadffdsa', 'afzal111@gmail.com', '1245784512', 0, 1, NULL, '$2y$10$KXFwcUr9p4VpWIKUSv5W7u5XAPysW15CVfqymq.v8RYXHOUvg2bMW', 1, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -627,7 +883,7 @@ CREATE TABLE `website_settings` (
 --
 
 INSERT INTO `website_settings` (`id`, `website_name`, `currency`, `phone_one`, `phone_two`, `main_email`, `support_email`, `logo`, `favicon`, `address`, `description`, `created_at`, `updated_at`) VALUES
-(1, '1Shot Apparel', '$', '19296015392', '19296015392', '1shotapparelandgoods@gmaill.com', '1shotapparelandgoods@gmaill.com', 'image/website/logoaaaaaaaaaa.png', 'image/website/favicon/aaaaaaaaaa.gif', '90-48 Francis Lewis Blvd Queensvillage,NY11428', '<p>aaaaaaa</p>', '2024-01-28 19:40:39', '2024-01-28 19:40:39');
+(1, '1Shot Apparel', '$', '19296015392', '19296015392', '1shotapparelandgoods@gmaill.com', '1shotapparelandgoods@gmaill.com', 'image/website/logoaaaaaaaaaa.png', 'image/website/favicon/aaaaaaaaaa.gif', '90-48 Francis Lewis Blvd Queensvillage,NY11428', '<p>aaaaaaa</p>', '2024-08-04 02:20:38', '2024-08-04 02:20:38');
 
 -- --------------------------------------------------------
 
@@ -677,17 +933,37 @@ CREATE TABLE `wishlists` (
 --
 
 INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `date`, `created_at`, `updated_at`) VALUES
-(28, 1, 26, '30, March 2024', '2024-03-30 14:06:35', NULL);
+(31, 1, 5, '03, August 2024', '2024-08-03 11:01:21', NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `blogs_blog_category_id_foreign` (`blog_category_id`);
+
+--
+-- Indexes for table `blog_category`
+--
+ALTER TABLE `blog_category`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `brands`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `campaign_product`
+--
+ALTER TABLE `campaign_product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `campaign_product_campaign_id_foreign` (`campaign_id`);
 
 --
 -- Indexes for table `campaingns`
@@ -734,6 +1010,18 @@ ALTER TABLE `news_letters`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order__details`
+--
+ALTER TABLE `order__details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pages`
 --
 ALTER TABLE `pages`
@@ -744,6 +1032,12 @@ ALTER TABLE `pages`
 --
 ALTER TABLE `password_resets`
   ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `payment_geteway_bd`
+--
+ALTER TABLE `payment_geteway_bd`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -767,6 +1061,13 @@ ALTER TABLE `products`
   ADD KEY `products_brand_id_foreign` (`brand_id`),
   ADD KEY `products_category_id_foreign` (`category_id`),
   ADD KEY `products_subcategory_id_foreign` (`subcategory_id`);
+
+--
+-- Indexes for table `replies`
+--
+ALTER TABLE `replies`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `replies_ticket_id_foreign` (`ticket_id`);
 
 --
 -- Indexes for table `reviews`
@@ -808,6 +1109,12 @@ ALTER TABLE `sub_categories`
   ADD KEY `sub_categories_category_id_foreign` (`category_id`);
 
 --
+-- Indexes for table `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -846,16 +1153,34 @@ ALTER TABLE `wishlists`
 --
 
 --
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `blog_category`
+--
+ALTER TABLE `blog_category`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `campaign_product`
+--
+ALTER TABLE `campaign_product`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `campaingns`
 --
 ALTER TABLE `campaingns`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -873,7 +1198,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -885,7 +1210,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `news_letters`
@@ -894,9 +1219,27 @@ ALTER TABLE `news_letters`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `order__details`
+--
+ALTER TABLE `order__details`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `payment_geteway_bd`
+--
+ALTER TABLE `payment_geteway_bd`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
@@ -909,13 +1252,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `pickup_points`
 --
 ALTER TABLE `pickup_points`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `replies`
+--
+ALTER TABLE `replies`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -954,16 +1303,22 @@ ALTER TABLE `sub_categories`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `warehouses`
 --
 ALTER TABLE `warehouses`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `website_settings`
@@ -981,11 +1336,23 @@ ALTER TABLE `wereviews`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD CONSTRAINT `blogs_blog_category_id_foreign` FOREIGN KEY (`blog_category_id`) REFERENCES `blog_category` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `campaign_product`
+--
+ALTER TABLE `campaign_product`
+  ADD CONSTRAINT `campaign_product_campaign_id_foreign` FOREIGN KEY (`campaign_id`) REFERENCES `campaingns` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `categories`
@@ -1000,6 +1367,12 @@ ALTER TABLE `products`
   ADD CONSTRAINT `products_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `products_subcategory_id_foreign` FOREIGN KEY (`subcategory_id`) REFERENCES `sub_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `replies`
+--
+ALTER TABLE `replies`
+  ADD CONSTRAINT `replies_ticket_id_foreign` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `shippings`
