@@ -26,6 +26,7 @@
     		<div class="card  p-2">
         	  <div class="row">	
         		<div class="col-md-9">
+              {{-- @dd($ticket); --}}
         			<strong>User: {{  $ticket->name }}</strong><br>
         			<strong>Subject: {{  $ticket->subject }}</strong><br>
         			<strong>Service: {{  $ticket->service }}</strong><br>
@@ -33,7 +34,7 @@
         			<strong>Message: {{  $ticket->message }}</strong>
         		</div>
         		<div class="col-md-3">
-        		 <a href="{{ asset($ticket->image) }}" target="_blank"><img src="{{ asset($ticket->image) }}" style="height:80px; width:120px;"></a>
+        		 <img src="{{ asset($ticket->image) }}" style="height:80px; width:120px;">
         		</div>
         		</div>
         	</div>

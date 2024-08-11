@@ -27,7 +27,7 @@ class TicketController extends Controller
         if ($request->ajax()) {
 
             $ticket = "";
-            $query = DB::table('tickets')->leftJoin('users', 'tickets.user_id', 'users.id');
+            $query = DB::table('tickets')->orderBy('id', 'DESC')->leftJoin('users', 'tickets.user_id', 'users.id');
 
             if ($request->date) {
                 $query->where('tickets.date', $request->date);
@@ -138,10 +138,11 @@ class TicketController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function admin_ticket_delete(Request $request)
+    public function admin_ticket_delete(Request $request, $id)
     {
+        // dd($request->id);
 
-        DB::table('tickets')->where('id', $request->id)->delete();
+        DB::table('tickets')->where('id', $id)->delete();
 
         $notification = array('messege' => 'Delete Successfully', 'alert-type' => 'success');
         return redirect()->back()->with($notification);

@@ -192,9 +192,12 @@ class UserProfileController extends Controller
         $data['user_id'] = Auth::id();
         $data['reply_date'] = date('Y-m-d');
 
+
+        $oldimage = $request->oldimage;
+
         if ($request->image) {
             $photo = $request->image;
-            $photoname = uniqid() . '-' . $photo->getClientOriginalExtension();
+            $photoname = uniqid() . '.' . $photo->getClientOriginalExtension();
             Image::make($photo)->resize(600, 350)->save('image/ticket/' . $photoname);
 
             $data['image'] = "image/ticket/" . $photoname;

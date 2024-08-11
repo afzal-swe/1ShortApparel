@@ -63,6 +63,10 @@
                    	    	<label for="exampleInputPassword1">Image</label>
                    	    	<input type="file" class="form-control" name="image" >
                    	    </div><br>
+
+                   	    {{-- <div>
+                   	    	<input type="hidden" class="form-control" name="oldimage" value="{{ $ticket->image }}">
+                   	    </div><br> --}}
                    	    <button type="submit" class="btn btn-primary">Submit Ticket</button>
                    	  </form>
                    </div>

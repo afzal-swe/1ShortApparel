@@ -33,7 +33,8 @@
             </a>
           </li>
 
-          
+
+
 
           {{-- Sales Section Start --}}
           <li class="nav-item">
@@ -44,16 +45,34 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('role.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add User & Parmission</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('manage.role') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage User Parmission</p>
+                </a>
+              </li>
+            </ul>
+          
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('user.view') }}" class="nav-link">
-                  {{-- <i class="far fa-circle nav-icon"></i> --}}
-                  <p>Manage User</p>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>User Info</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('user.review') }}" class="nav-link">
-                  {{-- <i class="far fa-circle nav-icon"></i> --}}
+                  <i class="far fa-circle nav-icon"></i>
                   <p>User Review</p>
                 </a>
               </li>
@@ -511,34 +530,7 @@
           @endif
 
 
-          @if (Auth::user()->userrole==1)
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                User Role
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('role.create') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Create New Role</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="{{ route('manage.role') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Role</p>
-                </a>
-              </li>
-            </ul>
-          </li> 
-          @else
-            
-          @endif
+          
 
           <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
