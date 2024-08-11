@@ -225,7 +225,7 @@ Route::middleware(['SupperAdmin'])->group(function () {
         Route::group(['prefix' => 'profile'], function () {
             Route::controller(AdminController::class)->group(function () {
                 Route::get('/', 'profile')->name('main_profile');
-                // Route::get('/add', 'product_add')->name('product_add');
+                Route::post('/update/{id}', 'Profile_Update')->name('profile_update');
                 // Route::post('/store', 'product_store')->name('product_store');
                 // Route::get('/edit/{id}', 'product_edit')->name('product_edit');
                 // Route::post('/update/{id}', 'product_update')->name('product_update');

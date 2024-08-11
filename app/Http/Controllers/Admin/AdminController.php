@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -93,6 +94,24 @@ class AdminController extends Controller
 
     public function profile()
     {
-        return view('admin.profile.main_profile');
+        $user_id = Auth::user()->id;
+
+        $profile = DB::table('users')->where('id', $user_id)->first();
+        return view('admin.profile.main_profile', compact('profile'));
+    }
+    // Profile Update Function
+    public function Profile_Update(Request $request, $id)
+    {
+
+
+        // dd($request->all());
+        $data = array();
+        $data['name'] = $request->name;
+        $data['phone'] = $request->phone;
+
+        DB::table('users')->where('id', $id)->update($data);
+
+        $notification = array('messege' => 'Update Successfully !', 'alert-type' => 'success');
+        return redirect()->route('main_profile')->with($notification);
     }
 }
