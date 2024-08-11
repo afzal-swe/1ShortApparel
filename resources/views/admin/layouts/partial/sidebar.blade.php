@@ -4,6 +4,8 @@
 
     @php
       $website_info = DB::table('website_settings')->first();
+      $order = DB::table('orders')->get();
+      $message = DB::table('contacts')->get();
     @endphp
     <a href="{{ route('dashboard') }}" class="brand-link">
       @if ($website_info !== Null)
@@ -191,6 +193,7 @@
               <p>
                 Orders
                 <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">{{ count($order) }}</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -241,6 +244,7 @@
               <p>
                 Contact Message
                 <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">{{ count($message) }}</span>
               </p>
             </a>
             <ul class="nav nav-treeview">

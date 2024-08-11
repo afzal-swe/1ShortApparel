@@ -216,7 +216,7 @@
             <div class="col-lg-3 order-3" style="border-left: 1px solid grey; padding-left: 10px;">
                 {{-- {!! $shareButtons1 !!} --}}
              <strong class="text-muted">Pickup Point of this product</strong><br>
-             <i class="fa fa-map"> {{ $product->pickpoint->pickup_point_address }} </i><hr><br>
+             {{-- <i class="fa fa-map"> {{ $product->pickpoint->pickup_point_address }} </i><hr><br> --}}
              <strong class="text-muted"> Home Delivery :</strong><br>
              -> (4-8) days after the order placed.<br> 
              -> Cash on Delivery Available.
