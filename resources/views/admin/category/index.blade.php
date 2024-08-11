@@ -70,7 +70,7 @@
                                       </td>
                                         <td>
                                             
-                                            <a href="#" class="btn btn-info btn-sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('category.edit',$row->id) }}" class="btn btn-info btn-sm edit" title="Edit Data"><i class="fas fa-edit"></i></a>
                                             <a href="{{ route('category.delete',$row->id) }}" id="delete" class="btn btn-danger btn-sm delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
@@ -188,27 +188,9 @@
       </div>
 
 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js"></script>
 
-{{-- Category Edit Modal --}}
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title" id="exampleModalLabel">Update Category</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body" id="modal_body">
-               
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script>
         $(function () {
           //Initialize Select2 Elements
@@ -220,15 +202,6 @@
       
         })
         
-      </script>
-
-      <script type="text/javascript">
-        $('body').on('click','.edit',function(){
-          let cat_id=$(this).data('id');
-          $.get("categorys/edit"+cat_id,function(data){
-            $("#modal_body").html(data);
-          });
-        });
       </script>
 
 @endsection

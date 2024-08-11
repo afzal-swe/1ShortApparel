@@ -81,19 +81,23 @@ class CartController extends Controller
     //__ Apply Coupon __
     public function applyCoupon(Request $request)
     {
-        // dd($request->all());
 
-        $check = DB::table('coupons')->where('coupon_code', $request->coupon)->first();
+        $coupon = $request->coupon;
+
+        $check = DB::table('coupons')->where('coupon_code', $coupon)->first();
+        // dd($check);
 
         if ($check) {
 
             //__coupon exist
             if (date('Y-m-d', strtotime(date('Y-m-d'))) <= date('Y-m-d', strtotime($check->valid_date))) {
-                session::put('coupon', [
+                $test = session::put('coupon', [
                     'name' => $check->coupon_code,
                     'discount' => $check->coupon_amount,
                     'after_discount' => Cart::subtotal() - $check->coupon_amount,
+
                 ]);
+                dd($test);
                 $notification = array('messege' => 'Coupon Applied!', 'alert-type' => 'success');
                 return redirect()->back()->with($notification);
             } else {

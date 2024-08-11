@@ -99,7 +99,7 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::get('/', 'All_categorys')->name('category.index');
                 Route::post('/add', 'Add_category')->name('category.add');
                 Route::get('/edit/{id}', 'edit_category')->name('category.edit');
-                Route::post('/update/{id}', 'category_update')->name('category.update');
+                Route::post('/update/{id}', 'category_update')->name('category.update.form');
                 Route::get('/delete/{id}', 'category_Delete')->name('category.delete');
             });
         }); // Category Route Section End //
@@ -189,6 +189,7 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::get('/edit/{id}', 'product_edit')->name('product_edit');
                 Route::post('/update', 'product_update')->name('product_update');
                 Route::get('/delete/{id}', 'Product_delete')->name('product.delete');
+                Route::get('/view/{id}', 'Single_Product_View')->name('product_view');
             });
         }); // End Product Route section //
 

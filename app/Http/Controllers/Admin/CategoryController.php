@@ -9,13 +9,18 @@ use App\Models\Brand;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class CategoryController extends Controller
 {
+
+    private $db_categories;
+
     public function __construct()
     {
         $this->middleware('auth');
+        $this->db_categories = "categories";
     }
     //
     // All Category View Section //
@@ -62,6 +67,7 @@ class CategoryController extends Controller
     // Edit Category From Section
     public function edit_category(Request $request)
     {
+        // dd($request->all());
         $req = $request->id;
         if (!$req == null) {
             $brand = Brand::all();
@@ -72,44 +78,48 @@ class CategoryController extends Controller
         }
     } // End
 
-    public function category_update(Request $request)
+    public function category_update(Request $request, $id)
     {
-        $update = $request->id;
+        // dd($request->all());
 
-        $file = Categorie::findOrFail($update);
 
         $slug = Str::of($request->category_name)->slug('-');
 
+        $oldimage = $request->oldimg;
+
+
+        $data = array();
+        $data['brand_id'] = $request->brand_id;
+        $data['category_name'] = $request->category_name;
+        $data['home_page'] = $request->home_page;
+        $data['category_status'] = $request->category_status;
+        $data['category_slug'] = $slug;
+        $data['updated_at'] = Carbon::now();
+
         if ($request->file('image')) {
 
-            $img = $file->image;
-            unlink($img);
+            $img = DB::table($this->db_categories)->where('id', $id)->first();
+            $image = $img->image;
+            unlink($image);
 
             $img = $request->file('image');
 
             $img_name = $slug . '.' . $img->getClientOriginalExtension();
             Image::make($img)->resize(240, 120)->save("image/category/" . $img_name);
-
             $img_url = "image/category/" . $img_name;
 
-            Categorie::findOrFail($update)->update([
-                'brand_id' => $request->brand_id,
-                'category_name' => $request->category_name,
-                'category_slug' => $slug,
-                'image' => $img_url,
-                'updated_at' => Carbon::now(),
+            $data['image'] = $img_url;
 
-            ]);
+
+            DB::table($this->db_categories)->where('id', $id)->update($data);
+
             $notification = array('messege' => 'Category Update Successfully', 'alert-type' => 'success');
             return redirect()->route('category.index')->with($notification);
         } else {
-            Categorie::findOrFail($update)->update([
-                'brand_id' => $request->brand_id,
-                'category_name' => $request->category_name,
-                'category_slug' => $slug,
-                'updated_at' => Carbon::now(),
+            $data['image'] = $oldimage;
 
-            ]);
+            DB::table($this->db_categories)->where('id', $id)->update($data);
+
             $notification = array('messege' => 'Category Update Successfully', 'alert-type' => 'success');
             return redirect()->route('category.index')->with($notification);
         }

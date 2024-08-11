@@ -1610,7 +1610,7 @@ $cat_product = DB::table('products')->where('category_id',$row->id)->orderBy('id
 
 <!-- Adverts -->
 
-<div class="adverts">
+{{-- <div class="adverts">
     <div class="container">
         <div class="row">
 
@@ -1656,7 +1656,7 @@ $cat_product = DB::table('products')->where('category_id',$row->id)->orderBy('id
 
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- Trends -->
 

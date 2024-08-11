@@ -112,31 +112,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('product.all_product') }}" class="nav-link">
-                  <i class="nav-icon fas fa-chart-pie"></i>
-                  <p>
-                    Product Managment
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('product_add') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Add New Product</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('product.all_product') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Manage Product</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              
-              
+             
               <li class="nav-item">
                 <a href="{{ route('brand.index') }}" class="nav-link">
                   {{-- <i class="far fa-circle nav-icon"></i> --}}
@@ -202,7 +178,32 @@
           {{-- Customers Section End --}}
 
           
+          <li class="nav-item">
+            <a href="{{ route('product.all_product') }}" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Product Managment
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('product_add') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('product.all_product') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Product</p>
+                </a>
+              </li>
+            </ul>
+          </li>
             
+         
+
           @if (Auth::user()->order==1)
             
           {{-- Orders Section End --}}
@@ -516,12 +517,12 @@
                   <p>SMTP Setting</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ route('payment.all') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Payment Gateway</p>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
             

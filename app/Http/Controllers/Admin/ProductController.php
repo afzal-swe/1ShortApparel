@@ -340,4 +340,12 @@ class ProductController extends Controller
         $notification = array('messege' => 'Product Deleted!', 'alert-type' => 'success');
         return redirect()->back()->with($notification);
     }
+
+    // Single Product Function
+    public function Single_Product_View($id)
+    {
+
+        $product_details = DB::table('products')->where('id', $id)->first();
+        return view('admin.product.single_product', compact('product_details'));
+    }
 }
