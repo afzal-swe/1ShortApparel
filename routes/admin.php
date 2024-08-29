@@ -101,6 +101,10 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::get('/edit/{id}', 'edit_category')->name('category.edit');
                 Route::post('/update/{id}', 'category_update')->name('category.update.form');
                 Route::get('/delete/{id}', 'category_Delete')->name('category.delete');
+
+                // Status
+                Route::get('/status/{id}', 'Category_Status')->name('categtory.status');
+                Route::get('/home-page/status/{id}', 'HomePage_Status')->name('home_page.status');
             });
         }); // Category Route Section End //
 
@@ -112,6 +116,8 @@ Route::middleware(['SupperAdmin'])->group(function () {
                 Route::get('/edit/{id}', 'edit_subcategory')->name('subcategory.edit');
                 Route::post('/update/{id}', 'subcategory_update')->name('subcategory.update');
                 Route::get('/delete/{id}', 'subcategory_Delete')->name('subcategory.delete');
+                // status
+                Route::get('/status/{id}', 'subcategory_Status')->name('subcategory_status.status');
             });
         }); // Sub Category Route Section End //
 

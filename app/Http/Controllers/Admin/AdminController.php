@@ -58,6 +58,20 @@ class AdminController extends Controller
         return redirect()->route('admin_login')->with($notification);
     }
 
+
+
+
+
+    /**
+     * Update the password of the authenticated user.
+     *
+     * This method validates the request to ensure the old password is provided and that the new password meets the required criteria.
+     * It checks if the provided old password matches the current user's password. If it does, the user's password is updated, and they are logged out to reauthenticate with the new password.
+     * If the old password does not match, an error notification is returned.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function password_change()
     {
         return view('admin.profile.change_password');
@@ -92,6 +106,18 @@ class AdminController extends Controller
         }
     } // End Function //
 
+
+
+
+
+
+    /**
+     * Display the profile of the authenticated user.
+     *
+     * This method retrieves the currently authenticated user's profile information from the 'users' table and passes it to the 'main_profile' view.
+     *
+     * @return \Illuminate\View\View
+     */
     public function profile()
     {
         $user_id = Auth::user()->id;
@@ -99,11 +125,22 @@ class AdminController extends Controller
         $profile = DB::table('users')->where('id', $user_id)->first();
         return view('admin.profile.main_profile', compact('profile'));
     }
-    // Profile Update Function
+
+
+
+
+    /**
+     * Update the profile of a specific user.
+     *
+     * This method updates the 'name' and 'phone' fields of a user's profile in the 'users' table based on the provided ID.
+     * After the update, it redirects back to the 'main_profile' route with a success notification.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Profile_Update(Request $request, $id)
     {
-
-
         // dd($request->all());
         $data = array();
         $data['name'] = $request->name;

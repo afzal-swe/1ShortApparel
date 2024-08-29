@@ -10,11 +10,26 @@ use Intervention\Image\Facades\Image;
 
 class BrandController extends Controller
 {
-    //
+
+
+
+    /**
+     * Constructor method for applying middleware.
+     *
+     * This method applies the 'auth' middleware to the controller,
+     * ensuring that all routes within this controller require
+     * user authentication.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
+
+
+
+
 
     /**
      * Display all brands.
@@ -50,13 +65,20 @@ class BrandController extends Controller
         $request->validate([
             'name' => 'required|unique:brands|max:50',
             'image' => 'required',
+            'status' => 'required',
+        ], [
+            'name.required' => 'This name is required',
+            'image.required' => 'This image is required',
+            'status.required' => 'This status is required',
         ]);
 
-        if ($request->file('image')) {
+        $image = $request->image;
+
+        if ($image) {
             $name = Str::of($request->name)->slug('-');
-            $img = $request->file('image');
-            $name_gen = $name . '.' . $img->getClientOriginalExtension();
-            Image::make($img)->resize(240, 120)->save("image/brand/" . $name_gen);
+
+            $name_gen = $name . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(240, 120)->save("image/brand/" . $name_gen);
             $save_img = "image/brand/" . $name_gen;
 
             Brand::insert([
@@ -71,73 +93,105 @@ class BrandController extends Controller
     }
 
 
-    // Edit from view function //
+
+
+
+
+
+    /**
+     * Show the form for editing a specific brand.
+     *
+     * Retrieves the brand record to be edited by its ID
+     * and passes it to the view.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\View\View
+     */
     public function edit_brand(Request $request)
     {
         $req = $request->id;
-        if (!$req == null) {
-            $edit = Brand::find($req);
-            return view('admin.brand.edit', compact('edit'));
-        } else {
-            echo "Not Found";
-        }
-    } // End
 
+        $edit = Brand::find($req);
+        return view('admin.brand.edit', compact('edit'));
+    }
+
+
+
+
+
+    /**
+     * Update the specified brand in the database.
+     *
+     * Handles both scenarios where an image is provided
+     * or not. If an image is provided, it updates the brand's image
+     * and removes the old image from storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function brand_update(Request $request)
     {
-        $update = $request->id;
-        $file = Brand::findOrFail($update);
+        $update_id = $request->id;
 
-        if ($request->file('image')) {
+        $image = $request->image;
 
-            $img = $file->image;
+        if ($image) {
+
+            // Find the existing brand and remove the old image
+            $brand_image = Brand::findOrFail($update_id);
+            $img = $brand_image->image;
             unlink($img);
 
             $name = Str::of($request->name)->slug('-');
 
-            $img = $request->file('image');
-
-            $name_gen = $name . '.' . $img->getClientOriginalExtension();
-            Image::make($img)->resize(240, 120)->save("image/brand/" . $name_gen);
-
+            // Process the new image
+            $name_gen = $name . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(240, 120)->save("image/brand/" . $name_gen);
             $save_img = "image/brand/" . $name_gen;
 
-            Brand::findOrFail($update)->update([
+            // Update the brand with new image
+            Brand::findOrFail($update_id)->update([
                 'name' => $request->name,
                 'image' => $save_img,
 
             ]);
-            $notification = array('messege' => 'Brand Insert Successfully', 'alert-type' => 'success');
-            return redirect()->route('brand.index')->with($notification);
-        } else {
-            Brand::findOrFail($update)->update([
-                'name' => $request->name,
-            ]);
-            $notification = array('messege' => 'Brand Insert Successfully', 'alert-type' => 'success');
+            $notification = array('messege' => 'Brand Update Successfully', 'alert-type' => 'success');
             return redirect()->route('brand.index')->with($notification);
         }
+        // Update the brand without changing the image
+        Brand::findOrFail($update_id)->update([
+            'name' => $request->name,
+        ]);
+        $notification = array('messege' => 'Brand Update Successfully', 'alert-type' => 'success');
+        return redirect()->route('brand.index')->with($notification);
     }
 
-    // Brand Delete function Section //
+
+
+
+
+    /**
+     * Delete the specified brand from the database.
+     *
+     * Deletes the brand and its associated image from the storage.
+     *
+     * @param int|null $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function Brand_Delete($id = null)
     {
 
+        // Find the brand by ID
         $file = Brand::findOrFail($id);
 
-        if ($file !== 'image') {
-            $img = $file->image;
-            unlink($img);
+        // Remove the brand's image from storage
+        $img = $file->image;
+        unlink($img);
 
-            Brand::findOrFail($id)->delete();
+        // Delete the brand from the database
+        Brand::findOrFail($id)->delete();
 
-            $notification = array('messege' => 'Brand Delete Successfully', 'alert-type' => 'success');
-            return redirect()->route('brand.index')->with($notification);
-        } else {
-
-            Brand::findOrFail($id)->delete();
-
-            $notification = array('messege' => 'Brand Delete Successfully', 'alert-type' => 'success');
-            return redirect()->route('brand.index')->with($notification);
-        }
-    } // End
+        $notification = array('messege' => 'Brand Delete Successfully', 'alert-type' => 'success');
+        return redirect()->route('brand.index')->with($notification);
+    }
 }

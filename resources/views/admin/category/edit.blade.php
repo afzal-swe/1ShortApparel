@@ -98,8 +98,6 @@
                                     <div class="input-group">
                                       <div class="custom-file">
                                         <img src="{{ asset($edit->image) }}" alt="" style="height: 50px; width:70px;">
-                                        <input type="hidden" name="oldimg" value="{{ $edit->image }}">
-                                        
                                       </div>
                                       
                                     </div>

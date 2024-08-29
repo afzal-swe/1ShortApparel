@@ -78,7 +78,7 @@ class PageController extends Controller
             'updated_at' => Carbon::now(),
         ]);
         $notification = array('messege' => 'Page Update Successfully !!', 'alert-type' => "success");
-        return redirect()->route('page.all')->with($notification);
+        return redirect()->back()->with($notification);
     } // End //
 
     // Page Delete Section //

@@ -57,9 +57,9 @@
                                         <td>{{ $row->subcategory_name }}</td>
                                         <td>
                                           @if ($row->subcategory_status == '1')
-                                          <h6 class="text-info">Active</h6>
+                                          <a href="{{ route('subcategory_status.status',$row->id) }}" class="btn btn-success btn-xs" style="width:100px;"> Active </a>
                                           @else
-                                          <h6 class="text-danger">Deactive</h6>
+                                          <a href="{{ route('subcategory_status.status',$row->id) }}" class="btn btn-primary btn-xs" style="width:100px;"> Deactive </a>
                                           @endif
                                       </td>
                                         <td >

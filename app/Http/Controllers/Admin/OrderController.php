@@ -13,13 +13,37 @@ class OrderController extends Controller
     //
     private $DB_Order;
 
+
+
+    /**
+     * Constructor for initializing properties.
+     *
+     * This method sets up the `$DB_Order` property with the name of the database table
+     * used for handling orders. This property is used throughout the controller
+     * to reference the orders table.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->DB_Order = "orders";
     }
 
 
-    //__order list
+
+
+
+    /**
+     * Retrieves and returns all orders with optional filtering for DataTables.
+     *
+     * This method handles AJAX requests to fetch orders from the database. It applies
+     * filtering based on payment type, date, and status if provided in the request.
+     * The results are formatted for display in DataTables, including status badges
+     * and action buttons.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function All_Order(Request $request)
     {
 
@@ -91,14 +115,40 @@ class OrderController extends Controller
         return view('admin.order.view_order');
     }
 
-    //__order edit
+
+
+
+    /**
+     * Retrieves and returns the details of a specific order for editing.
+     *
+     * This method fetches the order data from the database based on the provided
+     * order ID in the request. It then passes the order details to the view for
+     * updating the order.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\View\View
+     */
     public function Editorder(Request $request)
     {
         $order_edit = DB::table($this->DB_Order)->where('id', $request->id)->first();
         return view('admin.order.update_order', compact('order_edit'));
     }
 
-    //__update status
+
+
+
+
+    /**
+     * Updates the status and other details of a specific order.
+     *
+     * This method updates the order record in the database with the provided
+     * customer name, email, address, and status based on the order ID from
+     * the request. It also sends an email notification if the status is updated
+     * to '1' (the code for sending email is currently commented out).
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateStatus(Request $request)
     {
         $data = array();
@@ -117,7 +167,19 @@ class OrderController extends Controller
     }
 
 
-    //__view Order
+
+
+
+    /**
+     * Retrieves and displays the details of a specific order.
+     *
+     * This method fetches the order details based on the order ID from the request
+     * and retrieves additional order details from the 'order__details' table. 
+     * It then returns a view with the order and order details.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\View\View
+     */
     public function ViewOrder(Request $request)
     {
         $order = DB::table($this->DB_Order)->where('id', $request->id)->first();
@@ -125,7 +187,19 @@ class OrderController extends Controller
         return view('admin.order.order_details', compact('order', 'order_details'));
     }
 
-    //__delete
+
+
+
+    /**
+     * Deletes a specific order and its associated details.
+     *
+     * This method deletes an order and its related details from the database
+     * based on the provided order ID. After the deletion, it redirects back
+     * to the previous page with a success notification.
+     *
+     * @param int $id The ID of the order to be deleted.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete($id)
     {
         $order = DB::table('orders')->where('id', $id)->delete();

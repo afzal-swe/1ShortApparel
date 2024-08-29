@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    //
-    // Blog Function
+
+
+
+
+    /**
+     * Display the blog page.
+     *
+     * @return \Illuminate\View\View
+     */
     public function Blog()
     {
+        // Return the 'blog' view located in the 'frontend.blog' directory.
         return view('frontend.blog.blog');
     }
 }

@@ -97,7 +97,7 @@ class CartController extends Controller
                     'after_discount' => Cart::subtotal() - $check->coupon_amount,
 
                 ]);
-                dd($test);
+                // dd($test);
                 $notification = array('messege' => 'Coupon Applied!', 'alert-type' => 'success');
                 return redirect()->back()->with($notification);
             } else {

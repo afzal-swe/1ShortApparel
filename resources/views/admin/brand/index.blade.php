@@ -90,9 +90,9 @@
 
                         <div class="form-group">
                             <label for="">Brand Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror " placeholder="Brand Name" value="{{old('name')}}" required>
+                            <input type="text" name="name" class="form-control" placeholder="Brand Name" value="{{old('name')}}">
                             @error('name')
-                              <div class="alert alert-danger">{{ $message }}</div>
+                              <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -101,18 +101,23 @@
                           <label for="exampleInputFile">Brand Logo <span class="text-danger">*</span></label>
                           <div class="input-group">
                             <div class="custom-file">
-                              <input type="file" name="image"  class="custom-file-input" id="exampleInputFile" required>
+                              <input type="file" name="image"  class="custom-file-input" id="exampleInputFile">
                               <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                              
                             </div>
                             <div class="input-group-append">
                               <span class="input-group-text">Upload</span>
                             </div>
+                              
                           </div>
+                           @error('image')
+                              <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group col-lg-12">
                           <label for="exampleInputFile">Publication<span class="text-danger">*</span></label>
-                          <select name="status" id="" class="form-control  @error('status') is-invalid @enderror " required>
+                          <select name="status" id="" class="form-control  @error('status') is-invalid @enderror ">
                             <option value="" selected disabled>== Choose Options ==</option>
                               
                               <option value="1">Yes</option>
@@ -121,7 +126,7 @@
                           </select>
                           @error('status')
                               <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
+                                  <strong class="text-danger">{{ $message }}</strong>
                               </span>
                           @enderror
                         </div>

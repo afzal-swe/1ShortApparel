@@ -36,7 +36,7 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    @if ($errors->any())
+    {{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -44,7 +44,7 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
 
     <!-- Main content -->
     <section class="content">
@@ -65,17 +65,23 @@
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="exampleInputEmail1">Product Name <span class="text-danger">*</span> </label>
-                      <input type="text" class="form-control" name="product_title" value="{{ old('product_title') }}" placeholder="Product Name"  required="">
+                      <input type="text" class="form-control" name="product_title" value="{{ old('product_title') }}" placeholder="Product Name">
+                      @error('product_title')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="exampleInputPassword1">Product Code <span class="text-danger">*</span> </label>
-                      <input type="text" class="form-control" value="{{ old('product_code') }}" name="product_code" placeholder="Product Code" required="">
+                      <input type="text" class="form-control" value="{{ old('product_code') }}" name="product_code" placeholder="Product Code">
+                      @error('product_code')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="exampleInputEmail1">Category <span class="text-danger">*</span> </label>
-                      <select class="form-control" name="category_id" id="subcategory_id">
+                      <select class="form-control" name="category_id" id="category_id">
                         <option disabled="" selected="">==choose category==</option>
                         @foreach($category as $row)
                           
@@ -83,6 +89,9 @@
                              
                         @endforeach 
                       </select>
+                      @error('category_id')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
 
                     <div class="form-group col-lg-6">
@@ -99,17 +108,23 @@
                               @endforeach
                         @endforeach 
                       </select>
+                      @error('subcategory_id')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="exampleInputEmail1">Brand <span class="text-danger">*</span> </label>
-                      <select class="form-control" name="brand_id" required>
+                      <select class="form-control" name="brand_id">
                         <option selected disabled>==choose brand==</option>
                         @foreach($brand as $row)
                           <option value="{{ $row->id }}">{{ $row->name }}</option>
                         @endforeach 
                       </select>
+                      @error('brand_id')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="exampleInputPassword1">Pickup Point</label>
@@ -124,7 +139,10 @@
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="exampleInputEmail1">Unit <span class="text-danger">*</span> </label>
-                      <input type="text" class=form-control name="product_unit" value="{{ old('product_unit') }}" placeholder="Unit (e.g. KG, Pc, etc)" required="">
+                      <input type="text" class=form-control name="product_unit" value="{{ old('product_unit') }}" placeholder="Unit (e.g. KG, Pc, etc)">
+                      @error('product_unit')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="exampleInputPassword1">Tags</label><br>
@@ -134,11 +152,17 @@
                   <div class="row">
                     <div class="form-group col-lg-4">
                       <label for="exampleInput">Unit price  <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" {{ old('product_price') }} name="product_price" placeholder="0" required>
+                      <input type="text" class="form-control" {{ old('product_price') }} name="product_price" placeholder="0">
+                      @error('product_price')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-4">
                       <label for="exampleInput">Selling Price <span class="text-danger">*</span> </label>
-                      <input type="text" name="product_purchase_price" value="{{ old('product_purchase_price') }}" class="form-control" placeholder="0" required="">
+                      <input type="text" name="product_purchase_price" value="{{ old('product_purchase_price') }}" class="form-control" placeholder="0">
+                      @error('product_purchase_price')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-4">
                       <label for="exampleInput">Discount Price </label>
@@ -148,11 +172,14 @@
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label for="exampleInputEmail1">Warehouse <span class="text-danger">*</span> </label>
-                      <select class="form-control" name="warehouse" required>
+                      <select class="form-control" name="warehouse">
                         @foreach($warehouse as $row)
                          <option value="{{ $row->warhouse_name }}">{{ $row->warhouse_name }}</option>
                         @endforeach 
                       </select>
+                      @error('warehouse')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-6">
                       <label for="exampleInputPassword1">Quantity </label>
@@ -215,6 +242,7 @@
                         <div class="form-group col-lg-12">
                           <label for="exampleInputPassword1">Meta Title</label>
                           <input class="form-control" name="video" value="{{ old('video') }}" placeholder="Meta Title">
+                          
                         </div>
                         <div class="form-group col-lg-12">
                           <label for="exampleInputPassword1">Description</label>
@@ -243,7 +271,10 @@
               <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Main Thumbnail <span class="text-danger">*</span> </label><br>
-                    <input type="file" name="thumbnail" required="" accept="image/*" class="dropify">
+                    <input type="file" name="thumbnail" accept="image/*" class="dropify">
+                    @error('thumbnail')
+                      <samp class="text-danger">{{ $message }}</samp>
+                    @enderror
                   </div><br>
                   <div class="">  
                     <table class="table table-bordered" id="dynamic_field">
@@ -251,9 +282,12 @@
                       <h3 class="card-title">More Images (Click Add For More Image)</h3>
                     </div> 
                       <tr>  
-                          <td><input type="file" accept="image/*" name="images" required class="form-control name_list" /></td>  
+                          <td><input type="file" accept="image/*" name="images" class="form-control name_list" /></td>  
                           <td><button type="button" name="add" id="add" class="btn btn-success">Add</button></td>  
                       </tr>  
+                      @error('images')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </table>    
                   </div>
                      <div class="card p-4">

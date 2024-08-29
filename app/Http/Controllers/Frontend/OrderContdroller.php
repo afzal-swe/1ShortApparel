@@ -19,6 +19,11 @@ class OrderContdroller extends Controller
     private $db_order_details;
     private $payment_gateway;
 
+
+
+    /**
+     * Constructor for initializing middleware and setting database table names.
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,17 +32,27 @@ class OrderContdroller extends Controller
         $this->payment_gateway = "payment_geteway_bd";
     }
 
+
+
+
+    /**
+     * Retrieve the list of orders for the authenticated user.
+     *
+     * @return \Illuminate\View\View
+     */
     public function Order_List()
     {
-        $orders = DB::table($this->db_order)->where('user_id', Auth::id())->orderBy('id', 'DESC')->take(10)->get();
+        $orders = DB::table($this->db_order)
+            ->where('user_id', Auth::id())
+            ->orderBy('id', 'DESC')
+            ->take(10)
+            ->get();
 
         return view('user.my_order', compact('orders'));
     }
 
     public function OrderPlace(Request $request)
     {
-        // dd($request->all());
-
         $request->validate([
             'c_name' => 'required',
             'c_phone' => 'required',
@@ -213,7 +228,17 @@ class OrderContdroller extends Controller
         return redirect()->route('checkout')->with($notification);
     }
 
-    // Customer single ordr view 
+
+
+
+
+
+    /**
+     * View the details of a specific order.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\View\View
+     */
     public function Order_View(Request $request)
     {
 

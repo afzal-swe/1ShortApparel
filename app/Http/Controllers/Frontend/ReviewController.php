@@ -12,7 +12,15 @@ use Illuminate\Support\Carbon;
 
 class ReviewController extends Controller
 {
-    //
+
+
+
+    /**
+     * Add a review for a specific product.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function review_add(Request $request)
     {
         $request->validate([

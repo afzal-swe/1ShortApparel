@@ -20,38 +20,77 @@ use App\Models\Warehouse;
 
 class ProductController extends Controller
 {
-    //
+
+
+
+
+    /**
+     * Create a new instance of the controller.
+     *
+     * This constructor applies the 'auth' middleware to ensure that the user is authenticated.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
-    } // End // 
+    }
 
-    // View All Product Section //
+
+
+
+
+
+    /**
+     * Display a list of all products.
+     *
+     * This method retrieves all products from the 'products' table, ordered by ID in descending order, and returns
+     * the view for displaying the list of products.
+     *
+     * @return \Illuminate\View\View
+     */
     public function all_product()
     {
         $product = Product::orderBy('id', 'DESC')->get();
         return view('admin.product.index', compact('product'));
-    } // End //
+    }
 
-    // New Product add form section //
+
+
+
+
+
+
+
+    /**
+     * Display the form for adding a new product.
+     *
+     * This method retrieves all active brands, categories, subcategories, pickup points, and warehouses,
+     * and returns the view for creating a new product with these data points.
+     *
+     * @return \Illuminate\View\View
+     */
     public function product_add()
     {
-        $brand = Brand::where('status', '=', "1")->get();
-        $category = Categorie::where('category_status', '=', '1')->get();
-        $subcategory = SubCategory::where('subcategory_status', '=', '1')->get();
+        $brand = Brand::where('status', '=', "1")
+            ->get();
+
+        $category = Categorie::where('category_status', '=', '1')
+            ->get();
+
+        $subcategory = SubCategory::where('subcategory_status', '=', '1')
+            ->get();
+
         $pickup_point = Pickup_point::all();
         $warehouse = Warehouse::all();
 
-
         return view('admin.product.create', compact('brand', 'category', 'subcategory', 'pickup_point', 'warehouse'));
-    } // End //
+    }
 
 
     public function product_store(Request $request)
     {
         // dd($request->all());
-
-
         $request->validate([
             'brand_id' => 'required',
             // 'category_id' => 'required',
@@ -62,6 +101,19 @@ class ProductController extends Controller
             'product_price' => 'required',
             'product_purchase_price' => 'required',
             'warehouse' => 'required',
+            'images' => 'required',
+            'thumbnail' => 'required',
+        ], [
+            'brand_id.required' => 'This brand name is required',
+            'subcategory_id.required' => 'This category is required',
+            'product_title.required' => 'This product name is required',
+            'product_code.required' => 'This product code is required',
+            'product_unit.required' => 'This product unit is required',
+            'product_price.required' => 'This product price is required',
+            'product_purchase_price.required' => 'This product purchase price is required',
+            'warehouse.required' => 'This warehouse is required',
+            'images.required' => 'This image is required',
+            'thumbnail.required' => 'This thumbnail is required',
         ]);
 
         // subcategory call for category id
@@ -127,7 +179,7 @@ class ProductController extends Controller
             $notification = array('messege' => 'New Product Added Successfully', 'alert-type' => 'success');
             return redirect()->route('product.all_product')->with($notification);
         }
-    } // End Product insert function //
+    }
 
     // public function product_store(Request $request)
     // {

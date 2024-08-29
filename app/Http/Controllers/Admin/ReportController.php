@@ -14,6 +14,16 @@ class ReportController extends Controller
     private $DB_Order;
     private $db_replies;
 
+
+
+    /**
+     * Initialize a new instance of the controller.
+     *
+     * This constructor method sets up the database table names used in the controller. It assigns the table
+     * names for orders and replies to the respective properties of the controller.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->DB_Order = "orders";
@@ -21,7 +31,21 @@ class ReportController extends Controller
     }
 
 
-    // __ Order Report Function Section
+
+
+    /**
+     * Generate a report of orders with optional filtering.
+     *
+     * This method handles AJAX requests to filter and retrieve orders based on various criteria such as
+     * payment type, date, and status. It formats the status column for display and returns the data
+     * in a format suitable for DataTables.
+     *
+     * @param \Illuminate\Http\Request $request The request instance containing filtering parameters.
+     *
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *         If the request is an AJAX request, returns the filtered orders data in JSON format suitable for DataTables.
+     *         Otherwise, returns the view for the order report page.
+     */
     public function Order_report(Request $request)
     {
 
@@ -84,7 +108,22 @@ class ReportController extends Controller
         return view('admin.report.order.order_report');
     }
 
-    //__  Order Report Prent
+
+
+
+
+    /**
+     * Generate a printable report of orders with optional filtering.
+     *
+     * This method handles AJAX requests to filter and retrieve orders based on various criteria such as
+     * payment type, date, and status. It returns a view with the filtered orders data for printing purposes.
+     *
+     * @param \Illuminate\Http\Request $request The request instance containing filtering parameters.
+     *
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *         If the request is an AJAX request, returns the filtered orders data in a format suitable for printing.
+     *         Otherwise, returns the view for printing the order report.
+     */
     public function Print_report(Request $request)
     {
         if ($request->ajax()) {
@@ -123,7 +162,22 @@ class ReportController extends Controller
         return view('admin.report.order.print', compact('order'));
     }
 
-    // Ticket Print View function Section
+
+
+
+
+    /**
+     * Retrieve and display a list of tickets with optional filtering.
+     *
+     * This method handles AJAX requests to filter and retrieve tickets based on various criteria such as
+     * date, service type, and status. It returns a DataTables response for dynamic table updates.
+     *
+     * @param \Illuminate\Http\Request $request The request instance containing filtering parameters.
+     *
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *         If the request is an AJAX request, returns a DataTables response with the filtered ticket data.
+     *         Otherwise, returns the view for displaying the ticket report.
+     */
     public function Ticket_View(Request $request)
     {
         if ($request->ajax()) {
@@ -184,7 +238,21 @@ class ReportController extends Controller
         return view('admin.report.ticket.ticket_view');
     }
 
-    // Ticket print Sections 
+
+
+    /**
+     * Retrieve and display a printable list of tickets with optional filtering.
+     *
+     * This method handles AJAX requests to filter and retrieve tickets based on various criteria such as
+     * date, service type, and status. It returns a DataTables response for dynamic updates if requested via AJAX.
+     * If not an AJAX request, it returns the view for printing the ticket report with the filtered data.
+     *
+     * @param \Illuminate\Http\Request $request The request instance containing filtering parameters.
+     *
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *         If the request is an AJAX request, returns a DataTables response with the filtered ticket data.
+     *         Otherwise, returns the view for printing the ticket report.
+     */
     public function Ticket_Print(Request $request)
     {
         if ($request->ajax()) {

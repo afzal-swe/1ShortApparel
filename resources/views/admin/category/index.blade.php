@@ -56,16 +56,16 @@
                                         <td>{{ $row->category_name }}</td>
                                         <td>
                                           @if ($row->home_page == '1')
-                                            <h6 class="btn text-success" >Active</h6>
+                                          <a href="{{ route('home_page.status',$row->id) }}" class="btn btn-success btn-xs" style="width:100px;"> Active </a>
                                           @else
-                                            <h6 class="btn text-danger" >Deactive</h6>
+                                          <a href="{{ route('home_page.status',$row->id) }}" class="btn btn-primary btn-xs" style="width:100px;"> Deactive </a>
                                           @endif
                                       </td>
                                         <td>
-                                          @if ($row->category_status == '1')
-                                            <h6 class="btn text-success" >Active</h6>
+                                          @if ($row->category_status == 1)
+                                          <a href="{{ route('categtory.status',$row->id) }}" class="btn btn-success btn-xs" style="width:100px;"> Active </a>
                                           @else
-                                            <h6 class="btn text-danger" >Deactive</h6>
+                                          <a href="{{ route('categtory.status',$row->id) }}" class="btn btn-primary btn-xs" style="width:100px;"> Deactive </a>
                                           @endif
                                       </td>
                                         <td>
@@ -105,33 +105,29 @@
 
                         <div class="form-group">
                             <label for="">Brand Name <span class="text-danger">*</span></label>
-                            <select name="brand_id" id="" class="form-control  @error('brand_id') is-invalid @enderror " required>
+                            <select name="brand_id" id="" class="form-control">
                               <option value="" selected disabled>Choose Brand</option>
                                 @foreach ($brand as $row)
                                 <option value="{{ $row->id }}">{{ $row->name }}</option>
                                 @endforeach
                             </select>
                             @error('brand_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="">Category Name <span class="text-danger">*</span></label>
-                            <input type="text" name="category_name" class="form-control  @error('brand_id') is-invalid @enderror" placeholder="Category Name" value="{{old('category_name')}}" required>
+                            <input type="text" name="category_name" class="form-control" value="{{old('category_name')}}">
                             @error('category_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="row">
                           <div class="form-group col-lg-6">
                             <label for="exampleInputFile">Home Page<span class="text-danger">*</span></label>
-                            <select name="home_page" id="" class="form-control  @error('home_page') is-invalid @enderror " required>
+                            <select name="home_page" id="" class="form-control">
                               <option value="" selected disabled>== Choose Options ==</option>
                                 
                                 <option value="1">Yes</option>
@@ -139,15 +135,13 @@
                                 
                             </select>
                             @error('home_page')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                           </div>
                           
                           <div class="form-group col-lg-6">
                             <label for="exampleInputFile">Publication<span class="text-danger">*</span></label>
-                            <select name="category_status" id="" class="form-control  @error('category_status') is-invalid @enderror " required>
+                            <select name="category_status" id="" class="form-control">
                               <option value="" selected disabled>== Choose Options ==</option>
                                 
                                 <option value="1">Yes</option>
@@ -155,9 +149,7 @@
                                 
                             </select>
                             @error('category_status')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                           </div>
                         </div>
@@ -166,13 +158,16 @@
                           <label for="exampleInputFile">Category Image <span class="text-danger">*</span></label>
                           <div class="input-group">
                             <div class="custom-file">
-                              <input type="file" name="image"  class="custom-file-input" id="exampleInputFile" required>
+                              <input type="file" name="image"  class="custom-file-input" id="exampleInputFile">
                               <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                             </div>
                             <div class="input-group-append">
                               <span class="input-group-text">Upload</span>
                             </div>
                           </div>
+                          @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                          @enderror
                         </div>
                            
                         <div class="card-footer">
