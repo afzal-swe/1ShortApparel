@@ -15,16 +15,18 @@ class InvoiceMail extends Mailable
 
 
     public $order;
+    public $content;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct($order, $content)
     {
         //
         $this->order = $order;
+        $this->content = $content;
     }
 
     /**
@@ -44,13 +46,26 @@ class InvoiceMail extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Content
      */
-    public function content()
+    // public function content()
+    // {
+    //     // return new Content(
+    //     //     view: 'frontend.mail.invoice',
+    //     // );
+    //     return $this->view('frontend.mail.invoice');
+    // }
+
+
+    public function build()
     {
-        return new Content(
-            view: 'frontend.mail.invoice',
-        );
-        // return $this->view('frontend.mail.invoice')
+
+        // dd($this->order, $this->content);
+        return $this->view('frontend.mail.invoice')
+            ->with(['text' => $this->order, 'details' => $this->content]);
     }
+
+
+
+
 
     /**
      * Get the attachments for the message.

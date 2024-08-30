@@ -76,13 +76,19 @@ class RoleController extends Controller
         // Validate the request
         $validated = $request->validate([
             'email' => 'required|unique:users',
+            'name' => 'required',
+
+        ], [
+            'email.required' => 'This email is required',
+            'name.required' => 'This name is required',
+
         ]);
 
         // Prepare data for insertion
         $data = array();
         $data['name'] = $request->name;
         $data['email'] = $request->email;
-        $data['supper_admin'] = 0;
+        $data['supper_admin'] = $request->supper_admin;
         $data['password'] = Hash::make($request->password);
         $data['category'] = $request->category;
         $data['product'] = $request->product;
@@ -95,7 +101,6 @@ class RoleController extends Controller
         $data['report'] = $request->report;
         $data['setting'] = $request->setting;
         $data['userrole'] = $request->userrole;
-        $data['status'] = $request->status;
         // $data['is_admin'] = 1;
         // $data['role_admin'] = 1;
 

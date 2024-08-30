@@ -21,7 +21,7 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -29,7 +29,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif --}}
 
     <!-- Main content -->
     <section class="content">
@@ -49,15 +49,36 @@
                   <div class="row">
                     <div class="form-group col-lg-4">
                       <label for="exampleInputEmail1">Employee Name <span class="text-danger">*</span> </label>
-                      <input type="text" class="form-control" name="name" value="{{ old('name') }}"  required="">
+                      <input type="text" class="form-control" name="name" value="{{ old('name') }}" >
+                      @error('name')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-4">
                       <label for="exampleInputPassword1">Employee Email <span class="text-danger">*</span> </label>
-                      <input type="email" class="form-control" value="{{ old('email') }}" name="email" required="">
+                      <input type="email" class="form-control" value="{{ old('email') }}" name="email">
+                      @error('email')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                     <div class="form-group col-lg-4">
                       <label for="exampleInputPassword1">Password <span class="text-danger">*</span> </label>
-                      <input type="password" class="form-control" value="{{ old('password') }}" name="password" required="">
+                      <input type="password" class="form-control" value="{{ old('password') }}" name="password">
+                      @error('password')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                      <label for="exampleInputPassword1">Deshboard Parmission <span class="text-danger">*</span> </label>
+                      <select name="supper_admin" id=""class="form-control">
+                        <option value="1" selected>Supper-Admin</option>
+                        <option value="2">Admin</option>
+                        <option value="3">Editor</option>
+                      </select>
+                      @error('supper_admin')
+                        <samp class="text-danger">{{ $message }}</samp>
+                      @enderror
                     </div>
                   </div>
 
@@ -112,10 +133,7 @@
                         <h6>blog</h6>
                        <input type="checkbox" name="blog" value="1" >
                     </div>
-                    <div class="col-3">
-                        <h6>Status</h6>
-                       <input type="checkbox" name="status" value="1" checked>
-                    </div>
+                    
                  
                   </div>
                     

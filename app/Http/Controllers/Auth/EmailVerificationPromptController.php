@@ -28,7 +28,7 @@ class EmailVerificationPromptController extends Controller
         } else {
             return $request->user()->hasVerifiedEmail()
                 ? redirect()->intended(RouteServiceProvider::HOME)
-                : view('auth.frontend-verify-email');
+                : view('auth.verify-email');
         }
     }
 }

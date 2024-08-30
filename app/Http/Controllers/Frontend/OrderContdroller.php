@@ -78,8 +78,8 @@ class OrderContdroller extends Controller
             $order['month'] = date('F');
             $order['year'] = date('Y');
             $order['total'] = Cart::total();
-            if (Session::has('coupon')) {
 
+            if (Session::has('coupon')) {
                 $order['subtotal'] = Cart::subtotal();
                 $order['coupon_code'] = Session::get('coupon')['name'];
                 $order['coupon_discount'] = Session::get('coupon')['discount'];
@@ -96,6 +96,8 @@ class OrderContdroller extends Controller
             // Order Details
             $content = Cart::content();
 
+            $mail = Mail::to($request->c_email)->send(new InvoiceMail($order, $content));
+
             $details = array();
             foreach ($content as $row) {
                 // dd($row);
@@ -111,6 +113,8 @@ class OrderContdroller extends Controller
 
                 DB::table('order__details')->insert($details);
             }
+
+
             Cart::destroy();
             if (Session::has('coupon')) {
                 Session::forget('coupon');

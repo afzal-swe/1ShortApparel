@@ -14,6 +14,10 @@ use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\BlogController;
 
 
+// Route::get('/invoice', function () {
+//     return view('frontend.mail.invoice');
+// });
+
 Route::group(['prefix' => '/'], function () {
     Route::controller(indexController::class)->group(function () {
         Route::get('/', 'home_page')->name('home_page');
@@ -69,13 +73,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/list', [OrderContdroller::class, 'Order_List'])->name('order.list');
         Route::get('/view/{id}', [OrderContdroller::class, 'Order_View'])->name('view.order');
     });
-});
-
-
-
-
-Route::middleware(['auth'])->group(function () {
-
 
     Route::group(['prefix' => 'review'], function () {
         Route::post('/', [ReviewController::class, 'review_add'])->name('review_add');
@@ -100,6 +97,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('cancel', [OrderContdroller::class, 'cancel'])->name('cancel');
     });
 });
+
+
 
 Route::group(['prefix' => 'category'], function () {
     Route::get('/product/{id}', [indexController::class, 'categorywise_product'])->name('categorywise.product');
