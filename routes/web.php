@@ -21,6 +21,25 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/store/newsletter', 'storeNewsletter')->name('store.newsletter');
     });
 
+    Route::group(['prefix' => 'contact'], function () {
+        Route::get('/page', [ContectController::class, 'contact_page'])->name('contact.page');
+        Route::post('/send/message', [ContectController::class, 'contact_send'])->name('contact.send_message');
+    });
+    Route::group(['prefix' => 'blog'], function () {
+        Route::get('/', [BlogController::class, 'Blog'])->name('blog');
+    });
+    Route::group(['prefix' => 'page'], function () {
+        Route::get('/{page_slug}', [F_PageController::class, 'view_Page'])->name('view.page');
+    });
+});
+
+
+
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+
     Route::group(['prefix' => 'user'], function () {
         Route::controller(UserProfileController::class)->group(function () {
             Route::get('/deshboard', 'deshboard')->name('deshboard');
@@ -38,15 +57,17 @@ Route::group(['prefix' => '/'], function () {
         });
     });
 
-    Route::group(['prefix' => 'contact'], function () {
-        Route::get('/page', [ContectController::class, 'contact_page'])->name('contact.page');
-        Route::post('/send/message', [ContectController::class, 'contact_send'])->name('contact.send_message');
+    Route::group(['prefix' => 'wishlist'], function () {
+        Route::get('/store/{id}', [WishlistController::class, 'add_wishlist'])->name('add.wishlist');
+        Route::get('/view', [WishlistController::class, 'wishlist_view'])->name('wishlist.view');
+        Route::get('/delete/{id}', [WishlistController::class, 'wishlist_product_delete'])->name('wishlist_product.delete');
+        Route::get('/clear', [WishlistController::class, 'clear_wishlist'])->name('clear.wishlist');
     });
-    Route::group(['prefix' => 'blog'], function () {
-        Route::get('/', [BlogController::class, 'Blog'])->name('blog');
-    });
-    Route::group(['prefix' => 'page'], function () {
-        Route::get('/{page_slug}', [F_PageController::class, 'view_Page'])->name('view.page');
+
+    Route::group(['prefix' => 'order'], function () {
+        Route::post('/place', [OrderContdroller::class, 'OrderPlace'])->name('order.place');
+        Route::get('/list', [OrderContdroller::class, 'Order_List'])->name('order.list');
+        Route::get('/view/{id}', [OrderContdroller::class, 'Order_View'])->name('view.order');
     });
 });
 
@@ -54,18 +75,14 @@ Route::group(['prefix' => '/'], function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::group(['prefix' => 'review'], function () {
 
+
+    Route::group(['prefix' => 'review'], function () {
         Route::post('/', [ReviewController::class, 'review_add'])->name('review_add');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
-    Route::group(['prefix' => 'wishlist'], function () {
-        Route::get('/store/{id}', [WishlistController::class, 'add_wishlist'])->name('add.wishlist');
-        Route::get('/view', [WishlistController::class, 'wishlist_view'])->name('wishlist.view');
-        Route::get('/delete/{id}', [WishlistController::class, 'wishlist_product_delete'])->name('wishlist_product.delete');
-        Route::get('/clear', [WishlistController::class, 'clear_wishlist'])->name('clear.wishlist');
-    });
+
     Route::group(['prefix' => 'add'], function () {
         Route::post('/cart/{id}', [CartController::class, 'addToCart'])->name('add.to_cart');
         Route::get('/my/cart', [CartController::class, 'my_cart'])->name('cart');
@@ -75,11 +92,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/coupon', [CartController::class, 'applyCoupon'])->name('apply.coupon');
         Route::get('/remove', [CartController::class, 'couponRemove'])->name('coupon.remove');
     });
-    Route::group(['prefix' => 'order'], function () {
-        Route::post('/place', [OrderContdroller::class, 'OrderPlace'])->name('order.place');
-        Route::get('/list', [OrderContdroller::class, 'Order_List'])->name('order.list');
-        Route::get('/view/{id}', [OrderContdroller::class, 'Order_View'])->name('view.order');
-    });
+
     // __ Payment Route Option
     Route::group(['prefix' => 'payment'], function () {
         Route::post('success', [OrderContdroller::class, 'success'])->name('success');

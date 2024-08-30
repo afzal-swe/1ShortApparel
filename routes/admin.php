@@ -37,7 +37,7 @@ Route::get('/customer-logout', [HomeController::class, 'customer_logout'])->name
 //     });
 // });
 
-Route::middleware(['SupperAdmin'])->group(function () {
+Route::middleware(['SupperAdmin', 'verified'])->group(function () {
     Route::group(['prefix' => 'author'], function () {
         // Admin Home Route Section Start //
         Route::controller(AdminController::class)->group(function () {
