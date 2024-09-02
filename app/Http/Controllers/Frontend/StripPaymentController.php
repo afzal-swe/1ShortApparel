@@ -27,6 +27,7 @@ class StripPaymentController extends Controller
     {
         // Retrieve the current total from the shopping cart.
         $sub_total = Cart::total();
+        $div = 100;
 
         // Set the Stripe API key from the environment configuration.
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
