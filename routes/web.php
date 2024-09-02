@@ -111,7 +111,7 @@ Route::group(['prefix' => 'tracking'], function () {
 });
 Route::group(['prefix' => 'campaing'], function () {
     Route::get('/product/{id}', [indexController::class, 'Campaign_Products'])->name('frontend_campaign.product');
-    Route::get('/product/details/{id}', [indexController::class, 'Campaign_Product_Details'])->name('campaign.product.details');
+    Route::get('/product/details/{product_id}', [indexController::class, 'Campaign_Product_Details'])->name('campaign.product.details');
 });
 
 

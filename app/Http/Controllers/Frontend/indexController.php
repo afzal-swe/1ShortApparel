@@ -258,9 +258,10 @@ class indexController extends Controller
     public function Campaign_Products($id)
     {
 
-        // dd/($id);
 
-        $products = DB::table($this->db_campaign_product)->leftJoin('products', 'campaign_product.product_id', 'products.id')
+
+        $products = DB::table($this->db_campaign_product)
+            ->leftJoin('products', 'campaign_product.product_id', 'products.id')
             ->select('products.product_title', 'products.product_code', 'products.thumbnail', 'campaign_product.*')
             ->where('campaign_product.campaign_id', $id)
             ->get();
@@ -281,25 +282,27 @@ class indexController extends Controller
      * @param int $id Product ID
      * @return \Illuminate\View\View
      */
-    public function Campaign_Product_Details(Request $request, $id)
+    public function Campaign_Product_Details(Request $request, $product_id)
     {
 
-        $product = Product::where('id', $id)->first();
+        $product = Product::where('id', $product_id)->first();
+        // dd($product);
 
-        Product::where('id', $id)->increment('product_views');
+        $test = Product::where('id', $product_id)->increment('product_views');
+
         $product_price = DB::table($this->db_campaign_product)
-            ->where('product_id', $product)
+            ->where('product_id', $product_id)
             ->first();
-        // dd($product_price);
 
         $related_product = DB::table($this->db_campaign_product)->leftJoin('products', 'campaign_product.product_id', 'products.id')
             ->select('products.product_title', 'products.product_code', 'products.thumbnail', 'products.id', 'campaign_product.*')
             ->inRandomOrder(12)
             ->get();
-        $review = Review::where('product_id', $product)
+        $review = Review::where('product_id', $product_id)
             ->orderBy('id', 'DESC')
             ->take(6)
             ->get();
+        // dd($review);
         return view('frontend.campaign.product_details', compact('product', 'related_product', 'review', 'product_price'));
     }
 }

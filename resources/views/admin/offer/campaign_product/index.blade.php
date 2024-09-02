@@ -31,8 +31,8 @@
                     <thead>
                     <tr>
                       <th>SL</th>
-                      <th>Name</th>
                       <th>Image</th>
+                      <th>Product Name</th>
                       <th>Code</th>
                       <th>Category</th>
                       <th>Brand</th>
@@ -44,12 +44,17 @@
 
                    @foreach($products as $key=>$row) 
                    @php 
-                     $exist=DB::table('campaign_product')->where('campaign_id',$campaign_id)->where('product_id',$row->id)->first();
+                     $exist=DB::table('campaign_product')
+                     ->where('campaign_id',$campaign_id)
+                     ->where('product_id',$row->id)
+                     ->join('products','campaign_product.product_id','products.id')
+                     ->select('campaign_product.*', 'products.product_title')
+                     ->first();
                    @endphp	
                     <tr>
                       <td>{{ $key+1 }}</td>
-                      <td>{{ $row->name }}</td>
                       <td><img src="{{ asset($row->thumbnail) }}" height="32" width="32"></td>
+                      <td>{{ $row->product_title }}</td>
                       <td>{{ $row->product_code }}</td>
                       <td>{{ $row->category_name }}</td>
                       <td>{{ $row->name }}</td>
