@@ -143,7 +143,7 @@
             <div class="row">
                 <div class="col">
                     @php
-                    $category = DB::table('categories')->get();
+                    $category = DB::table('categories')->where('category_status','1')->get();
                     @endphp
                     <div class="main_nav_content d-flex flex-row">
     

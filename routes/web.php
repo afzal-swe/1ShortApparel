@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\F_PageController;
 use App\Http\Controllers\Frontend\OrderContdroller;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\StripPaymentController;
 
 
 // Route::get('/invoice', function () {
@@ -95,6 +96,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('success', [OrderContdroller::class, 'success'])->name('success');
         Route::post('fail', [OrderContdroller::class, 'fail'])->name('fail');
         Route::get('cancel', [OrderContdroller::class, 'cancel'])->name('cancel');
+    });
+
+    Route::controller(StripPaymentController::class)->group(function () {
+        Route::get('stripe', 'stripe');
+        Route::post('stripe', 'stripePost')->name('stripe.post');
     });
 });
 

@@ -34,7 +34,7 @@
                              <td>{{ date('d F , Y') ,strtotime($row->order_id)  }}</td>
                              <td>{{ $row->total }} {{ $settings->currency }}</td>
                              <td>
-                                @if($row->payment_type==2)
+                                @if($row->payment_type==1)
                                   <span class="badge badge-info">Paypal</span>
                                 @else
                                  <span class="badge badge-info">Order</span>

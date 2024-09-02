@@ -95,7 +95,7 @@ class ProductController extends Controller
             'brand_id' => 'required',
             // 'category_id' => 'required',
             'subcategory_id' => 'required',
-            'product_title' => 'required',
+            'product_title' => 'required|unique:products|max:50',
             'product_code' => 'required|unique:products|max:50',
             'product_unit' => 'required',
             'product_price' => 'required',

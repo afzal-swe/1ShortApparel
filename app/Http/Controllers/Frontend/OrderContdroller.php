@@ -53,12 +53,14 @@ class OrderContdroller extends Controller
 
     public function OrderPlace(Request $request)
     {
-        $request->validate([
-            'c_name' => 'required',
-            'c_phone' => 'required',
+
+        $validate = $request->validate([
+
+
+            'c_email' => 'required',
         ]);
 
-        if ($request->payment_type == 3) {
+        if ($request->payment_type == 2) {
             $order = array();
             $order['user_id'] = Auth::id();
             $order['c_name'] = $request->c_name;
@@ -124,88 +126,11 @@ class OrderContdroller extends Controller
             return redirect()->to('/')->with($notification);
 
             // __Aamar Pay Payment Gateway Option
-        } elseif ($request->payment_type == 2) {
+        }
 
-
-            $aamarpay = DB::table($this->payment_gateway)->first();
-            if ($aamarpay->store_id == Null) {
-                $notification = array('messege' => 'Please Setting Your Payment Gateway!', 'alert-type' => 'error');
-                return redirect()->back()->with($notification);
-            } else {
-                if ($aamarpay->status == 1) {
-                    $url = "https://secure.aamarpay.com/jsonpost.php"; // for Live Transection use "https://secure.aamarpay.com/jsonpost.php"
-                } else {
-                    $url = "https://​sandbox​.aamarpay.com/jsonpost.php"; // for Live Transection use "https://secure.aamarpay.com/jsonpost.php"
-                }
-                $tran_id = "test" . rand(1111111, 9999999); //unique transection id for every transection 
-
-                $currency = "BDT"; //aamarPay support Two type of currency USD & BDT  
-
-                $amount = "10";   //10 taka is the minimum amount for show card option in aamarPay payment gateway
-
-                //For live Store Id & Signature Key please mail to support@aamarpay.com
-                $store_id = "aamarpaytest";
-
-                $signature_key = "dbb74894e82415a2f7ff0ec3a97e4183";
-
-                $curl = curl_init();
-
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => $url,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => '{
-                        "store_id": "' . $aamarpay->store_id . '",
-                        "tran_id": "' . $tran_id . '",
-                        "success_url": "' . route('success') . '",
-                        "fail_url": "' . route('fail') . '",
-                        "cancel_url": "' . route('cancel') . '",
-                        "amount": "' . Cart::total() . '",
-                        "currency": "' . $currency . '",
-                        "signature_key": "' . $aamarpay->signature_key . '",
-                        "desc": "Merchant Registration Payment",
-                        "cus_name": "' . $request->c_name . '",
-                        "cus_email": "' . $request->c_email . '",
-                        "cus_add1": "' . $request->c_address . '",
-                        "cus_add2": "' . $request->c_address . '",
-                        "cus_city": "' . $request->c_city . '",
-                        "cus_state": "' . $request->c_city . '",
-                        "cus_postcode": "' . $request->c_zipcode . '",
-                        "cus_country": "' . $request->c_country . '",
-                        "cus_phone": "' . $request->c_phone . '",
-                        "type": "json"
-                    }',
-                    CURLOPT_HTTPHEADER => array(
-                        'Content-Type: application/json'
-                    ),
-                ));
-
-                $response = curl_exec($curl);
-
-                curl_close($curl);
-                // dd($response);
-
-                $responseObj = json_decode($response);
-
-                if (isset($responseObj->payment_url) && !empty($responseObj->payment_url)) {
-
-                    $paymentUrl = $responseObj->payment_url;
-                    // dd($paymentUrl);
-                    return redirect()->away($paymentUrl);
-                } else {
-                    echo $response;
-                }
-            }
-
-
-            // __ Paypal Gateway option
-        } elseif ($request->payment_type == 1) {
-            echo "paypal";
+        // __ Paypal Gateway option
+        elseif ($request->payment_type == 1) {
+            return view('frontend.cart.pay_to_cart');
         } else {
             $notification = array('messege' => 'Successfully Order Placed!', 'alert-type' => 'success');
             return redirect()->back()->with($notification);

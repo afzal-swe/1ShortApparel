@@ -59,7 +59,7 @@ class indexController extends Controller
     {
         $category = Categorie::all(); // Retrieve all categories
         $product_slider = Product::where('product_slider', 1)->latest()->first(); // Retrieve the latest product for the slider
-        $featured = Product::where('status', 1)->orderBy('id', 'DESC')->limit(16)->get(); // Retrieve the latest 16 featured products
+        $featured = Product::where('status', 1)->where('featured', '1')->orderBy('id', 'DESC')->limit(16)->get(); // Retrieve the latest 16 featured products
         $trendy_product = Product::where('status', 1)->where('trendy', 1)->orderBy('id', 'DESC')->limit(8)->get(); // Retrieve the latest 8 trendy products
         $wbreview = DB::table($this->db_wbreview)->where('status', 1)->orderBy('id', 'DESC')->limit(12)->get(); // Retrieve the latest 12 reviews
         $campaingn = DB::table($this->campaingns)->where('status', 1)->orderBy('id', 'DESC')->first(); // Retrieve the latest campaign

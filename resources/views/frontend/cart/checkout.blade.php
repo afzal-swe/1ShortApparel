@@ -22,48 +22,48 @@
 							<div class="row p-4">
 							  <div class="form-group col-lg-6">
 								<label>Customer Name <span class="text-danger">*</span></label>
-								<input type="text" class="form-control" value="{{ Auth::user()->name }}" name="c_name" required="" >
+								<input type="text" class="form-control" value="{{ Auth::user()->name }}" name="c_name">
 							  </div>
 							  <div class="form-group col-lg-6">
 								<label>Customer Phone <span class="text-danger">*</span></label>
-								<input type="text" class="form-control" value="{{ Auth::user()->phone ?? "Null" }}" name="c_phone" required="" >
+								<input type="text" class="form-control" value="{{ Auth::user()->phone ?? "Null" }}" name="c_phone">
 							  </div>
 							  <div class="form-group col-lg-6">
 								<label> Country <span class="text-danger">*</span></label>
-								<input type="text" class="form-control" name="c_country" required="" >
+								<input type="text" class="form-control" name="c_country">
+								
 							  </div>
 							  <div class="form-group col-lg-6">
 								<label>Shipping Address <span class="text-danger">*</span> </label>
-								<input type="text" class="form-control" name="c_address" required="" >
+								<input type="text" class="form-control" name="c_address">
+								
 							  </div>
 							  
 							  <div class="form-group col-lg-6">
 								<label>Email Address</label>
-								<input type="text" class="form-control" name="c_email" >
+								<input type="text" class="form-control" name="c_email" required>
+								
 							  </div>
 							  <div class="form-group col-lg-6">
 								<label>Zip Code</label>
-								<input type="text" class="form-control" name="c_zipcode" required="">
+								<input type="text" class="form-control" name="c_zipcode">
 							  </div>
 							  <div class="form-group col-lg-6">
 								<label>City Name</label>
-								<input type="text" class="form-control" name="c_city" required="">
+								<input type="text" class="form-control" name="c_city">
 							  </div>
 							  <div class="form-group col-lg-6">
 								<label>Extra Phone</label>
-								<input type="text" class="form-control" name="c_extra_phone" required="" >
+								<input type="text" class="form-control" name="c_extra_phone">
 							  </div>
 								<br>
 							  	   <div class="form-group col-lg-4">
                                          <input type="radio"  name="payment_type" value="1">
-                                         <label>Paypal</label>
+                                         <label>Pay To Cart</label>
 							  	   </div>
-							  	   {{-- <div class="form-group col-lg-4">
-                                         <input type="radio"  name="payment_type" value="2" >
-                                         <label>Bkash/Rocket/Nagad </label>
-							  	   </div> --}}
+							  	   
 							  	   <div class="form-group col-lg-4">
-                                         <input type="radio"  name="payment_type" checked="" value="3" >
+                                         <input type="radio"  name="payment_type" checked="" value="2" >
                                          <label>Hand Cash</label>
 							  	   </div>
 							  	   
