@@ -106,7 +106,7 @@
 
                         <div class="form-group">
                             <label for="coupon_code">Coupone Code </label>
-                            <input type="text" name="coupon_code" class="form-control " placeholder="Coupone Code" value="{{old('coupon_code')}}" required>
+                            <input type="text" name="coupon_code" class="form-control " placeholder="ds12dasa" value="{{old('coupon_code')}}" required>
                         </div>
 
                         <div class="form-group">

@@ -18,6 +18,19 @@ class CampaignController extends Controller
     private $db_products;
     private $db_campaign_product;
 
+
+
+
+
+
+    /**
+     * Constructor to initialize middleware and database table names.
+     *
+     * This method ensures that the `auth` middleware is applied to all routes
+     * that use this controller, requiring user authentication. It also initializes
+     * the names of the database tables used in the controller for campaigns, products,
+     * and campaign products.
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -26,6 +39,25 @@ class CampaignController extends Controller
         $this->db_campaign_product = "campaign_product";
     }
 
+
+
+
+
+
+
+
+    /**
+     * Display all campaigns with options for editing, deleting, and adding products.
+     *
+     * This method handles both AJAX requests and regular page loads.
+     * If the request is AJAX, it fetches all campaigns from the database, formats
+     * them into a DataTable, and returns the data as JSON. The DataTable includes
+     * columns for campaign status and action buttons (edit, delete, and add product).
+     * If the request is not AJAX, it returns the view for the campaign index page.
+     *
+     * @param Request $request The HTTP request object.
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View JSON response for AJAX requests or the campaign index view.
+     */
     public function all_campaign(Request $request)
     {
 
@@ -59,6 +91,21 @@ class CampaignController extends Controller
 
 
 
+
+
+
+
+    /**
+     * Add a new campaign to the database.
+     *
+     * This method validates the request input, processes the campaign image, and 
+     * inserts a new campaign record into the database. If the image is provided, it
+     * is resized and saved to the specified directory. After successful insertion, 
+     * a success notification is generated and the user is redirected back.
+     *
+     * @param Request $request The HTTP request object containing campaign details.
+     * @return \Illuminate\Http\RedirectResponse Redirects back with a success notification.
+     */
     public function campaign_add(Request $request)
     {
         $request->validate([
@@ -95,7 +142,21 @@ class CampaignController extends Controller
 
 
 
-    // Edit Campaign Function
+
+
+
+
+
+    /**
+     * Display the form to edit an existing campaign.
+     *
+     * This method retrieves the campaign data by its ID and returns a view 
+     * to edit the campaign details. The retrieved data is passed to the view 
+     * using the `compact` function.
+     *
+     * @param int $id The ID of the campaign to be edited.
+     * @return \Illuminate\View\View The view to edit the campaign details.
+     */
     public function campaign_edit($id)
     {
         $data = Campaingn::find($id);
@@ -103,6 +164,21 @@ class CampaignController extends Controller
     }
 
 
+
+
+
+
+
+    /**
+     * Update an existing campaign with new data.
+     *
+     * This method updates the campaign data with the given input. If a new image is uploaded,
+     * it deletes the old image, processes the new image, and updates the campaign record with the new image path.
+     * Otherwise, it updates the campaign without changing the image.
+     *
+     * @param \Illuminate\Http\Request $request The incoming request with the campaign data.
+     * @return \Illuminate\Http\RedirectResponse Redirects to the list of all campaigns with a success notification.
+     */
     public function campaign_update(Request $request)
     {
         $update = $request->id;
@@ -155,6 +231,21 @@ class CampaignController extends Controller
         }
     }
 
+
+
+
+
+
+
+    /**
+     * Delete a campaign and its associated image from the storage.
+     *
+     * This method deletes a campaign record from the database. If the campaign has an associated image,
+     * it checks if the image file exists and deletes it before removing the campaign record.
+     *
+     * @param int $id The ID of the campaign to be deleted.
+     * @return \Illuminate\Http\RedirectResponse Redirects back with a success notification.
+     */
     public function campaign_delete($id)
     {
         $campaign = Campaingn::findOrFail($id);
@@ -180,7 +271,21 @@ class CampaignController extends Controller
     }
 
 
-    // Campagin Product
+
+
+
+
+
+
+    /**
+     * Display the products for a specific campaign.
+     *
+     * This method retrieves all products along with their associated categories, subcategories, and brands
+     * that are currently active. It then returns a view with the list of products and the campaign ID.
+     *
+     * @param int $campaign_id The ID of the campaign for which products are to be displayed.
+     * @return \Illuminate\View\View The view displaying the products for the given campaign.
+     */
     public function Campaign_Product($campaign_id)
     {
         $products = DB::table($this->db_products)->leftJoin('categories', 'products.category_id', 'categories.id')
@@ -194,7 +299,22 @@ class CampaignController extends Controller
         return view('admin.offer.campaign_product.index', compact('products', 'campaign_id'));
     }
 
-    // Add Product To Campaign
+
+
+
+
+
+
+    /**
+     * Add a product to a specific campaign with a discounted price.
+     *
+     * This method calculates the discounted price for a product based on the campaign's discount,
+     * and then associates the product with the campaign by inserting the details into the campaign-product table.
+     *
+     * @param int $id The ID of the product to be added to the campaign.
+     * @param int $campaign_id The ID of the campaign to which the product is to be added.
+     * @return \Illuminate\Http\RedirectResponse Redirects back with a success notification.
+     */
     public function ProductAddToCampaign($id, $campaign_id)
     {
         $campaign = DB::table($this->db_campaingns)->where('id', $campaign_id)->first();
@@ -213,7 +333,22 @@ class CampaignController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    // Campaign Product List
+
+
+
+
+
+
+
+    /**
+     * Display the list of products associated with a specific campaign.
+     *
+     * This method retrieves all products linked to the given campaign ID and prepares them for display
+     * along with the campaign details.
+     *
+     * @param int $campaign_id The ID of the campaign for which products are to be listed.
+     * @return \Illuminate\View\View Returns a view with the list of products and campaign details.
+     */
     public function ProductListCampaign($campaign_id)
     {
         $products = DB::table($this->db_campaign_product)->leftJoin('products', 'campaign_product.product_id', 'products.id')
@@ -226,6 +361,19 @@ class CampaignController extends Controller
         return view('admin.offer.campaign_product.campaign_product_list', compact('products', 'campaign'));
     }
 
+
+
+
+
+
+    /**
+     * Remove a product from a campaign.
+     *
+     * This method deletes the association of a product with a campaign based on the provided ID.
+     *
+     * @param int $id The ID of the product-campaign association to be removed.
+     * @return \Illuminate\Http\RedirectResponse Redirects back with a success notification.
+     */
     public function RemoveProduct($id)
     {
 

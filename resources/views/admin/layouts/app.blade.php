@@ -36,6 +36,9 @@
         <title>{{ $seo->meta_title }}</title>
         @endisset
 
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{ asset($website_info->favicon ?? 'image/No_Image_Available.jpg') }}">
+
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Google Font: Source Sans Pro -->

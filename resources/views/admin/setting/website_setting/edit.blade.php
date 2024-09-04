@@ -51,18 +51,7 @@
                                                 <input type="text" name="website_name" class="form-control" value="{{ $setting->website_name }}">
                                             </div>
                     
-                                            <div class="form-group">
-                                                <label for="">Website Logo</label>
-                                                <input type="file" name="logo" class="form-control">
-                                                <input type="hidden" name="old_logo" value="{{ $setting->logo }}">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="">Website Favicon</label>
-                                                <input type="file" name="favicon" class="form-control">
-                                                <input type="hidden" name="old_favicon" value="{{ $setting->favicon }}">
-                                            </div>
-
+                                            
                                             <div class="form-group">
                                                 <label for="">Currency</label>
                                                 <select name="currency" id="" class="form-control">
@@ -102,6 +91,39 @@
                                             <div class="form-group">
                                                 <label for="">Description</label>
                                                 <textarea name="description" id="summernote" cols="30" rows="10">{!! $setting->description !!}</textarea>
+                                            </div><br> <hr>
+
+                                            <div class="row">
+
+                                              <div class="col sm-6">
+                                                <div class="form-group">
+                                                  <label for="">Website Logo</label>
+                                                  <input type="file" name="logo" id="logo" class="form-control">
+                                                </div>
+
+                                                <div class="mb-3 row">
+                                                    <label for="example-text-input" class="col-form-label"> </label>
+                                                    <div class="col-sm-6">
+                                                        <img id="showLogo" class="rounded avatar-lg" src="{{ (!empty($setting->logo)) ? 
+                                                            url($setting->logo):url('image/No_Image_Available.jpg') }}" alt="Card image cap" style="width: 130px;">
+                                                    </div>
+                                                </div>
+                                              </div>
+
+                                              <div class="col sm-6"> 
+                                                <div class="form-group">
+                                                    <label for="">Website Favicon</label>
+                                                    <input type="file" name="favicon" id="favicon" class="form-control">
+                                                </div>
+
+                                                <div class="mb-3 row">
+                                                  <label for="example-text-input" class="col-form-label"> </label>
+                                                  <div class="col-sm-6">
+                                                      <img id="show_favicon" class="rounded avatar-lg" src="{{ (!empty($setting->favicon)) ? 
+                                                          url($setting->favicon):url('image/No_Image_Available.jpg') }}" alt="Card image cap" style="width: 32px; height:32px;">
+                                                  </div>
+                                                </div>
+                                              </div>
                                             </div>
 
                                            
@@ -121,5 +143,28 @@
         </div>
     </section>
   </div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('#logo').change(function(e){
+            var reader = new FileReader();
+            reader.onload=function(e){
+                $('#showLogo').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+</script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('#favicon').change(function(e){
+            var reader = new FileReader();
+            reader.onload=function(e){
+                $('#show_favicon').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+</script>
 
 @endsection

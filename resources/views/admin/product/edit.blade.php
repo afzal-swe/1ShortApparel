@@ -36,7 +36,7 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    @if ($errors->any())
+    {{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -44,7 +44,7 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
 
     <!-- Main content -->
     <section class="content">
@@ -84,11 +84,14 @@
                              
                         @endforeach
                       </select>
+                      @error('category_id')
+                        <div class="text-danger">{{ $message }}</div>
+                      @enderror
                     </div>
 
                     <div class="form-group col-lg-6">
                       <label for="exampleInputEmail1">Subcategory </label>
-                      <select class="form-control" name="subcategory_id" id="subcategory_id">
+                      <select class="form-control" name="subcategory_id" id="subcategory_id" required>
                         <option disabled="" selected="">==choose Subcategory==</option>
                         @foreach($category as $row)
                            @php 
@@ -99,8 +102,11 @@
                                 <option value="{{ $row->id }}"@if ($row->id==$product_edit->subcategory_id ) selected @endif>> -- {{ $row->subcategory_name }}</option>
                               @endforeach
                         @endforeach 
+                       
                       </select>
+                     
                     </div>
+
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
@@ -241,11 +247,11 @@
             <!-- Form Element sizes -->
             <div class="card card-primary">
               <div class="card-body">
-                  <div class="form-group">
+                  <div class="card p-3">
                     <label for="exampleInputEmail1">Main Thumbnail </label><br>
                     <img src="{{ asset($product_edit->thumbnail) }}" alt="" style="height: 150px; width:150px;"><br><hr>
                     <input type="file" name="thumbnail" accept="image/*" class="dropify">
-                    <input type="hidden" name="old_thumbnail" value="{{ $product_edit->thumbnail }}">
+                    
                   </div><br>
                   <div class="">  
                     <table class="table table-bordered" id="dynamic_field">
