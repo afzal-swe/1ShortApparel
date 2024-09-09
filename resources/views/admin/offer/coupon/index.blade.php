@@ -119,7 +119,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="coupon_amount">Coupone Amount </label>
+                            <label for="coupon_amount">Coupone Amount</label>
                             <input type="text" name="coupon_amount" class="form-control " placeholder="Coupone Amount" value="{{old('coupon_amount')}}" required>
                         </div>
 
